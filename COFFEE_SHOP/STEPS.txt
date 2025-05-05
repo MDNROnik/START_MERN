@@ -1,0 +1,22 @@
+
+#server
+-> Make a folder for server 
+-> npm init -y
+-> express, cors, mongodb , dotenv etc
+->set up exprees, cors, mongodb
+->set up middleware
+->set up port and, listen the app
+->dotenv
+
+#client
+->vite for react and make a folder for client
+->react router
+->tailwindcss
+->daisyui
+->sweetalert
+
+
+
+#database
+->mongodb setup
+->for image upload -imgbb
