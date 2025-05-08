@@ -3,8 +3,12 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import AddCoffee from "./Components/AddCoffee.jsx";
+import LogIn from "./Components/LogIn.jsx";
+import SignUp from "./Components/SignUp.jsx";
 import UpdateCoffee from "./Components/UpdateCoffee.jsx";
+import AuthProviders from "./providers/AuthProviders.jsx";
 import "./index.css";
+import Users from "./Components/Users.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,10 +25,25 @@ const router = createBrowserRouter([
     element: <UpdateCoffee />,
     loader: ({ params }) => fetch(`http://localhost:3000/coffee/${params.id}`),
   },
+  {
+    path: "/signup",
+    element: <SignUp />,
+  },
+  {
+    path: "/login",
+    element: <LogIn />,
+  },
+  {
+    path: "/users",
+    element: <Users />,
+    loader: () => fetch("http://localhost:3000/users"),
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProviders>
+      <RouterProvider router={router} />
+    </AuthProviders>
   </StrictMode>
 );

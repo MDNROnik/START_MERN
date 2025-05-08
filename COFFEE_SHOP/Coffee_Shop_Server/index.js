@@ -35,6 +35,8 @@ async function run() {
     const database = client.db("coffee_shop");
     const col = database.collection("coffee_list");
 
+    const users=database.collection("users");
+
     //add coffee to database
     app.post('/addcoffee', async(req, res)=>{
       const newCoffee = req.body;
@@ -92,6 +94,35 @@ async function run() {
       id = new ObjectId(id);      
       const qu = {_id: id} 
       const result = await col.deleteOne(qu);
+      console.log(result);
+      res.json(result)
+    })
+
+
+    //user related 
+    //save user
+    app.post('/users',async(req, res)=>{
+      const newUser = req.body;
+      console.log(newUser);
+      const result = await users.insertOne(newUser);
+      res.send(result);
+    })
+
+    //get all  user
+    app.get('/users',async(req, res)=>{
+      let user = users.find();
+      allUsers = await user.toArray();
+      console.log(allUsers);
+      
+      res.send(allUsers);
+    })
+
+    // delete a user
+    app.delete('/users/:id', async (req, res) => {
+      let id = req.params.id;
+      id = new ObjectId(id);      
+      const qu = {_id: id} 
+      const result = await users.deleteOne(qu);
       console.log(result);
       res.json(result)
     })

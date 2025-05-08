@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Sweet from "sweetalert";
 const AddCoffee = () => {
   const handleAddCoffee = (event) => {
@@ -21,7 +22,7 @@ const AddCoffee = () => {
       details,
       photo,
     };
-    console.log(newCoffee);
+    // console.log(newCoffee);
 
     // send data to server for store
     fetch("http://localhost:3000/addcoffee", {
@@ -43,8 +44,16 @@ const AddCoffee = () => {
       });
   };
   return (
-    <div className="p-24">
-      <div className="p-12 text-center space-y-4">
+    <div className="p-5">
+      <div className="flex justify-between  ">
+        <div className="flex">
+          <Link to="/" className="bg-black text-white px-4 py-2 rounded">
+            HOME
+          </Link>
+        </div>
+      </div>
+
+      <div className="p-2 text-center space-y-4">
         <h1 className="text-6xl">Add Coffee</h1>
         <p>
           It is a long established fact that a reader will be distraceted by the
