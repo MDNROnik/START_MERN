@@ -117,6 +117,21 @@ async function run() {
       res.send(allUsers);
     })
 
+    //update a user
+    app.put('/users/:email',async(req, res)=>{
+      let email = req.params.email;
+      const filter = {email}
+      const updateDoc = {
+        $set:{
+          lastSignInTime: req.body.lastSignInTime,
+        }
+      }
+      const result = await users.updateOne(filter, updateDoc)
+      console.log(result);
+    
+      res.send(result);
+    })
+
     // delete a user
     app.delete('/users/:id', async (req, res) => {
       let id = req.params.id;

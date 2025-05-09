@@ -8,29 +8,33 @@ const LogIn = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
-    console.log(logIn);
+    // console.log(email, password);
+    // console.log(logIn);
 
     //firebase sign in send
     logIn(email, password)
       .then((result) => {
         console.log(result);
-        // const singInInfo = {
-        //   email,
-        //   lastSignInTime: result.user?.metadata?.lastSignInTime,
-        // };
-        // // update last sign in to the database
-        // fetch("https://coffee-store-server-mocha-eight.vercel.app/users", {
-        //   method: "PATCH",
-        //   headers: {
-        //     "content-type": "application/json",
-        //   },
-        //   body: JSON.stringify(singInInfo),
-        // })
-        //   .then((res) => res.json())
-        //   .then((data) => {
-        //     console.log("after update patch", data);
-        //   });
+        const signInInfo = {
+          email,
+          lastSignInTime: result.user?.metadata?.lastSignInTime,
+        };
+
+
+        console.log(signInInfo);
+        
+        //update last sign in to the database
+        fetch(`http://localhost:3000/users/${email}`, {
+          method: "put",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(signInInfo),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("after update patch", data);
+          });
       })
       .catch((error) => {
         console.log(error);

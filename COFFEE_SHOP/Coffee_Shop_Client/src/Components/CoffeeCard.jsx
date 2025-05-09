@@ -4,9 +4,9 @@ import Swal from "sweetalert2";
 
 const CoffeeCard = ({ coffees, coffee, setCoffees }) => {
   const { _id, name, price, quantity, photo } = coffee;
-  console.log(photo);
+  // console.log(photo);
   const p = `${photo}/image.png`;
-  console.log(p);
+  // console.log(p);
 
   const handleDelete = (_id) => {
     // console.log(_id);

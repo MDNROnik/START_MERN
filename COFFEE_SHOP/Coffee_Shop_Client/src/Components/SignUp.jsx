@@ -6,6 +6,9 @@ const SignUp = () => {
   const handleSignUp = (event) => {
     event.preventDefault();
     const name = event.target.name.value;
+    const address = event.target.address.value;
+    const phone = event.target.phone.value;
+    const photo = event.target.photo.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
     console.log("SIGN UP ", email, password);
@@ -13,7 +16,7 @@ const SignUp = () => {
       .then((result) => {
         console.log(result.user);
         const createdAt = result.user.metadata.creationTime;
-        const newUser = { name, email, createdAt };
+        const newUser = { name, email, createdAt,address, phone, photo };
         console.log("new ", newUser);
 
         //save user in database
