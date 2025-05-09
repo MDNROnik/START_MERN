@@ -12,7 +12,7 @@ const Home = () => {
       <div>
         <Header />
       </div>
-      <h1 className="text-6xl text-center">Welcome To The World Of COFFEES</h1>
+      <h1 className="text-6xl text-center">Welcome To The World Of COFFEES !!!</h1>
       <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
         {coffees.map((coffee) => (
           <CoffeeCard
