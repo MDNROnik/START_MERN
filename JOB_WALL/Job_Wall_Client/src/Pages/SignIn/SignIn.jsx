@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import signInAnimation from "../../assets/Login.json";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
-// import SocialLogin from '../shared/SocialLogin';
+import SocialLogin from "../../Components/SocialLogin";
 
 const SignIn = () => {
   const { signInUser } = useContext(AuthContext);
@@ -68,7 +68,7 @@ const SignIn = () => {
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
-          {/* <SocialLogin></SocialLogin> */}
+          <SocialLogin></SocialLogin>
         </div>
       </div>
     </div>

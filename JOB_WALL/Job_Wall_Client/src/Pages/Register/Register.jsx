@@ -3,8 +3,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router";
 import registerAnimation from "../../assets/Register.json";
 import { AuthContext } from "../../Contexts/AuthProvider";
-
-// import SocialLogin from '../shared/SocialLogin';
+import SocialLogin from "../../Components/SocialLogin";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -69,7 +68,7 @@ const Register = () => {
               <button className="btn btn-primary">Register</button>
             </div>
           </form>
-          {/* <SocialLogin></SocialLogin> */}
+          <SocialLogin></SocialLogin>
         </div>
       </div>
     </div>
