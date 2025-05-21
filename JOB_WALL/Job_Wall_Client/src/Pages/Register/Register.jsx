@@ -1,16 +1,28 @@
 import Lottie from "lottie-react";
-// import React, { useContext } from 'react';
+import { useContext } from "react";
 import registerAnimation from "../../assets/Register.json";
-// import AuthContext from '../../context/AuthContext/AuthContext';
+import { AuthContext } from "../../Contexts/AuthProvider";
+
 // import SocialLogin from '../shared/SocialLogin';
 
 const Register = () => {
+  const { createNewUser } = useContext(AuthContext);
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
+
+    createNewUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        form.reset();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   return (
     <div className="hero bg-base-200 min-h-screen">
