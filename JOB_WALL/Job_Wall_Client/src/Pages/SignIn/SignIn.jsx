@@ -1,41 +1,40 @@
 import Lottie from "lottie-react";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
-import registerAnimation from "../../assets/Register.json";
+import signInAnimation from "../../assets/Login.json";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 // import SocialLogin from '../shared/SocialLogin';
 
-const Register = () => {
+const SignIn = () => {
+  const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  const { createNewUser } = useContext(AuthContext);
-  const handleRegister = (event) => {
-    event.preventDefault();
-    const form = event.target;
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
 
-    createNewUser(email, password)
+    signInUser(email, password)
       .then((result) => {
-        const user = result.user;
-        console.log(user);
-        form.reset();
+        console.log("sign in", result.user);
         navigate("/");
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
       });
   };
+
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left w-96">
-          <Lottie animationData={registerAnimation}></Lottie>
+          <Lottie animationData={signInAnimation}></Lottie>
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <h1 className="ml-8 mt-4 text-5xl font-bold">Register now!</h1>
-          <form onSubmit={handleRegister} className="card-body">
+          <h1 className="ml-8 mt-4 text-5xl font-bold">Login now!</h1>
+          <form onSubmit={handleSignIn} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -66,7 +65,7 @@ const Register = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Register</button>
+              <button className="btn btn-primary">Login</button>
             </div>
           </form>
           {/* <SocialLogin></SocialLogin> */}
@@ -76,4 +75,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SignIn;
