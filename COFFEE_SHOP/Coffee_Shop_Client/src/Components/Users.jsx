@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
 
@@ -18,7 +18,7 @@ const Users = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/users/${id}`, {
+        fetch(`https://coffee-shop-server-swart.vercel.app/users/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -36,6 +36,11 @@ const Users = () => {
       }
     });
   };
+
+  if (!users) {
+    return <div className="text-center text-6xl">Loading...</div>;
+  }
+
   return (
     <div>
       <h2 className="text-3xl">Users: {users.length}</h2>

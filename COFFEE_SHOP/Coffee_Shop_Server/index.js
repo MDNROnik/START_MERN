@@ -5,12 +5,6 @@ require('dotenv').config()
 
 const uri = `mongodb+srv://${process.env.user}:${process.env.passworld}@cluster0.tu3kffr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
-// const uri = `mongodb+srv://${process.env.user}:${process.env.passworld}@cluster0.tu3kffr.mongodb.net/coffee_shop?retryWrites=true&w=majority&appName=Cluster0`;
-
-// const uri = "mongodb+srv://mdnronik13:helloworld2021@cluster0.tu3kffr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
-console.log(uri);
-console.log('====================================');
 
 const app = express();
 

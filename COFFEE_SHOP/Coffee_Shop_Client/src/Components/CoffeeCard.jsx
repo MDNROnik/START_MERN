@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 
@@ -22,7 +21,7 @@ const CoffeeCard = ({ coffees, coffee, setCoffees }) => {
       // console.log(result);
       if (result.isConfirmed) {
         // start deleting the coffee
-        fetch(`http://localhost:3000/coffee/${_id}`, {
+        fetch(`https://coffee-shop-server-swart.vercel.app/coffee/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

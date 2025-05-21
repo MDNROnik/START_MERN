@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { AuthProviders } from '../providers/AuthProviders.jsx';
+import { useContext } from "react";
+import { AuthProviders } from "../providers/AuthProviders.jsx";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthProviders);
@@ -16,11 +16,11 @@ const SignUp = () => {
       .then((result) => {
         console.log(result.user);
         const createdAt = result.user.metadata.creationTime;
-        const newUser = { name, email, createdAt,address, phone, photo };
+        const newUser = { name, email, createdAt, address, phone, photo };
         console.log("new ", newUser);
 
         //save user in database
-        fetch("http://localhost:3000/users", {
+        fetch("https://coffee-shop-server-swart.vercel.app/users", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newUser),

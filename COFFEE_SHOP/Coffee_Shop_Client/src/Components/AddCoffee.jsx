@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import Sweet from "sweetalert";
 const AddCoffee = () => {
@@ -25,7 +24,7 @@ const AddCoffee = () => {
     // console.log(newCoffee);
 
     // send data to server for store
-    fetch("http://localhost:3000/addcoffee", {
+    fetch("https://coffee-shop-server-swart.vercel.app/addcoffee", {
       method: "POST",
       body: JSON.stringify(newCoffee),
       headers: { "Content-Type": "application/json" },

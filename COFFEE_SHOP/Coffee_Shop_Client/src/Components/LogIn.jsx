@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { AuthProviders } from '../providers/AuthProviders.jsx';
+import { useContext } from "react";
+import { AuthProviders } from "../providers/AuthProviders.jsx";
 
 const LogIn = () => {
   const { logIn } = useContext(AuthProviders);
@@ -20,11 +20,10 @@ const LogIn = () => {
           lastSignInTime: result.user?.metadata?.lastSignInTime,
         };
 
-
         console.log(signInInfo);
-        
+
         //update last sign in to the database
-        fetch(`http://localhost:3000/users/${email}`, {
+        fetch(`https://coffee-shop-server-swart.vercel.app/users/${email}`, {
           method: "put",
           headers: {
             "content-type": "application/json",
