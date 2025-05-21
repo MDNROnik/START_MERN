@@ -6,9 +6,9 @@ import AddCoffee from "./Components/AddCoffee.jsx";
 import LogIn from "./Components/LogIn.jsx";
 import SignUp from "./Components/SignUp.jsx";
 import UpdateCoffee from "./Components/UpdateCoffee.jsx";
-import AuthProviders from "./providers/AuthProviders.jsx";
-import "./index.css";
 import Users from "./Components/Users.jsx";
+import "./index.css";
+import AuthProviders from "./providers/AuthProviders.jsx";
 
 const router = createBrowserRouter([
   {

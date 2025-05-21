@@ -7,14 +7,18 @@ const Home = () => {
   const initialCoffees = useLoaderData();
   const [coffees, setCoffees] = useState(initialCoffees);
 
+  console.log(coffees);
+  
   return (
     <div className="m-20">
       <div>
         <Header />
       </div>
       <h1 className="text-6xl text-center">Welcome To The World Of COFFEES !!!</h1>
+      
+      
       <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
-        {coffees.map((coffee) => (
+        {coffees?.map((coffee) => (
           <CoffeeCard
             key={coffee._id}
             coffees={coffees}
