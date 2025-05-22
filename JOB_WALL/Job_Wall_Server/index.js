@@ -32,9 +32,37 @@ async function run() {
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
+
+    const database = client.db(process.env.DB_NAME);
+    const jobsCollection = database.collection('job');
+
+    // Create a job
+    app.post('/jobs', async (req, res) => {
+      const job = req.body;
+      const result = await jobsCollection.insertOne(job);
+      res.send(result);
+    })
+    // Get all jobs
+    app.get('/jobs', async (req, res) => {
+      const cursor = jobsCollection.find({});
+      const jobs = await cursor.toArray();
+      res.send(jobs);
+    })
+  
+    // Get a job by id
+    app.get('/jobdetails/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new mongodb.ObjectId(id) };
+      const job = await jobsCollection.findOne(query);
+      res.send(job);
+    })
+
+
+
+
+} finally {
     // Ensures that the client will close when you finish/error
-    // await client.close();
+    // await client.close();   
   }
 }
 run().catch(console.dir);
