@@ -1,5 +1,3 @@
-
-import React from "react";
 import { Link } from "react-router-dom";
 const SingleJobCard = ({ job }) => {
   const {
@@ -35,7 +33,10 @@ const SingleJobCard = ({ job }) => {
             Salary: {salaryRange.min}- {salaryRange.max} BDT
           </p>
 
-          <button className="btn btn-primary"> <Link to={`/jobdetails/${job._id}`}>Job Details</Link> </button>
+          <button className="btn btn-primary">
+            {" "}
+            <Link to={`/jobdetails/${job._id}`}>Job Details</Link>{" "}
+          </button>
         </div>
       </div>
     </div>
