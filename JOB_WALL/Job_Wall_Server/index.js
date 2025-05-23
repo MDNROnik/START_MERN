@@ -35,13 +35,16 @@ async function run() {
 
     const database = client.db(process.env.DB_NAME);
     const jobsCollection = database.collection('job');
+    const jobApplicationCollection = database.collection('jobapplication');
+    const usersCollection = database.collection('users');
 
-    // Create a job
+    // Post a job
     app.post('/jobs', async (req, res) => {
       const job = req.body;
       const result = await jobsCollection.insertOne(job);
       res.send(result);
     })
+
     // Get all jobs
     app.get('/jobs', async (req, res) => {
       const cursor = jobsCollection.find({});
@@ -56,6 +59,29 @@ async function run() {
       const job = await jobsCollection.findOne(query);
       res.send(job);
     })
+
+    //Post a job application
+    app.post('/job-application', async (req, res) => {
+      const application = req.body;
+      const result = await jobApplicationCollection.insertOne(application);
+      res.send(result);
+    })
+
+    // Get a job application by id
+    app.get('/job-application/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new mongodb.ObjectId(id) };
+      const application = await jobApplicationCollection.findOne(query);
+      res.send(application);
+    })
+
+    // Get all job applications
+    app.get('/job-application', async (req, res) => {
+      const cursor = jobApplicationCollection.find({});
+      const applications = await cursor.toArray();
+      res.send(applications);
+    })
+    
 
 
 

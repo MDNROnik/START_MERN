@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthProvider";
 const JobApply = () => {
   const { id } = useParams();
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const submitJobApplication = (event) => {
     event.preventDefault();
@@ -10,12 +13,28 @@ const JobApply = () => {
     const resume = form.resume.value;
 
     const jobApplication = {
+      jobId: id,
+      userId: user.uid,
+      userEmail: user.email,
       linkedIn,
       github,
       resume,
     };
-
     console.log(jobApplication);
+    
+    fetch("http://localhost:5000/job-application", {
+      method: "POST",
+      body: JSON.stringify(jobApplication),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          alert("Job application submitted successfully!");
+          navigate("/");
+        }
+      });
   };
   return (
     <div className="card bg-base-100 w-full shadow-2xl">
