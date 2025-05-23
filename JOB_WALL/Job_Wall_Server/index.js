@@ -77,7 +77,9 @@ async function run() {
 
     // Get all job applications
     app.get('/job-application', async (req, res) => {
-      const cursor = jobApplicationCollection.find({});
+      const userId = req.query.userId;;
+      const query = { userId: userId };
+      const cursor = await jobApplicationCollection.find(query);
       const applications = await cursor.toArray();
       res.send(applications);
     })
