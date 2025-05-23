@@ -81,6 +81,14 @@ async function run() {
       const query = { userId: userId };
       const cursor = await jobApplicationCollection.find(query);
       const applications = await cursor.toArray();
+
+      for(let i = 0; i < applications.length; i++) {
+        const jobId = applications[i].jobId;
+        const query = { _id: new mongodb.ObjectId(jobId) };
+        const job = await jobsCollection.findOne(query);
+        applications[i].job = job;
+      }
+
       res.send(applications);
     })
     
