@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayOut from "../Layouts/MainLayOut";
+import AddJob from "../Pages/AboutJob/AddJob";
 import Home from "../Pages/Home/Home";
 import JobApply from "../Pages/JobApply/JobApply";
 import JobDetails from "../Pages/JobDetails/JobDetails";
 import Register from "../Pages/Register/Register";
 import SignIn from "../Pages/SignIn/SignIn";
 import UserInfo from "../Pages/UserInfo/UserInfo";
-import AddJob from "../Pages/AboutJob/AddJob";
+import MyJobs from "../Pages/MyJobs/MyJobs";
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -42,6 +43,10 @@ const Routes = createBrowserRouter([
       {
         path: "/addjob",
         element: <AddJob></AddJob>,
+      },
+      {
+        path: "/myjobs",
+        element: <MyJobs></MyJobs>,
       },
     ],
   },

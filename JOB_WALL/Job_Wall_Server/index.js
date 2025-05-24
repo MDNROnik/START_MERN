@@ -39,17 +39,28 @@ async function run() {
     const usersCollection = database.collection('users');
 
     // Post a job
-    app.post('/jobs', async (req, res) => {
+    app.post('/addjob', async (req, res) => {
       const job = req.body;
       const result = await jobsCollection.insertOne(job);
+      // console.log(result);
       res.send(result);
     })
 
     // Get all jobs
     app.get('/jobs', async (req, res) => {
-      const cursor = jobsCollection.find({});
-      const jobs = await cursor.toArray();
-      res.send(jobs);
+      // console.log(req.query.userId);
+      if(req.query.userId){
+        const userId = req.query.userId;
+        const query = { userId: userId };
+        const cursor = await jobsCollection.find(query);
+        const jobs = await cursor.toArray();
+        res.send(jobs);
+      }
+      else{
+        const cursor = jobsCollection.find({});
+        const jobs = await cursor.toArray();
+        res.send(jobs);
+      }
     })
   
     // Get a job by id
@@ -77,7 +88,8 @@ async function run() {
 
     // Get all job applications
     app.get('/job-application', async (req, res) => {
-      const userId = req.query.userId;;
+      // console.log(req.query.userId);
+      const userId = req.query.userId;
       const query = { userId: userId };
       const cursor = await jobApplicationCollection.find(query);
       const applications = await cursor.toArray();

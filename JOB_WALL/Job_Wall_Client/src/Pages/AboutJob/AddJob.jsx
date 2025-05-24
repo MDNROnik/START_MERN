@@ -1,10 +1,37 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Contexts/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const AddJob = () => {
   const { user, loading } = useContext(AuthContext);
-  const handleAddJob = () => {
-    console.log(1111111111111);
+  const navigate = useNavigate();
+  const handleAddJob = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    // console.log(formData.entries())
+    const initialData = Object.fromEntries(formData.entries());
+    // console.log(initialData)
+    const { min, max, currency, ...newJob } = initialData;
+    // console.log(min, max, currency, newJob);
+    newJob.salaryRange = { min, max, currency };
+    newJob.requirements = newJob.requirements.split("\n");
+    newJob.responsibilities = newJob.responsibilities.split("\n");
+    newJob.userId = user.uid;
+    // console.log(newJob);
+    fetch("http://localhost:5000/addjob", {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newJob)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    alert("job added")
+                    navigate('/')
+                }
+            })
   };
   return (
     <div>
