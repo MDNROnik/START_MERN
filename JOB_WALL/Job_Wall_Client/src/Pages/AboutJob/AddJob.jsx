@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { AuthContext } from "../../Contexts/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 const AddJob = () => {
   const { user, loading } = useContext(AuthContext);
@@ -19,19 +19,19 @@ const AddJob = () => {
     newJob.userId = user.uid;
     // console.log(newJob);
     fetch("http://localhost:5000/addjob", {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newJob)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
-                    alert("job added")
-                    navigate('/')
-                }
-            })
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newJob),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          alert("job added");
+          navigate("/");
+        }
+      });
   };
   return (
     <div>

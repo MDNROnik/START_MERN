@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Contexts/AuthProvider";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthProvider";
 const MyJobs = () => {
   const { user } = useContext(AuthContext);
   const [jobs, setJobs] = useState([]);

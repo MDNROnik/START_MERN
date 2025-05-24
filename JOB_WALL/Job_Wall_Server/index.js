@@ -124,6 +124,21 @@ async function run() {
       }
       
     })
+
+    //update data
+    app.patch('/job-application/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new mongodb.ObjectId(id) };
+      // const option = {upsert: true}
+      const newData = {
+        $set:{
+          status: req.body.data,
+        }
+      }
+      console.log(id, req.body.data);
+      const result = await jobApplicationCollection.updateOne(query, newData);
+      res.send(result);
+    })
     
 
 
