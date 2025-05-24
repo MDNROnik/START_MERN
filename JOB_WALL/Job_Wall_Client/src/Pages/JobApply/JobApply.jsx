@@ -11,6 +11,7 @@ const JobApply = () => {
     const linkedIn = form.linkedIn.value;
     const github = form.github.value;
     const resume = form.resume.value;
+    const status = "applied";
 
     const jobApplication = {
       jobId: id,
@@ -19,6 +20,7 @@ const JobApply = () => {
       linkedIn,
       github,
       resume,
+      status,
     };
     console.log(jobApplication);
     

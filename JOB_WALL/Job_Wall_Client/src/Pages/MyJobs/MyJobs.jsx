@@ -32,13 +32,13 @@ const MyJobs = () => {
           </thead>
           <tbody>
             {jobs.map((job, index) => (
-              <tr>
+              <tr key={index}>
                 <th>{index + 1}</th>
                 <td>{job.title}</td>
                 <td>{job.applicationDeadline}</td>
-                <td>{job.applicationCount}</td>
+                <td>{job.count}</td>
                 <td>
-                  <Link to={`/viewApplications/${job._id}`}>
+                  <Link to={`/viewapplicant/${job._id}`}>
                     <button className="btn btn-link">View Applications</button>
                   </Link>
                 </td>

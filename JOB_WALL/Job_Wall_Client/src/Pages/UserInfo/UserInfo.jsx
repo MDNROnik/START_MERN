@@ -36,6 +36,7 @@ const UserInfo = () => {
                 </th>
                 <th>Name</th>
                 <th>Job</th>
+                <th>Status</th>
                 <th></th>
               </tr>
             </thead>
@@ -70,6 +71,9 @@ const UserInfo = () => {
                     <span className="badge badge-ghost badge-sm">
                       {application.job.description}
                     </span>
+                  </td>
+                  <td>
+                    {application.status}
                   </td>
                   <th>
                     <button className="btn btn-ghost btn-xs">X</button>

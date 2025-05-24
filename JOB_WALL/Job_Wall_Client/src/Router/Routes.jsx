@@ -8,6 +8,7 @@ import Register from "../Pages/Register/Register";
 import SignIn from "../Pages/SignIn/SignIn";
 import UserInfo from "../Pages/UserInfo/UserInfo";
 import MyJobs from "../Pages/MyJobs/MyJobs";
+import ViewApplicant from "../Pages/ViewApplicant/ViewApplicant";
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -47,6 +48,10 @@ const Routes = createBrowserRouter([
       {
         path: "/myjobs",
         element: <MyJobs></MyJobs>,
+      },
+      {
+        path: "/viewapplicant/:id",
+        element: <ViewApplicant></ViewApplicant>,
       },
     ],
   },

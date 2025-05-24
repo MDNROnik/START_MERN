@@ -54,6 +54,16 @@ async function run() {
         const query = { userId: userId };
         const cursor = await jobsCollection.find(query);
         const jobs = await cursor.toArray();
+        for(let i = 0; i < jobs.length; i++) {
+          // jobId
+          const jobId = jobs[i]._id.toString();
+          // console.log(jobId);
+          const query = { jobId: jobId };;
+          const cursor = await jobApplicationCollection.find(query);
+          const applications = await cursor.toArray();
+          // console.log(applications);
+          jobs[i].count=applications.length;
+        }
         res.send(jobs);
       }
       else{
@@ -89,19 +99,30 @@ async function run() {
     // Get all job applications
     app.get('/job-application', async (req, res) => {
       // console.log(req.query.userId);
-      const userId = req.query.userId;
-      const query = { userId: userId };
-      const cursor = await jobApplicationCollection.find(query);
-      const applications = await cursor.toArray();
+      if(req.query.userId){
+        const userId = req.query.userId;
+        const query = { userId: userId };
+        const cursor = await jobApplicationCollection.find(query);
+        const applications = await cursor.toArray();
 
-      for(let i = 0; i < applications.length; i++) {
-        const jobId = applications[i].jobId;
-        const query = { _id: new mongodb.ObjectId(jobId) };
-        const job = await jobsCollection.findOne(query);
-        applications[i].job = job;
+        for(let i = 0; i < applications.length; i++) {
+          const jobId = applications[i].jobId;
+          const query = { _id: new mongodb.ObjectId(jobId) };
+          const job = await jobsCollection.findOne(query);
+          applications[i].job = job;
+        }
+
+        res.send(applications);
       }
-
-      res.send(applications);
+      else if(req.query.jobId){
+        console.log(req.query.jobId);
+        const jobId = req.query.jobId;
+        const query = { jobId: jobId };
+        const cursor = await jobApplicationCollection.find(query);
+        const applications = await cursor.toArray();
+        res.send(applications)
+      }
+      
     })
     
 
