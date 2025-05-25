@@ -1,10 +1,10 @@
+import axios from "axios";
 import Lottie from "lottie-react";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import signInAnimation from "../../assets/Login.json";
-import { AuthContext } from "../../Contexts/AuthProvider";
-
 import SocialLogin from "../../Components/SocialLogin";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 const SignIn = () => {
   const { signInUser } = useContext(AuthContext);
@@ -14,11 +14,17 @@ const SignIn = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    // console.log(email, password);
 
     signInUser(email, password)
       .then((result) => {
-        console.log("sign in", result.user);
+        // console.log("sign in", result.user);
+        const user = {
+          email: email,
+        };
+        axios.post("http://localhost:5000/jwt", user).then((data) => {
+          console.log(data);
+        });
         navigate("/");
       })
       .catch((error) => {
