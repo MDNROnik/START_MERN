@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
@@ -5,20 +6,26 @@ const UserInfo = () => {
   const { user } = useContext(AuthContext);
   const [allApplication, setAllApplication] = useState([]);
   useEffect(() => {
-    fetch(
-      `http://localhost:5000/job-application?userId=${encodeURIComponent(
-        user.uid
-      )}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data), setAllApplication(data);
-        console.log(allApplication);
-      })
-      .catch((error) => console.error(error));
+    // fetch(
+    //   `http://localhost:5000/job-application?userId=${encodeURIComponent(
+    //     user.uid
+    //   )}`
+    // )
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data), setAllApplication(data);
+    //   })
+    //   .catch((error) => console.error(error));
 
-    
-  }, [user.uid]);
+    axios
+      .get(`http://localhost:5000/job-application?userId=${user.uid}`, {
+        withCredentials: true, // 🔥
+      })
+      .then((res) => {
+        console.log("from jwt ", res.data);
+        setAllApplication(res.data);
+      });
+  }, []);
   return (
     <div>
       <p>{allApplication.length}</p>
@@ -60,8 +67,12 @@ const UserInfo = () => {
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">{application.job.company}</div>
-                        <div className="text-sm opacity-50">{application.job.location}</div>
+                        <div className="font-bold">
+                          {application.job.company}
+                        </div>
+                        <div className="text-sm opacity-50">
+                          {application.job.location}
+                        </div>
                       </div>
                     </div>
                   </td>
@@ -72,9 +83,7 @@ const UserInfo = () => {
                       {application.job.description}
                     </span>
                   </td>
-                  <td>
-                    {application.status}
-                  </td>
+                  <td>{application.status}</td>
                   <th>
                     <button className="btn btn-ghost btn-xs">X</button>
                   </th>

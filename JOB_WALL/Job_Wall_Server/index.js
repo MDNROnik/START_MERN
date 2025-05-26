@@ -3,15 +3,50 @@ const cors = require('cors')
 const mongodb = require('mongodb')
 const dotenv = require('dotenv')
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 dotenv.config()
 
 const app = express()
 const port = process.env.PORT || 5000
 
-app.use(cors())
+app.use(cookieParser())
+app.use(cors({
+  origin: ['http://localhost:5173'],// client site url
+  credentials: true
+}))
 app.use(express.json())
 
+
+// require('crypto').randomBytes(64).toString('hex')
+
+
+// functions
+const logCheck=(req, res, next)=>{
+  // console.log("this the funciton ", req.cookies);
+  const token = req?.cookies?.token;
+  // console.log(req.query.userId);
+  if(!token){
+    console.log(" in not have token ",2222);
+    
+    return res.status(401).send({message:"Unacuthorized Access"});
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded)=>{
+    console.log(2222);
+    // console.log(err);
+    
+    if(err){
+      return res.status(401).send({message:"Unacuthorized Access"});
+    }
+    else{
+      // console.log(1111);
+      req.result = decoded;
+      next();
+    }
+  })
+  // next();
+}
 
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.tu3kffr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
@@ -45,10 +80,18 @@ async function run() {
     //auth related APIS
     app.post('/jwt', async(req, res)=>{
       const user  = req.body;
-      // console.log("api hit");
-      
-      const token = jwt.sign(user, 'secret', {expiresIn: '1h'});
-      res.send(token);
+      // console.log(user);
+      const token = jwt.sign(user, process.env.JWT_SECRET, {expiresIn: '1h'});
+
+
+      res.cookie('token', token, {
+        httpOnly: true, 
+        secure: false, // set true for production https
+        sameSite: 'lax',
+      })
+
+
+      res.send({result: 'loggind successfully'});
     })
 
 
@@ -107,7 +150,7 @@ async function run() {
     })
 
     // Get a job application by id
-    app.get('/job-application/:id', async (req, res) => {
+    app.get('/job-application/:id', async (req, res) => {      
       const id = req.params.id;
       const query = { _id: new mongodb.ObjectId(id) };
       const application = await jobApplicationCollection.findOne(query);
@@ -115,8 +158,15 @@ async function run() {
     })
 
     // Get all job applications
-    app.get('/job-application', async (req, res) => {
+    app.get('/job-application', logCheck, async (req, res) => {      
+
+      console.log("this is the logCheck function ", req.result);
+      if(req.query.userId != undefined && req.query.userId!==req.result.uid){
+        return res.status(401).send({message:"Unacuthorized Access"});
+      }
+      
       // console.log(req.query.userId);
+      // console.log(req.query.jobId);
       if(req.query.userId){
         const userId = req.query.userId;
         const query = { userId: userId };
@@ -181,4 +231,3 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`)
 })
-

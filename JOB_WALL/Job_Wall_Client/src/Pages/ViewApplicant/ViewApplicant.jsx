@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -6,16 +7,33 @@ const ViewApplicant = () => {
   const [allApplication, setAllApplication] = useState([]);
   //   console.log(jobId.id);
   useEffect(() => {
-    fetch(
-      `http://localhost:5000/job-application?jobId=${encodeURIComponent(
-        jobId.id
-      )}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setAllApplication(data);
-      })
-      .catch((error) => console.error(error));
+    // fetch(
+    //   `http://localhost:5000/job-application?jobId=${encodeURIComponent(
+    //     jobId.id
+    //   )}`
+    // )
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+
+    //     setAllApplication(data);
+    //   })
+    //   .catch((error) => console.error(error));
+
+    axios
+      .get(
+        `http://localhost:5000/job-application?jobId=${encodeURIComponent(
+          jobId.id
+        )}`,
+        {
+          withCredentials: true, // 🔥
+        }
+      )
+      .then((res) => {
+        // console.log("from jwt ", res.data);
+        setAllApplication(res.data);
+        // setAllApplication(data);
+      });
   }, [jobId.id]);
 
   const handleStatusUpdate = (e, id) => {
@@ -62,7 +80,7 @@ const ViewApplicant = () => {
             </tr>
           </thead>
           <tbody>
-            {allApplication.map((app, index) => (
+            {allApplication?.map((app, index) => (
               <tr key={app._id}>
                 <th>{index + 1}</th>
                 <td>{app.userEmail}</td>

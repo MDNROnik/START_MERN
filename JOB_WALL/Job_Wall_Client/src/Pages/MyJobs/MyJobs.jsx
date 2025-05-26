@@ -5,7 +5,7 @@ const MyJobs = () => {
   const { user } = useContext(AuthContext);
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
-    console.log(user.uid);
+    // console.log(user.uid);
 
     fetch(`http://localhost:5000/jobs?userId=${encodeURIComponent(user.uid)}`)
       .then((res) => res.json())

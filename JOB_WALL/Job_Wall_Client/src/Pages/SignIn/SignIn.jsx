@@ -18,11 +18,12 @@ const SignIn = () => {
 
     signInUser(email, password)
       .then((result) => {
-        // console.log("sign in", result.user);
+        console.log("sign in", result.user.uid);
         const user = {
           email: email,
+          uid:result.user.uid,
         };
-        axios.post("http://localhost:5000/jwt", user).then((data) => {
+        axios.post("http://localhost:5000/jwt", user, {withCredentials: true}).then((data) => {
           console.log(data);
         });
         navigate("/");
