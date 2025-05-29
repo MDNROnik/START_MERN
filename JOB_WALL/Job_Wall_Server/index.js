@@ -27,13 +27,13 @@ const logCheck=(req, res, next)=>{
   const token = req?.cookies?.token;
   // console.log(req.query.userId);
   if(!token){
-    console.log(" in not have token ",2222);
+    // console.log(" in not have token ",2222);
     
     return res.status(401).send({message:"Unacuthorized Access"});
   }
 
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded)=>{
-    console.log(2222);
+    // console.log(2222);
     // console.log(err);
     
     if(err){
@@ -171,13 +171,18 @@ async function run() {
     // Get all job applications
     app.get('/job-application', logCheck, async (req, res) => {      
 
-      console.log("this is the logCheck function ", req.result);
-      if(req.query.userId != undefined && req.query.userId!==req.result.uid){
+      // console.log("this is the logCheck function ", req.result);
+      console.log(req.query.userId );
+      if(req.query.userId !== undefined && req.query.userId!==req.result.uid){
+        console.log("in second condition ", req.query.userId);
+        
         return res.status(401).send({message:"Unacuthorized Access"});
       }
       
       // console.log(req.query.userId);
       // console.log(req.query.jobId);
+      console.log("after print");
+      
       if(req.query.userId){
         const userId = req.query.userId;
         const query = { userId: userId };
@@ -194,7 +199,7 @@ async function run() {
         res.send(applications);
       }
       else if(req.query.jobId){
-        console.log(req.query.jobId);
+        // console.log(req.query.jobId);
         const jobId = req.query.jobId;
         const query = { jobId: jobId };
         const cursor = await jobApplicationCollection.find(query);
