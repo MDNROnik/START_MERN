@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo.jpg";
@@ -8,6 +9,11 @@ const Navbar = () => {
     signOutUser()
       .then(() => {
         console.log("sign out successful");
+        axios
+          .post("http://localhost:5000/logoutJwt", {}, { withCredentials: true })
+          .then((data) => {
+            console.log(data);
+          });
       })
       .catch((error) => {
         console.error(error);

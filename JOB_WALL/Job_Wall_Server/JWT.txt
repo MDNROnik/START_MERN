@@ -3,7 +3,8 @@
  * npm i jsonwebtoken, cookie-parser
  *
  *
- * set data in payload, and secret code 
+ * set data in payload, 
+
  * made secret code by // require('crypto').randomBytes(64).toString('hex')
  * 
  * jwt.sign(payload, secret, {expiresIn: '1d'})
@@ -34,7 +35,7 @@
  * 
  * 
  * 
- * set e funciton where a token can be store and also check validation
+ * set e funciton where a token can be  validation
  * 
  * 
  * 

@@ -91,7 +91,18 @@ async function run() {
       })
 
 
-      res.send({result: 'loggind successfully'});
+      res.send({result: 'loggin successfully'});
+    })
+
+    //auth logout
+    app.post('/logoutJwt', async(req, res)=>{
+      res.clearCookie('token',{
+        httpOnly:true,
+        secure:false
+      })
+      // console.log(111111111);
+      
+      res.send({result: 'logout successfully'})
     })
 
 
