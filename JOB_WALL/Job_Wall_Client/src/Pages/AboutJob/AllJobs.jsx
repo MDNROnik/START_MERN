@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
 import SingleJobCard from "../Home/SingleJobCard";
 
 const AllJobs = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState(false);
-  const [search , setSearch ] = useState("");
-
+  const [search, setSearch] = useState("");
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(0);
   // console.log(sort);
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/jobs?sort=${sort}&search=${search}`);
+        const response = await fetch(
+          `http://localhost:5000/jobs?sort=${sort}&search=${search}&min=${min}&max=${max}`
+        );
         const data = await response.json();
         setJobs(data);
       } catch (error) {
@@ -24,7 +26,7 @@ const AllJobs = () => {
     };
 
     fetchJobs();
-  }, [sort, search]);
+  }, [sort, search, min, max]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -37,12 +39,23 @@ const AllJobs = () => {
           {sort == true ? "Sorted By Salary" : "Sort By Salary"}
         </button>
         <div className="flex">
-          <FaSearch />
           <input
-            onKeyUp={(e)=>setSearch(e.target.value)}
+            onKeyUp={(e) => setSearch(e.target.value)}
             className="input w-full max-w-2xl"
             type="text"
             placeholder="Search Job By Location"
+          />
+          <input
+            onKeyUp={(e) => setMin(e.target.value)}
+            className="input w-full max-w-2xl"
+            type="text"
+            placeholder="Min Salary"
+          />
+          <input
+            onKeyUp={(e) => setMax(e.target.value)}
+            className="input w-full max-w-2xl"
+            type="text"
+            placeholder="Max Salary"
           />
         </div>
       </div>

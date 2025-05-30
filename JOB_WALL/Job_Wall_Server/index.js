@@ -123,8 +123,13 @@ async function run() {
       // console.log('fromt all jobs', req.query.sort);
       
       const sort = req.query.sort;
-      const search = req.query.search
-      console.log(sort, search);
+      const search = req.query.search;
+      const min = parseInt(req.query.min);
+      const max = parseInt(req.query.max);
+
+      console.log(req.query);
+      // console.log(min, max);
+      
       
       // console.log(req.query.userId);
       if(req.query.userId){
@@ -144,20 +149,32 @@ async function run() {
         }
         res.send(jobs);
       }
-      else if(search){
-        const query = {};
-        query.location = {$regex:search, $options:'i'};
-        console.log(query);
-        
+      else if(max>0 && min>0){
+        console.log("recieve");
+        const query = {
+          "salaryRange.min":{$gte:min},
+          "salaryRange.max":{$lte:max}
+        }
         const cursor =await jobsCollection.find(query);
         const jobs = await cursor.toArray();
         console.log(jobs);
         
         res.send(jobs);
       }
+      else if(search){
+        const query = {};
+        query.location = {$regex:search, $options:'i'};
+        // console.log(query);
+        
+        const cursor =await jobsCollection.find(query);
+        const jobs = await cursor.toArray();
+        // console.log(jobs);
+        
+        res.send(jobs);
+      }
       
       else if(sort=="true"){
-        console.log("IN the sort");
+        // console.log("IN the sort");
         const sortByMinSalary = { "salaryRange.min": -1 };
         const cursor =await jobsCollection.find({}).sort(sortByMinSalary);
         const jobs = await cursor.toArray();
