@@ -63,7 +63,6 @@ const AddJob = () => {
             required
           />
         </div>
-        {/* job Type */}
         <div className="form-control">
           <label className="label">
             <span className="label-text">Job Type</span>
@@ -78,7 +77,6 @@ const AddJob = () => {
             <option>Part-time</option>
           </select>
         </div>
-        {/* job Type */}
         <div className="form-control">
           <label className="label">
             <span className="label-text">Job Field</span>
@@ -101,7 +99,7 @@ const AddJob = () => {
               <span className="label-text">Salary Range</span>
             </label>
             <input
-              type="text"
+              type="number"
               name="min"
               placeholder="Min"
               className="input input-bordered"
@@ -110,7 +108,7 @@ const AddJob = () => {
           </div>
           <div className="form-control">
             <input
-              type="text"
+              type="number"
               name="max"
               placeholder="Max "
               className="input input-bordered"
