@@ -3,7 +3,7 @@ import LatestJobs from "./LatestJobs";
 const Home = () => {
   return (
     <div>
-      <h2>This is Home</h2>
+      {/* <h2>This is Home</h2> */}
       <Banner></Banner>
       <LatestJobs></LatestJobs>
     </div>

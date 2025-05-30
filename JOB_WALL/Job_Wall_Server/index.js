@@ -120,6 +120,12 @@ async function run() {
 
     // Get all jobs
     app.get('/jobs', async (req, res) => {
+      // console.log('fromt all jobs', req.query.sort);
+      
+      const sort = req.query.sort;
+      const search = req.query.search
+      console.log(sort, search);
+      
       // console.log(req.query.userId);
       if(req.query.userId){
         const userId = req.query.userId;
@@ -136,6 +142,27 @@ async function run() {
           // console.log(applications);
           jobs[i].count=applications.length;
         }
+        res.send(jobs);
+      }
+      else if(search){
+        const query = {};
+        query.location = {$regex:search, $options:'i'};
+        console.log(query);
+        
+        const cursor =await jobsCollection.find(query);
+        const jobs = await cursor.toArray();
+        console.log(jobs);
+        
+        res.send(jobs);
+      }
+      
+      else if(sort=="true"){
+        console.log("IN the sort");
+        const sortByMinSalary = { "salaryRange.min": -1 };
+        const cursor =await jobsCollection.find({}).sort(sortByMinSalary);
+        const jobs = await cursor.toArray();
+        // console.log(jobs);
+        
         res.send(jobs);
       }
       else{

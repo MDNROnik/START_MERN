@@ -10,7 +10,11 @@ const Navbar = () => {
       .then(() => {
         console.log("sign out successful");
         axios
-          .post("http://localhost:5000/logoutJwt", {}, { withCredentials: true })
+          .post(
+            "http://localhost:5000/logoutJwt",
+            {},
+            { withCredentials: true }
+          )
           .then((data) => {
             console.log(data);
           });
@@ -47,6 +51,9 @@ const Navbar = () => {
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
+              <NavLink to="/alljobs">All Jobs</NavLink>
+            </li>
+            <li>
               <NavLink to="/myjobs">MyJobs</NavLink>
             </li>
             <li>
@@ -54,15 +61,18 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">
+        <NavLink to="/" className="btn btn-ghost text-xl">
           <img className="w-12" src={logo} alt="" />
           <h3 className="text-3xl">Job Portal</h3>
-        </a>
+        </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
             <NavLink to="/">Home</NavLink>
+          </li>
+          <li>
+            <NavLink to="/alljobs">All Jobs</NavLink>
           </li>
           <li>
             <NavLink to="/myjobs">MyJobs</NavLink>

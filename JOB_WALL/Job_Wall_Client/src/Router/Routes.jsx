@@ -1,13 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayOut from "../Layouts/MainLayOut";
 import AddJob from "../Pages/AboutJob/AddJob";
+import AllJobs from "../Pages/AboutJob/AllJobs";
 import Home from "../Pages/Home/Home";
 import JobApply from "../Pages/JobApply/JobApply";
 import JobDetails from "../Pages/JobDetails/JobDetails";
+import MyJobs from "../Pages/MyJobs/MyJobs";
 import Register from "../Pages/Register/Register";
 import SignIn from "../Pages/SignIn/SignIn";
 import UserInfo from "../Pages/UserInfo/UserInfo";
-import MyJobs from "../Pages/MyJobs/MyJobs";
 import ViewApplicant from "../Pages/ViewApplicant/ViewApplicant";
 const Routes = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const Routes = createBrowserRouter([
       {
         path: "/viewapplicant/:id",
         element: <ViewApplicant></ViewApplicant>,
+      },
+      {
+        path: "/alljobs",
+        element: <AllJobs></AllJobs>,
       },
     ],
   },
