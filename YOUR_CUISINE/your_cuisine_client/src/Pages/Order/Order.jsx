@@ -1,0 +1,73 @@
+import { useEffect, useState } from "react";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
+import orderImg from "../../assets/order/banner2.jpg";
+import Cover from "../Share/Cover";
+import OrderCard from "./OrderCard";
+
+const Order = () => {
+  const [tabIndex, setTabIndex] = useState(0);
+  const [menu, setMenu] = useState([]);
+  const [salad, setSalad] = useState([]);
+  const [pizza, setPizza] = useState([]);
+  const [desserts, setDesserts] = useState([]);
+  const [soup, setSoup] = useState([]);
+  const [drinks, setDrinks] = useState([]);
+  useEffect(() => {
+    fetch("menu.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setMenu(data);
+        const tdesserts = data.filter((item) => item.category === "dessert");
+        const tsoup = data.filter((item) => item.category === "soup");
+        const tsalad = data.filter((item) => item.category === "salad");
+        const tpizza = data.filter((item) => item.category === "pizza");
+        const tdrinks = data.filter((item) => item.category === "drinks");
+        // console.log(tdesserts);
+
+        setSalad(tsalad);
+        setPizza(tpizza);
+        setDesserts(tdesserts);
+        setSoup(tsoup);
+        setDrinks(tdrinks);
+      });
+  }, []);
+
+  // console.log("salad, ", salad);
+  // console.log("pizza, ", pizza);
+  // console.log("desserts, ", desserts);
+  // console.log("soup, ", soup);
+  // console.log("drinks, ", drinks);
+
+  return (
+    <div>
+      <Cover img={orderImg} title={"Place Your Order"}></Cover>
+      <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+        <TabList>
+          <Tab>Salad</Tab>
+          <Tab>Pizza</Tab>
+          <Tab>Soup</Tab>
+          <Tab>Dessert</Tab>
+          <Tab>Drinks</Tab>
+        </TabList>
+        <TabPanel>
+          <OrderCard items={salad}></OrderCard>
+        </TabPanel>
+        <TabPanel>
+          <OrderCard items={pizza}></OrderCard>
+        </TabPanel>
+        <TabPanel>
+          <OrderCard items={soup}></OrderCard>
+        </TabPanel>
+        <TabPanel>
+          <OrderCard items={desserts}></OrderCard>
+        </TabPanel>
+        <TabPanel>
+          <OrderCard items={drinks}></OrderCard>
+        </TabPanel>
+      </Tabs>
+    </div>
+  );
+};
+
+export default Order;
