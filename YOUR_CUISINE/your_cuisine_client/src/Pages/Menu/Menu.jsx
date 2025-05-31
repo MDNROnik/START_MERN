@@ -14,19 +14,20 @@ const Menu = () => {
         heading={"From Our Menu"}
         subHeading={"Popular Items"}
         category={"popular"}
+        cate={0}
       ></ShortMenu>
 
       <Cover img={saladImg} title={"SALAD"}></Cover>
-      <ShortMenu category={"salad"}></ShortMenu>
+      <ShortMenu category={"salad"} cate={0}></ShortMenu>
 
       <Cover img={soupImg} title={"SOUP"}></Cover>
-      <ShortMenu category={"soup"}></ShortMenu>
+      <ShortMenu category={"soup"} cate={2}></ShortMenu>
 
       <Cover img={pizzaImg} title={"PIZZA"}></Cover>
-      <ShortMenu category={"pizza"}></ShortMenu>
+      <ShortMenu category={"pizza"} cate={1}></ShortMenu>
 
       <Cover img={dessertImg} title={"DESSERT"}></Cover>
-      <ShortMenu category={"dessert"}></ShortMenu>
+      <ShortMenu category={"dessert"} cate={3}></ShortMenu>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import orderImg from "../../assets/order/banner2.jpg";
@@ -6,15 +7,18 @@ import Cover from "../Share/Cover";
 import OrderCard from "./OrderCard";
 
 const Order = () => {
-  const [tabIndex, setTabIndex] = useState(0);
   const [menu, setMenu] = useState([]);
   const [salad, setSalad] = useState([]);
   const [pizza, setPizza] = useState([]);
   const [desserts, setDesserts] = useState([]);
   const [soup, setSoup] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const { cate } = useParams();
+  const [tabIndex, setTabIndex] = useState(cate);
+  console.log(cate);
+  
   useEffect(() => {
-    fetch("menu.json")
+    fetch("/menu.json")
       .then((res) => res.json())
       .then((data) => {
         setMenu(data);
@@ -23,7 +27,6 @@ const Order = () => {
         const tsalad = data.filter((item) => item.category === "salad");
         const tpizza = data.filter((item) => item.category === "pizza");
         const tdrinks = data.filter((item) => item.category === "drinks");
-        // console.log(tdesserts);
 
         setSalad(tsalad);
         setPizza(tpizza);
