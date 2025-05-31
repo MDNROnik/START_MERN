@@ -1,26 +1,29 @@
-import { useEffect, useState } from "react";
 import MenuItem from "../Share/MenuItem";
 import SectionTitle from "../Share/SectionTitle";
+import ShortMenu from "../Share/ShortMenu";
 
 const HomeMenu = () => {
-  const [menu, setMenu] = useState([]);
-  useEffect(() => {
-    fetch("menu.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const popular = data.filter((item) => item.category === "popular");
-        console.log(popular);
+  // const [menu, setMenu] = useState([]);
+  // useEffect(() => {
+  //   fetch("menu.json")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const filter = data.filter((item) => item.category === "popular");
+  //       console.log(filter);
 
-        setMenu(popular);
-      });
-  }, []);
+  //       setMenu(filter);
+  //     });
+  // }, []);
   return (
     <section className="mb-12">
       <SectionTitle
         heading="From Our Menu"
         subHeading="Popular Items"
       ></SectionTitle>
-      <div className="grid md:grid-cols-2 gap-10">
+      {
+        
+      }
+      {/* <div className="grid md:grid-cols-2 gap-10">
         {menu?.map((item) => (
           <MenuItem key={item._id} item={item}></MenuItem>
         ))}
@@ -29,7 +32,8 @@ const HomeMenu = () => {
         <button className=" btn btn-outline border-0  border-b-4 mt-4">
           View Full Menu
         </button>
-      </div>
+      </div> */}
+      <ShortMenu category={"popular"}></ShortMenu>
     </section>
   );
 };
