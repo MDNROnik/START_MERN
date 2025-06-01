@@ -1,18 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 // import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
-// import Swal from "sweetalert2";
+import Swal from "sweetalert2";
 // import SocialLogin from "../../components/SocialLogin/SocialLogin";
-// import { AuthContext } from "../../providers/AuthProvider";
+import { AuthContext } from "../../providers/AuthProvider";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const catRef = useRef();
-  //   const { signIn } = useContext(AuthContext);
+  const { signInUser } = useContext(AuthContext);
   //   const navigate = useNavigate();
   //   const location = useLocation();
 
@@ -29,20 +30,20 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    // signIn(email, password).then((result) => {
-    //   const user = result.user;
-    //   console.log(user);
-    //   Swal.fire({
-    //     title: "User Login Successful.",
-    //     showClass: {
-    //       popup: "animate__animated animate__fadeInDown",
-    //     },
-    //     hideClass: {
-    //       popup: "animate__animated animate__fadeOutUp",
-    //     },
-    //   });
-    //   navigate(from, { replace: true });
-    // });
+    signInUser(email, password).then((result) => {
+      const user = result.user;
+      console.log(user);
+      Swal.fire({
+        title: "User Login Successful.",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      // navigate(from, { replace: true });
+    });
   };
 
   const handleValidateCaptcha = () => {
@@ -127,7 +128,7 @@ const Login = () => {
             </form>
             <p className="px-6">
               <small>
-                New Here? <a to="/signup">Create an account</a>{" "}
+                New Here? <Link to="/signup">Create an account</Link>{" "}
               </small>
             </p>
             {/* <SocialLogin></SocialLogin> */}
