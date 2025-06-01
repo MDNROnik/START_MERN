@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
+  console.log(user);
+
   return (
     <>
       <div className="navbar fixed z-10  max-w-screen-xl bg-black/30 text-white">
@@ -77,7 +79,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">
             {user ? (
               <>
-                <li>{user.email}</li>
+                <li>{user?.displayName}</li>
                 <li>
                   <Link
                     onClick={() => {
