@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-// import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
@@ -8,16 +8,15 @@ import {
 import Swal from "sweetalert2";
 // import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import { AuthContext } from "../../providers/AuthProvider";
-import { Link } from "react-router-dom";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const catRef = useRef();
   const { signInUser } = useContext(AuthContext);
-  //   const navigate = useNavigate();
-  //   const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  //   const from = location.state?.from?.pathname || "/";
+  const preLocation = location.state?.preLocation?.pathname || "/";
   //   console.log("state in the location login page", location.state);
 
   useEffect(() => {
@@ -42,7 +41,7 @@ const Login = () => {
           popup: "animate__animated animate__fadeOutUp",
         },
       });
-      // navigate(from, { replace: true });
+      navigate(preLocation, { replace: true });
     });
   };
 
