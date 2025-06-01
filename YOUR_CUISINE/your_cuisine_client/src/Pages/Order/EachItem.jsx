@@ -19,7 +19,7 @@ const EachItem = ({ item }) => {
         <div className="card-actions justify-end">
           <button
             onClick={handleAddToCart}
-            className="btn btn-outline text-black bg-slate-100 border-0 border-b-4 border-orange-400 mt-4"
+            className="btn btn-outline border-0  border-b-4 mt-4"
           >
             Add to Cart
           </button>

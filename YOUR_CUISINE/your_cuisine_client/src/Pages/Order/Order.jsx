@@ -7,7 +7,7 @@ import Cover from "../Share/Cover";
 import OrderCard from "./OrderCard";
 
 const Order = () => {
-  const [menu, setMenu] = useState([]);
+  // const [menu, setMenu] = useState([]);
   const [salad, setSalad] = useState([]);
   const [pizza, setPizza] = useState([]);
   const [desserts, setDesserts] = useState([]);
@@ -15,13 +15,13 @@ const Order = () => {
   const [drinks, setDrinks] = useState([]);
   const { cate } = useParams();
   const [tabIndex, setTabIndex] = useState(cate);
-  console.log(cate);
+  // console.log(cate);
 
   useEffect(() => {
-    fetch("/menu.json")
+    fetch("http://localhost:5000/menu")
       .then((res) => res.json())
       .then((data) => {
-        setMenu(data);
+        // setMenu(data);
         const tdesserts = data.filter((item) => item.category === "dessert");
         const tsoup = data.filter((item) => item.category === "soup");
         const tsalad = data.filter((item) => item.category === "salad");
