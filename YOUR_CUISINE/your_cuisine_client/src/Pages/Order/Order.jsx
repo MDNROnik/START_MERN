@@ -16,7 +16,7 @@ const Order = () => {
   const { cate } = useParams();
   const [tabIndex, setTabIndex] = useState(cate);
   console.log(cate);
-  
+
   useEffect(() => {
     fetch("/menu.json")
       .then((res) => res.json())
