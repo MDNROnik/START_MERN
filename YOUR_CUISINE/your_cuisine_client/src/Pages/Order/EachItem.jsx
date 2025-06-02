@@ -1,9 +1,17 @@
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 const EachItem = ({ item }) => {
+  const { user } = useContext(AuthContext);
   const { name, image, price, recipe, _id } = item;
-  const handleAddToCart = () => {
-    console.log("====================================");
-    console.log("Click for order");
-    console.log("====================================");
+  const handleAddToCart = (item) => {
+    
+    const cartItem = {
+      menuId: _id,
+      email: user.uid,
+      name,
+      image,
+      price,
+    };
   };
   return (
     <div className="card w-96 bg-base-100 shadow-xl">
@@ -18,7 +26,9 @@ const EachItem = ({ item }) => {
         <p>{recipe}</p>
         <div className="card-actions justify-end">
           <button
-            onClick={handleAddToCart}
+            onClick={() => {
+              handleAddToCart(item);
+            }}
             className="btn btn-outline border-0  border-b-4 mt-4"
           >
             Add to Cart

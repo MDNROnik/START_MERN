@@ -33,15 +33,30 @@ async function run() {
     const database = client.db(process.env.DB_NAME);
     const menuCollection = database.collection('menu');
     const reviewCollection = database.collection('review');
+    const cartCollection = database.collection('cart');
 
+    //get menu
     app.get('/menu', async(req, res)=>{
       const result = await menuCollection.find().toArray();
       res.send(result);
     })
+
+    // get review
     app.get('/review', async(req, res)=>{
       const result = await reviewCollection.find().toArray();
       res.send(result);
     })
+
+    // post cart
+    app.get('/cart', async(req, res)=>{
+      const cart = req.body;
+      const result = await cartCollection.insertOne(cart);
+      res.send(result);
+    })
+
+
+
+
 
   
   
