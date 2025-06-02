@@ -13,8 +13,7 @@ import auth from "../Firebase/config";
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [nowCart, setNowCart] = useState(0);
+  const [loading, setLoading] = useState(true);;
 
   const createNewUser = (email, password) => {
     setLoading(true);
@@ -61,8 +60,6 @@ const AuthProvider = ({ children }) => {
     setLoading,
     updateUserProfile,
     signInWithGoogle,
-    nowCart,
-    setNowCart,
   };
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>

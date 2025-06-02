@@ -4,12 +4,12 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 const Navbar = () => {
-  const { user, signOutUser, nowCart, setNowCart } = useContext(AuthContext);
+  const { user, signOutUser, loading } = useContext(AuthContext);
   const [cart, setCart] = useState([]);
   // console.log(user);
 
   useEffect(() => {
-    // console.log("hit ", user && user.uid);
+    // console.log("hit ");
 
     if (user && user.uid) {
       // console.log("hit 2");
@@ -22,10 +22,9 @@ const Navbar = () => {
     } else {
       setCart();
     }
-  }, [user]);
+  }, [user, loading]);
 
-  console.log(cart?.length, nowCart);
-  
+  // console.log(cart?.length);
 
   return (
     <>
@@ -67,7 +66,7 @@ const Navbar = () => {
                   <button className="btn">
                     <FaShoppingCart className="mr-2"></FaShoppingCart>
                     <div className="badge badge-secondary">
-                      +{cart?.length + nowCart || 0 + nowCart}
+                      +{cart?.length || 0}
                     </div>
                   </button>
                 </Link>
@@ -93,7 +92,7 @@ const Navbar = () => {
                 <button className="btn">
                   <FaShoppingCart className="mr-2"></FaShoppingCart>
                   <div className="badge badge-secondary">
-                    +{cart?.length + nowCart || 0 + nowCart}
+                    +{cart?.length || 0}
                   </div>
                 </button>
               </Link>
