@@ -41,7 +41,7 @@ const Login = () => {
           popup: "animate__animated animate__fadeOutUp",
         },
       });
-      navigate(preLocation, { replace: true });
+      navigate("/");
     });
   };
 
