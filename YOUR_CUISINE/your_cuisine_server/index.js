@@ -52,9 +52,17 @@ async function run() {
       const cart = req.body;
       const result = await cartCollection.insertOne(cart);
       res.send(result);
-      // console.log("hit");
-      
-      // res.send({res:"happy"})
+    })
+    
+    // get cart data
+    app.get('/cart', async(req, res)=>{
+
+      const userId = req.query.userId;
+      const status = req.query.status;
+
+      const query = { userId: userId };
+      const result = await cartCollection.find(query).toArray();
+      res.json(result);
     })
 
 

@@ -8,8 +8,8 @@ const EachItem = ({ item }) => {
   const { name, image, price, recipe, _id } = item;
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(user);
-  const handleAddToCart = (item) => {
+  // console.log(user);
+  const handleAddToCart = () => {
     if (user && user.email) {
       //send cart item to the database
       const cart = {
@@ -64,7 +64,7 @@ const EachItem = ({ item }) => {
         <div className="card-actions justify-end">
           <button
             onClick={() => {
-              handleAddToCart(item);
+              handleAddToCart();
             }}
             className="btn btn-outline border-0  border-b-4 mt-4"
           >

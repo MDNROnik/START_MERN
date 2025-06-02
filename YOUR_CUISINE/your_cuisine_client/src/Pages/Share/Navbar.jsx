@@ -1,10 +1,25 @@
-import { useContext } from "react";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
+  const [cart, setCart] = useState([]);
   // console.log(user);
+  useEffect(() => {
+    // console.log("hit ", user && user.uid);
+
+    if (user && user.uid) {
+      // console.log("hit 2");
+      axios
+        .get("http://localhost:5000/cart", {
+          params: { userId: user.uid, status: "active" },
+        })
+        .then((res) => setCart(res.data))
+        .catch((err) => console.error(err));
+    }
+  }, [user]);
 
   return (
     <>
@@ -45,7 +60,7 @@ const Navbar = () => {
                 <Link to="/dashboard/cart">
                   <button className="btn">
                     <FaShoppingCart className="mr-2"></FaShoppingCart>
-                    {/* <div className="badge badge-secondary">+{cart.length}</div> */}
+                    <div className="badge badge-secondary">+{cart?.length}</div>
                   </button>
                 </Link>
               </li>
@@ -69,7 +84,7 @@ const Navbar = () => {
               <Link to="/dashboard/cart">
                 <button className="btn">
                   <FaShoppingCart className="mr-2"></FaShoppingCart>
-                  {/* <div className="badge badge-secondary">+{cart.length}</div> */}
+                  <div className="badge badge-secondary">+{cart?.length}</div>
                 </button>
               </Link>
             </li>
