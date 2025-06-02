@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProvider";
 const EachItem = ({ item }) => {
-  const { user } = useContext(AuthContext);
+  const { user, nowCart, setNowCart } = useContext(AuthContext);
   const { name, image, price, recipe, _id } = item;
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,6 +22,7 @@ const EachItem = ({ item }) => {
       axios.post("http://localhost:5000/cart", cart).then((res) => {
         console.log(res.data);
         if (res.data.insertedId) {
+          setNowCart(nowCart + 1);
           Swal.fire({
             position: "top-end",
             icon: "success",

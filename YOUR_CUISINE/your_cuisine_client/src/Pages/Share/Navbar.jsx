@@ -4,9 +4,10 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 const Navbar = () => {
-  const { user, signOutUser } = useContext(AuthContext);
+  const { user, signOutUser, nowCart, setNowCart } = useContext(AuthContext);
   const [cart, setCart] = useState([]);
   // console.log(user);
+
   useEffect(() => {
     // console.log("hit ", user && user.uid);
 
@@ -18,8 +19,13 @@ const Navbar = () => {
         })
         .then((res) => setCart(res.data))
         .catch((err) => console.error(err));
+    } else {
+      setCart();
     }
   }, [user]);
+
+  console.log(cart?.length, nowCart);
+  
 
   return (
     <>
@@ -60,7 +66,9 @@ const Navbar = () => {
                 <Link to="/dashboard/cart">
                   <button className="btn">
                     <FaShoppingCart className="mr-2"></FaShoppingCart>
-                    <div className="badge badge-secondary">+{cart?.length}</div>
+                    <div className="badge badge-secondary">
+                      +{cart?.length + nowCart || 0 + nowCart}
+                    </div>
                   </button>
                 </Link>
               </li>
@@ -84,7 +92,9 @@ const Navbar = () => {
               <Link to="/dashboard/cart">
                 <button className="btn">
                   <FaShoppingCart className="mr-2"></FaShoppingCart>
-                  <div className="badge badge-secondary">+{cart?.length}</div>
+                  <div className="badge badge-secondary">
+                    +{cart?.length + nowCart || 0 + nowCart}
+                  </div>
                 </button>
               </Link>
             </li>
