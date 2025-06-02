@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 const Navbar = () => {
-  const { user, signOutUser, loading } = useContext(AuthContext);
-  const [cart, setCart] = useState([]);
+  const { user, signOutUser, loading, carts, setCarts } =
+    useContext(AuthContext);
   // console.log(user);
 
   useEffect(() => {
@@ -17,10 +17,10 @@ const Navbar = () => {
         .get("http://localhost:5000/cart", {
           params: { userId: user.uid, status: "active" },
         })
-        .then((res) => setCart(res.data))
+        .then((res) => setCarts(res.data))
         .catch((err) => console.error(err));
     } else {
-      setCart();
+      setCarts();
     }
   }, [user, loading]);
 
@@ -62,11 +62,11 @@ const Navbar = () => {
               </li>
 
               <li>
-                <Link to="/dashboard/cart">
+                <Link to="/mainpanel/cart">
                   <button className="btn">
                     <FaShoppingCart className="mr-2"></FaShoppingCart>
                     <div className="badge badge-secondary">
-                      +{cart?.length || 0}
+                      +{carts?.length || 0}
                     </div>
                   </button>
                 </Link>
@@ -88,11 +88,11 @@ const Navbar = () => {
             </li>
 
             <li>
-              <Link to="/dashboard/cart">
+              <Link to="/mainpanel/cart">
                 <button className="btn">
                   <FaShoppingCart className="mr-2"></FaShoppingCart>
                   <div className="badge badge-secondary">
-                    +{cart?.length || 0}
+                    +{carts?.length || 0}
                   </div>
                 </button>
               </Link>
