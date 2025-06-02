@@ -21,6 +21,8 @@ const Order = () => {
     fetch("http://localhost:5000/menu")
       .then((res) => res.json())
       .then((data) => {
+        // console.log(data);
+
         // setMenu(data);
         const tdesserts = data.filter((item) => item.category === "dessert");
         const tsoup = data.filter((item) => item.category === "soup");

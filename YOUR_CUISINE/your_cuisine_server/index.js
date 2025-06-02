@@ -48,10 +48,13 @@ async function run() {
     })
 
     // post cart
-    app.get('/cart', async(req, res)=>{
+    app.post('/cart', async(req, res)=>{
       const cart = req.body;
       const result = await cartCollection.insertOne(cart);
       res.send(result);
+      // console.log("hit");
+      
+      // res.send({res:"happy"})
     })
 
 

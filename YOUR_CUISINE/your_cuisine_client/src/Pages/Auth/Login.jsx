@@ -30,8 +30,8 @@ const Login = () => {
     const password = form.password.value;
     console.log(email, password);
     signInUser(email, password).then((result) => {
-      const user = result.user;
-      // console.log(user);
+      // const user = result.user;
+      console.log(preLocation);
       Swal.fire({
         title: "User Login Successful.",
         showClass: {
