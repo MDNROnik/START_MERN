@@ -42,8 +42,15 @@ async function run() {
     //post user
     app.post('/user', async(req, res)=>{
       const user = req.body;
-      console.log(user);
-      
+      // console.log(user);
+      //first check the user exit or not
+      //check by user uid
+      const query = {uid: user.uid};
+      const response = await userCollection.findOne(query);
+      if(response){
+        return res.send({response: "user exit"});
+      }
+
       const result = await userCollection.insertOne(user);
       res.send(result);
     })

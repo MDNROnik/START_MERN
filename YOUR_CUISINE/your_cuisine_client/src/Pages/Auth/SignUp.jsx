@@ -2,10 +2,9 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-// import SocialLogin from "../../components/SocialLogin/SocialLogin";
-import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
+import Social from "./Social";
 
 const SignUp = () => {
   const axiosUser = useAxiosPublic();
@@ -177,7 +176,7 @@ const SignUp = () => {
                 Already have an account <Link to="/login">Login</Link>
               </small>
             </p>
-            {/* <SocialLogin></SocialLogin> */}
+            <Social></Social>
           </div>
         </div>
       </div>
