@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require('dotenv').config();
 const mongodb = require('mongodb')
-const jsonwebtoken = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 
 const port = process.env.PORT || 5000;
@@ -39,6 +39,71 @@ async function run() {
     const cartCollection = database.collection('cart');
     const userCollection = database.collection('user');
 
+    //verfity token
+    const verifyToken=(req,res, next)=>{
+      console.log("inside verifyToken ",  req.headers);
+      if(!req.headers.jwttoken){
+        console.log('NOT FOUND TOKEN');
+        
+        return res.status(401).send({
+          message : 'forbidden-access'
+        })
+      }
+      else{
+        console.log('FOUND TOKEN');
+        const token = req.headers.jwttoken.split(' ')[1];
+        // console.log(token);
+        
+        if(!token){
+          console.log('TOKEN EMPTY');
+          return res.status(401).send({
+            message : 'forbidden-access'
+          })
+        }
+        else{
+          console.log('TOKEN HAVE VALUE');
+          jwt.verify(token, process.env.JWT_SECRET, (error, decode)=>{
+            if(error){
+              console.log('TOKEN ERROR');
+              return res.status(401).send({
+                message : 'forbidden-access'
+              })
+            }
+            else{
+              console.log('TOKEN VALID');
+              req.decode = decode;
+              next();
+            }
+          })
+        }
+      }
+      // next();
+    }
+
+
+    //jwt related auth apis
+    //auth related APIS
+    app.post('/jwt', async(req, res)=>{
+      const user  = req.body;
+      // console.log(user);
+      const token = jwt.sign(user, process.env.JWT_SECRET, {expiresIn: '6h'});
+      // res.cookie('token', token, {
+      //   httpOnly: true, 
+      //   secure: false, // set true for production https
+      //   sameSite: 'lax',
+      // })
+      res.send({token});
+    })
+
+    //auth logout
+    app.post('/logoutJwt', async(req, res)=>{
+      res.clearCookie('token',{
+        httpOnly:true,
+        secure:false
+      })
+      // console.log(111111111);
+      res.send({result: 'logout successfully'})
+    })
 
     //post user
     app.post('/user', async(req, res)=>{
@@ -57,9 +122,25 @@ async function run() {
     })
 
     //get users
-    app.get('/user', async(req, res)=>{
+    app.get('/user',verifyToken, async(req, res)=>{
+      // console.log(req.headers);
+      
       const result = await userCollection.find().toArray();
       res.send(result);
+    })
+
+    //get a user
+    app.get('/user/:id' ,verifyToken , async(req, res)=>{
+      const id = req.params.id;
+      // res.send({mes:"IN"})
+      if(id == req.decode.uid){
+        const query = { uid: id };
+        const result = await userCollection.findOne(query);
+        return res.send(result);
+      }
+      else{
+        return res.status(403).send({message: 'unauthorized access'})
+      }
     })
 
     //delete user
@@ -68,7 +149,7 @@ async function run() {
       const query = { _id: new mongodb.ObjectId(id) };
       const result = await userCollection.deleteOne(query);
       res.send(result);
-      res.send({res:id})
+      // res.send({res:id})
     })
 
     //update user as admin or remove as admin

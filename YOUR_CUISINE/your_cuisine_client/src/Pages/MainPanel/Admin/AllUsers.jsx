@@ -1,16 +1,33 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const AllUsers = () => {
+  const { signOutUser } = useContext(AuthContext);
   const [users, setUser] = useState([]);
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   useEffect(() => {
-    axiosPublic.get("/user").then((res) => {
-      //   console.log(res.data);
-      setUser(res.data);
-    });
+    axiosPublic
+      .get("/user", {
+        headers: {
+          jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setUser(res.data);
+      })
+      .catch((err) => {
+        console.log(err.status);
+        if (err) {
+          signOutUser();
+          navigate("/login");
+        }
+      });
   }, []);
 
   const handleMakeAdmin = (user) => {

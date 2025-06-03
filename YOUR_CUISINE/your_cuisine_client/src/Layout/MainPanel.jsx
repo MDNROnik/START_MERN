@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import {
   FaAd,
   FaBook,
@@ -11,11 +12,38 @@ import {
   FaUsers,
   FaUtensils,
 } from "react-icons/fa";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 const MainPanel = () => {
-  const { carts } = useContext(AuthContext);
-  const isAdmin = true;
+  const { carts, user, signOutUser } = useContext(AuthContext);
+  // let isAdmin = false;
+  const [isAdmin, setIsAdmin] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    // currentUser.uid
+    axios
+      .get(`http://localhost:5000/user/${user.uid}`, {
+        headers: {
+          jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.role);
+        if (res.data?.role == "admin") {
+          setIsAdmin( true );
+          // console.log("2222");
+        } else {
+          // console.log("1111");
+        }
+      })
+      .catch((err) => {
+        console.log(err.status);
+        if (err) {
+          signOutUser();
+          navigate("/login");
+        }
+      });
+  }, [isAdmin]);
   return (
     <div className="max-w-screen-xl mx-auto">
       {/* <Navbar></Navbar> */}

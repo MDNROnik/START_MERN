@@ -9,9 +9,11 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/config";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
+  const axiosPublic = useAxiosPublic();
   const [user, setUser] = useState(null);
   const [carts, setCarts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -45,8 +47,21 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       // console.log("user inside auth state change", currentUser);
       setUser(currentUser);
-      if(currentUser){
-        
+
+      if (currentUser) {
+        const userInfo = {
+          uid: currentUser.uid,
+          email: currentUser.email,
+          displayName: currentUser.displayName,
+        };
+        axiosPublic.post("/jwt", userInfo).then((res) => {
+          console.log(res);
+          if (res.data.token) {
+            localStorage.setItem("jwttoken", res.data.token);
+          }
+        });
+      } else {
+        localStorage.removeItem("jwttoken");
       }
       setLoading(false);
     });
