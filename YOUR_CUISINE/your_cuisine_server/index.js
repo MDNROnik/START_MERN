@@ -36,6 +36,17 @@ async function run() {
     const menuCollection = database.collection('menu');
     const reviewCollection = database.collection('review');
     const cartCollection = database.collection('cart');
+    const userCollection = database.collection('user');
+
+
+    //post user
+    app.post('/user', async(req, res)=>{
+      const user = req.body;
+      console.log(user);
+      
+      const result = await userCollection.insertOne(user);
+      res.send(result);
+    })
 
     //get menu
     app.get('/menu', async(req, res)=>{

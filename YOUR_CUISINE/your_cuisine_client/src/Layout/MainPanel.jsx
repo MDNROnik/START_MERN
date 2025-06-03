@@ -11,8 +11,6 @@ import {
   FaUsers,
   FaUtensils,
 } from "react-icons/fa";
-import Footer from "../Pages/Share/Footer";
-import Navbar from "../Pages/Share/Navbar";
 import { NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 const MainPanel = () => {
@@ -20,8 +18,8 @@ const MainPanel = () => {
   const isAdmin = null;
   return (
     <div className="max-w-screen-xl mx-auto">
-      <Navbar></Navbar>
-      <div className="flex pt-20">
+      {/* <Navbar></Navbar> */}
+      <div className="flex">
         {/* mainpanel side bar */}
         <div className="w-64 min-h-screen bg-white text-black">
           <ul className="menu p-4">
@@ -119,7 +117,7 @@ const MainPanel = () => {
           <Outlet></Outlet>
         </div>
       </div>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </div>
   );
 };

@@ -24,7 +24,10 @@ const Navbar = () => {
     }
   }, [user, loading]);
 
-  // console.log(cart?.length);
+  const handleSignOut = () => {
+    signOutUser();
+    setCarts();
+  };
 
   return (
     <>
@@ -107,7 +110,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     onClick={() => {
-                      signOutUser();
+                      handleSignOut();
                     }}
                   >
                     Log Out
