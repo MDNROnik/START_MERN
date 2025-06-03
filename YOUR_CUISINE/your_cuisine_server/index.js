@@ -55,6 +55,12 @@ async function run() {
       res.send(result);
     })
 
+    //get users
+    app.get('/users', async(req, res)=>{
+      const result = await userCollection.find().toArray();
+      res.send(result);
+    })
+
     //get menu
     app.get('/menu', async(req, res)=>{
       const result = await menuCollection.find().toArray();

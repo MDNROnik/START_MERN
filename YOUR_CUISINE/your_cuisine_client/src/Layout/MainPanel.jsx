@@ -15,7 +15,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 const MainPanel = () => {
   const { carts } = useContext(AuthContext);
-  const isAdmin = null;
+  const isAdmin = true;
   return (
     <div className="max-w-screen-xl mx-auto">
       {/* <Navbar></Navbar> */}
@@ -112,7 +112,7 @@ const MainPanel = () => {
             </li>
           </ul>
         </div>
-        {/* dashboard content */}
+        {/* mainpanel content */}
         <div className="flex-1 p-8">
           <Outlet></Outlet>
         </div>
