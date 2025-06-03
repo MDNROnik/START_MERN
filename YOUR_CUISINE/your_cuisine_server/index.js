@@ -56,8 +56,30 @@ async function run() {
     })
 
     //get users
-    app.get('/users', async(req, res)=>{
+    app.get('/user', async(req, res)=>{
       const result = await userCollection.find().toArray();
+      res.send(result);
+    })
+
+    //delete user
+    app.delete('/user/:id', async(req, res)=>{
+      const id = req.params.id;
+      const query = { _id: new mongodb.ObjectId(id) };
+      const result = await userCollection.deleteOne(query);
+      res.send(result);
+      res.send({res:id})
+    })
+
+    //update user as admin or remove as admin
+    app.patch('/user/admin/:id', async(req, res)=>{
+      const id = req.params.id;
+      const filter = { _id: new mongodb.ObjectId(id) };
+      const updatedDoc ={
+        $set:{
+          role:'admin'
+        }
+      }
+      const result = await userCollection.updateOne(filter, updatedDoc);
       res.send(result);
     })
 

@@ -7,37 +7,37 @@ const AllUsers = () => {
   const [users, setUser] = useState([]);
   const axiosPublic = useAxiosPublic();
   useEffect(() => {
-    axiosPublic.get("/users",).then((res) => {
-      console.log(res.data);
+    axiosPublic.get("/user").then((res) => {
+      //   console.log(res.data);
       setUser(res.data);
     });
   }, []);
-  //   const axiosSecure = useAxiosSecure();
-  //   const { data: users = [], refetch } = useQuery({
-  //     queryKey: ["users"],
-  //     queryFn: async () => {
-  //       const res = await axiosSecure.get("/users");
-  //       return res.data;
-  //     },
-  //   });
 
   const handleMakeAdmin = (user) => {
-    // axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
-    //   console.log(res.data);
-    //   if (res.data.modifiedCount > 0) {
-    //     refetch();
-    //     Swal.fire({
-    //       position: "top-end",
-    //       icon: "success",
-    //       title: `${user.name} is an Admin Now!`,
-    //       showConfirmButton: false,
-    //       timer: 1500,
-    //     });
-    //   }
-    // });
+    console.log(user);
+
+    axiosPublic.patch(`/user/admin/${user._id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        setUser((prevUsers) =>
+          prevUsers.map((u) =>
+            u._id === user._id ? { ...u, role: "admin" } : u
+          )
+        );
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${user.name} is an Admin Now!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
 
-  const handleDeleteUser = (user) => {
+  const handleDeleteUser = (id) => {
+    console.log(id);
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -48,16 +48,30 @@ const AllUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // axiosSecure.delete(`/users/${user._id}`).then((res) => {
-        //   if (res.data.deletedCount > 0) {
-        //     refetch();
-        //     Swal.fire({
-        //       title: "Deleted!",
-        //       text: "Your file has been deleted.",
-        //       icon: "success",
-        //     });
-        //   }
-        // });
+        // console.log(id);
+        // setLoading(!loading);
+        axiosPublic
+          .delete(`/user/${id}`)
+          .then((res) => {
+            console.log(res.data);
+
+            if (res.data.deletedCount > 0) {
+              console.log("parchi mama");
+
+              const updatedUsers = users.filter((user) => user._id !== id);
+              setUser(updatedUsers);
+
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((error) => {
+            // Handle error
+            console.error(error);
+          });
       }
     });
   };
@@ -103,7 +117,7 @@ const AllUsers = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => handleDeleteUser(user)}
+                    onClick={() => handleDeleteUser(user._id)}
                     className="btn btn-ghost btn-lg"
                   >
                     <FaTrashAlt className="text-red-600"></FaTrashAlt>
