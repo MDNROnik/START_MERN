@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../providers/AuthProvider";
-import { useNavigate } from "react-router-dom";
 
 const AllUsers = () => {
   const { signOutUser } = useContext(AuthContext);
@@ -68,7 +68,11 @@ const AllUsers = () => {
         // console.log(id);
         // setLoading(!loading);
         axiosPublic
-          .delete(`/user/${id}`)
+          .delete(`/user/${id}`, {
+            headers: {
+              jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
+            },
+          })
           .then((res) => {
             console.log(res.data);
 

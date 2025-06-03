@@ -80,6 +80,20 @@ async function run() {
       // next();
     }
 
+    const verifyAdmin = async(req, res, next)=>{
+      const id = req.decode.uid;
+      const query = { uid: id };
+      const result = await userCollection.findOne(query);
+      if(result?.role != 'admin'){
+        return res.status(401).send({
+          message : 'forbidden-access'
+        })
+      }
+      else{
+        next();
+      }
+    }
+
 
     //jwt related auth apis
     //auth related APIS
@@ -122,7 +136,7 @@ async function run() {
     })
 
     //get users
-    app.get('/user',verifyToken, async(req, res)=>{
+    app.get('/user',verifyToken, verifyAdmin, async(req, res)=>{
       // console.log(req.headers);
       
       const result = await userCollection.find().toArray();
@@ -144,7 +158,7 @@ async function run() {
     })
 
     //delete user
-    app.delete('/user/:id', async(req, res)=>{
+    app.delete('/user/:id',verifyToken, verifyAdmin, async(req, res)=>{
       const id = req.params.id;
       const query = { _id: new mongodb.ObjectId(id) };
       const result = await userCollection.deleteOne(query);
