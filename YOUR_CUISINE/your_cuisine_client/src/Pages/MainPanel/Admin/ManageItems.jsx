@@ -1,18 +1,16 @@
-import { useState } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import SectionTitle from "../../Share/SectionTitle";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useMenu from "../../../Hooks/useMenu";
-// import useAxiosSecure from "../../../hooks/useAxiosSecure";
-// import useMenu from "../../../hooks/useMenu";
+import SectionTitle from "../../Share/SectionTitle";
 
 const ManageItems = () => {
-    const [menu, , loading] = useMenu();
-  //   const axiosSecure = useAxiosSecure();
-//   const [menu, setMenu] = useState([]);
+  const [menu, loading, setLoading] = useMenu();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
-  const handleDeleteItem = (item) => {
+  const handleDeleteItem = (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -23,6 +21,35 @@ const ManageItems = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        // console.log('====================================');
+        // console.log(id);
+        // console.log('====================================');
+        axiosPublic
+          .delete(`/menu/${id}`, {
+            headers: {
+              jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
+            },
+          })
+          .then((res) => {
+            console.log(res.data);
+
+            if (res.data.deletedCount > 0) {
+              console.log("parchi mama");
+              setLoading(true);
+              //   const updatedUsers = users.filter((user) => user._id !== id);
+              //   setUser(updatedUsers);
+
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your Menu has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((error) => {
+            // Handle error
+            console.error(error);
+          });
         // const res = await axiosSecure.delete(`/menu/${item._id}`);
         // // console.log(res.data);
         // if (res.data.deletedCount > 0) {
@@ -90,7 +117,7 @@ const ManageItems = () => {
                   </td>
                   <td>
                     <button
-                      onClick={() => handleDeleteItem(item)}
+                      onClick={() => handleDeleteItem(item._id)}
                       className="btn btn-ghost btn-lg"
                     >
                       <FaTrashAlt className="text-red-600"></FaTrashAlt>

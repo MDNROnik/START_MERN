@@ -192,6 +192,14 @@ async function run() {
       res.send(result);
     })
 
+    //delete a menu
+    app.delete('/menu/:id',verifyToken, verifyAdmin, async(req, res)=>{
+      const id = req.params.id;
+      const query = { _id: new mongodb.ObjectId(id) };
+      const result = await menuCollection.deleteOne(query);
+      res.send(result);
+    })
+
     // get review
     app.get('/review', async(req, res)=>{
       const result = await reviewCollection.find().toArray();
@@ -224,14 +232,6 @@ async function run() {
       res.send(result);
     })
 
-
-
-
-
-  
-  
-  
-  
   
   } finally {
     // Ensures that the client will close when you finish/error
@@ -239,6 +239,36 @@ async function run() {
   }
 }
 run().catch(console.dir);
+
+
+// async function fixIds() {
+//   await client.connect();
+//     // Send a ping to confirm a successful connection
+//     await client.db("admin").command({ ping: 1 });
+//     console.log("Pinged your deployment. You successfully connected to MongoDB! function for set ObjectID");
+
+//   const database = client.db(process.env.DB_NAME);
+//   const menuCollection = database.collection('menu');
+
+//   const docs = await menuCollection.find({}).toArray();
+
+//   for (const doc of docs) {
+//     const strId = doc._id;
+//     const newId = new mongodb.ObjectId(strId);
+
+//     // Insert new doc with ObjectId _id
+//     await menuCollection.insertOne({ ...doc, _id: newId });
+
+//     // Remove old doc with string _id
+//     await menuCollection.deleteOne({ _id: strId });
+//   }
+
+//   console.log("All _id values converted to ObjectId.");
+//   client.close();
+// }
+
+// fixIds();
+
 
 
 app.get("/", (req, res) => {
