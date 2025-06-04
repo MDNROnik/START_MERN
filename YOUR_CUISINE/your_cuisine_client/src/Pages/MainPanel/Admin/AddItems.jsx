@@ -1,25 +1,35 @@
+import axios from "axios";
 import { useForm } from "react-hook-form";
-import SectionTitle from "../../Share/SectionTitle";
 import { FaUtensils } from "react-icons/fa";
+import SectionTitle from "../../Share/SectionTitle";
 // import useAxiosPublic from "../../../hooks/useAxiosPublic";
 // import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import Swal from "sweetalert2";
 
-// const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-// const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+//how to image host on imgbb
+//take api from app button -> api route
+// set it on env local file
+// import as like firebase apis
+// take the url for api work
+//set template string url
+// send image data from client to hosting server
+// that will bring a url for image access
+
+const apiKeyForImgbb = import.meta.env.VITE_apiKeyForImgbb;
+const image_api_imgbb_url = `https://api.imgbb.com/1/upload?key=${apiKeyForImgbb}`;
 const AddItems = () => {
   const { register, handleSubmit, reset } = useForm();
   // const axiosPublic = useAxiosPublic();
   // const axiosSecure = useAxiosSecure();
   const onSubmit = async (data) => {
-    console.log(data);
-    // image upload to imgbb and then get an url
+    // console.log(data);
     const imageFile = { image: data.image[0] };
-    // const res = await axiosPublic.post(image_hosting_api, imageFile, {
-    //   headers: {
-    //     "content-type": "multipart/form-data",
-    //   },
-    // });
+    const res = await axios.post(image_api_imgbb_url, imageFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    console.log(res.data);
+    
     // if (res.data.success) {
     //   // now send the menu item data to the server with the image url
     //   const menuItem = {
@@ -122,7 +132,7 @@ const AddItems = () => {
             />
           </div>
 
-          <button className="btn">
+          <button type="submit" className="btn">
             Add Item <FaUtensils className="ml-4"></FaUtensils>
           </button>
         </form>
