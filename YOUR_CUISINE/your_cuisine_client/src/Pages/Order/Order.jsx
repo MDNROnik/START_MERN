@@ -3,11 +3,12 @@ import { useParams } from "react-router";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import orderImg from "../../assets/order/banner2.jpg";
+import useMenu from "../../Hooks/useMenu";
 import Cover from "../Share/Cover";
 import OrderCard from "./OrderCard";
 
 const Order = () => {
-  // const [menu, setMenu] = useState([]);
+  const [menu, loading] = useMenu();
   const [salad, setSalad] = useState([]);
   const [pizza, setPizza] = useState([]);
   const [desserts, setDesserts] = useState([]);
@@ -18,25 +19,39 @@ const Order = () => {
   // console.log(cate);
 
   useEffect(() => {
-    fetch("http://localhost:5000/menu")
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
+    // fetch("http://localhost:5000/menu")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     // console.log(data);
 
-        // setMenu(data);
-        const tdesserts = data.filter((item) => item.category === "dessert");
-        const tsoup = data.filter((item) => item.category === "soup");
-        const tsalad = data.filter((item) => item.category === "salad");
-        const tpizza = data.filter((item) => item.category === "pizza");
-        const tdrinks = data.filter((item) => item.category === "drinks");
+    //     // setMenu(data);
+    //     const tdesserts = data.filter((item) => item.category === "dessert");
+    //     const tsoup = data.filter((item) => item.category === "soup");
+    //     const tsalad = data.filter((item) => item.category === "salad");
+    //     const tpizza = data.filter((item) => item.category === "pizza");
+    //     const tdrinks = data.filter((item) => item.category === "drinks");
 
-        setSalad(tsalad);
-        setPizza(tpizza);
-        setDesserts(tdesserts);
-        setSoup(tsoup);
-        setDrinks(tdrinks);
-      });
-  }, []);
+    //     setSalad(tsalad);
+    //     setPizza(tpizza);
+    //     setDesserts(tdesserts);
+    //     setSoup(tsoup);
+    //     setDrinks(tdrinks);
+    //   });
+    // console.log('====================================');
+    // console.log(menu);
+    // console.log('====================================');
+    const tdesserts = menu.filter((item) => item.category === "dessert");
+    const tsoup = menu.filter((item) => item.category === "soup");
+    const tsalad = menu.filter((item) => item.category === "salad");
+    const tpizza = menu.filter((item) => item.category === "pizza");
+    const tdrinks = menu.filter((item) => item.category === "drinks");
+
+    setSalad(tsalad);
+    setPizza(tpizza);
+    setDesserts(tdesserts);
+    setSoup(tsoup);
+    setDrinks(tdrinks);
+  }, [menu]);
 
   // console.log("salad, ", salad);
   // console.log("pizza, ", pizza);

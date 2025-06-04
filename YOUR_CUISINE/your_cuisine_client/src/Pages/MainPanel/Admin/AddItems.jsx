@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FaUtensils } from "react-icons/fa";
+import Swal from "sweetalert2";
 import SectionTitle from "../../Share/SectionTitle";
-// import useAxiosPublic from "../../../hooks/useAxiosPublic";
-// import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 //how to image host on imgbb
 //take api from app button -> api route
@@ -28,32 +27,52 @@ const AddItems = () => {
         "content-type": "multipart/form-data",
       },
     });
-    console.log(res.data);
-    
-    // if (res.data.success) {
-    //   // now send the menu item data to the server with the image url
-    //   const menuItem = {
-    //     name: data.name,
-    //     category: data.category,
-    //     price: parseFloat(data.price),
-    //     recipe: data.recipe,
-    //     image: res.data.data.display_url,
-    //   };
-    //   //
-    //   const menuRes = await axiosSecure.post("/menu", menuItem);
-    //   console.log(menuRes.data);
-    //   if (menuRes.data.insertedId) {
-    //     // show success popup
-    //     reset();
-    //     Swal.fire({
-    //       position: "top-end",
-    //       icon: "success",
-    //       title: `${data.name} is added to the menu.`,
-    //       showConfirmButton: false,
-    //       timer: 1500,
-    //     });
-    //   }
-    // }
+    // console.log(res.data);
+
+    if (res.data.success) {
+      // now send the menu item data to the server
+      const menuItem = {
+        name: data.name,
+        category: data.category,
+        price: parseFloat(data.price),
+        recipe: data.recipe,
+        image: res.data.data.display_url,
+      };
+
+      await axios
+        .post("http://localhost:5000/menu", menuItem, {
+          headers: {
+            jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
+          },
+        })
+        .then((res) => {
+          if (res.data.insertedId) {
+            console.log("admin added a menu to the database");
+            reset();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `${data.name} is added to the menu.`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            // navigate("/");
+          }
+        });
+
+      // console.log(menuRes.data);
+      // if (menuRes.data.insertedId) {
+      //   // show success popup
+      //   reset();
+      //   Swal.fire({
+      //     position: "top-end",
+      //     icon: "success",
+      //     title: `${data.name} is added to the menu.`,
+      //     showConfirmButton: false,
+      //     timer: 1500,
+      //   });
+      // }
+    }
     // console.log("with image url", res.data);
     reset();
   };
