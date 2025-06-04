@@ -184,6 +184,31 @@ async function run() {
       const result = await menuCollection.find().toArray();
       res.send(result);
     })
+    // get menu data by id
+    app.get('/menu/:id', async(req, res)=>{
+      const id = req.params.id;
+      const query = { _id: new mongodb.ObjectId(id) };
+      const result = await menuCollection.findOne(query);
+      res.send(result);
+    })
+
+    // patch menu data by id
+    app.patch('/menu/:id',verifyToken, verifyAdmin, async(req, res)=>{
+      const id = req.params.id;
+      const menuItem = req.body;
+      const query = { _id: new mongodb.ObjectId(id) };
+      const updatedDoc = {
+        $set:{
+          name: menuItem.name,
+          category: menuItem.category,
+          price: menuItem.price,
+          recipe: menuItem.recipe,
+          image: menuItem.image,
+        }
+      }
+      const result = await menuCollection.updateOne(query, updatedDoc);
+      res.send(result);
+    })
 
     // post menu
     app.post('/menu',verifyToken, verifyAdmin, async(req, res)=>{

@@ -6,12 +6,13 @@ import SignUp from "../Pages/Auth/SignUp";
 import Home from "../Pages/Home/Home";
 import AddItems from "../Pages/MainPanel/Admin/AddItems";
 import AllUsers from "../Pages/MainPanel/Admin/AllUsers";
+import ManageItems from "../Pages/MainPanel/Admin/ManageItems";
+import UpdateItem from "../Pages/MainPanel/Admin/UpdateItem";
 import Cart from "../Pages/MainPanel/User/Cart";
 import Menu from "../Pages/Menu/Menu";
 import Order from "../Pages/Order/Order";
 import AdminRoutes from "../Pages/Share/AdminRoutes";
 import PrivateRoutes from "../Pages/Share/PrivateRoutes";
-import ManageItems from "../Pages/MainPanel/Admin/ManageItems";
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -74,6 +75,15 @@ const Routes = createBrowserRouter([
             <ManageItems></ManageItems>
           </AdminRoutes>
         ),
+      },
+      {
+        path: "manageItems/updateItem/:id",
+        element: (
+          <AdminRoutes>
+            <UpdateItem></UpdateItem>
+          </AdminRoutes>
+        ),
+        loader:({params})=>fetch(`http://localhost:5000/menu/${params.id}`)
       },
     ],
   },
