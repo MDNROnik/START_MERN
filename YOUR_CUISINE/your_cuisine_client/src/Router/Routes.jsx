@@ -4,10 +4,12 @@ import MainPanel from "../Layout/MainPanel";
 import Login from "../Pages/Auth/Login";
 import SignUp from "../Pages/Auth/SignUp";
 import Home from "../Pages/Home/Home";
+import AddItems from "../Pages/MainPanel/Admin/AddItems";
 import AllUsers from "../Pages/MainPanel/Admin/AllUsers";
 import Cart from "../Pages/MainPanel/User/Cart";
 import Menu from "../Pages/Menu/Menu";
 import Order from "../Pages/Order/Order";
+import AdminRoutes from "../Pages/Share/AdminRoutes";
 import PrivateRoutes from "../Pages/Share/PrivateRoutes";
 const Routes = createBrowserRouter([
   {
@@ -50,7 +52,19 @@ const Routes = createBrowserRouter([
       },
       {
         path: "users",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminRoutes>
+            <AllUsers></AllUsers>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "addItems",
+        element: (
+          <AdminRoutes>
+            <AddItems></AddItems>
+          </AdminRoutes>
+        ),
       },
     ],
   },
