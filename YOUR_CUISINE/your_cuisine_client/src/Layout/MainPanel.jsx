@@ -30,7 +30,7 @@ const MainPanel = () => {
       .then((res) => {
         console.log(res.data.role);
         if (res.data?.role == "admin") {
-          setIsAdmin( true );
+          setIsAdmin(true);
           // console.log("2222");
         } else {
           // console.log("1111");
@@ -38,10 +38,10 @@ const MainPanel = () => {
       })
       .catch((err) => {
         console.log(err.status);
-        if (err) {
-          signOutUser();
-          navigate("/login");
-        }
+        // if (err) {
+        //   signOutUser();
+        //   navigate("/login");
+        // }
       });
   }, [isAdmin]);
   return (

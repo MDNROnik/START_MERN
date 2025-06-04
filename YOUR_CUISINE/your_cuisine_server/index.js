@@ -84,13 +84,13 @@ async function run() {
       const id = req.decode.uid;
       const query = { uid: id };
       const result = await userCollection.findOne(query);
-      if(result?.role != 'admin'){
+      if(result?.role == 'admin'){
+        next();
+      }
+      else{
         return res.status(401).send({
           message : 'forbidden-access'
         })
-      }
-      else{
-        next();
       }
     }
 
@@ -144,7 +144,7 @@ async function run() {
     })
 
     //get a user
-    app.get('/user/:id' ,verifyToken , async(req, res)=>{
+    app.get('/user/:id' ,verifyToken, verifyAdmin , async(req, res)=>{
       const id = req.params.id;
       // res.send({mes:"IN"})
       if(id == req.decode.uid){

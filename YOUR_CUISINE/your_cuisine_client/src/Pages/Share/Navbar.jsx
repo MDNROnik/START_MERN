@@ -20,13 +20,13 @@ const Navbar = () => {
         .then((res) => setCarts(res.data))
         .catch((err) => console.error(err));
     } else {
-      setCarts();
+      setCarts([]);
     }
   }, [user, loading]);
 
   const handleSignOut = () => {
     signOutUser();
-    setCarts();
+    setCarts([]);
   };
 
   return (
