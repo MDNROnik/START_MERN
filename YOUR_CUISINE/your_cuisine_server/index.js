@@ -263,7 +263,16 @@ async function run() {
     app.post('/payment',verifyToken, async(req, res)=>{
       const paymentInfo = req.body;
       const result = await paymentCollection.insertOne(paymentInfo);
-      res.send(result);
+      console.log(paymentInfo);
+      
+      const query = {_id:{
+        $in:paymentInfo.carts.map(cart=>  new mongodb.ObjectId(cart._id) )
+      }};
+      console.log(query);
+      const deleteResult = await cartCollection.deleteMany(query);
+      console.log(deleteResult);
+      
+      res.send({result, deleteResult});
     })
 
 

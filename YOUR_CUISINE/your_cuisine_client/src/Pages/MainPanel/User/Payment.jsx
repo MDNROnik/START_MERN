@@ -27,6 +27,7 @@ const Payment = () => {
       date: value.date,
       uid: user.uid,
       totalPrice: totalPrice,
+      carts: carts,
     };
 
     await axios
@@ -36,10 +37,12 @@ const Payment = () => {
         },
       })
       .then((res) => {
-        if (res.data.insertedId) {
-          console.log("User added pay the payment", res);
+        console.log("User added pay the payment", res);
+        if (res.data.result.insertedId) {
+        //   console.log("User added pay the payment", res);
           setTransactionId(res.data.insertedId);
           reset();
+          setCarts([]);
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -51,6 +54,8 @@ const Payment = () => {
         }
       })
       .catch((err) => {
+        console.log(err);
+        
         setError(err);
       });
   };
