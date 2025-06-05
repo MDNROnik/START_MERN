@@ -38,10 +38,10 @@ const MainPanel = () => {
       })
       .catch((err) => {
         console.log(err.status);
-        // if (err) {
-        //   signOutUser();
-        //   navigate("/login");
-        // }
+        if (err) {
+          signOutUser();
+          navigate("/login");
+        }
       });
   }, [isAdmin]);
   return (

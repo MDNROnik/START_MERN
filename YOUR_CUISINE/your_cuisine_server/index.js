@@ -144,7 +144,7 @@ async function run() {
     })
 
     //get a user
-    app.get('/user/:id' ,verifyToken, verifyAdmin , async(req, res)=>{
+    app.get('/user/:id' ,verifyToken , async(req, res)=>{
       const id = req.params.id;
       // res.send({mes:"IN"})
       if(id == req.decode.uid){

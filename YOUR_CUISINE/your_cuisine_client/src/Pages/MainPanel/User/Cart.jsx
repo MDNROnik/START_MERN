@@ -20,7 +20,7 @@ const Cart = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // console.log(id);
-        // setLoading(!loading); 
+        // setLoading(!loading);
         axios
           .delete(`http://localhost:5000/cart/${id}`)
           .then((res) => {
@@ -50,7 +50,7 @@ const Cart = () => {
         <h2 className="text-4xl">Items: {carts.length}</h2>
         <h2 className="text-4xl">Total Price: {totalPrice}</h2>
         {carts.length ? (
-          <Link to="/dashboard/payment">
+          <Link to="/mainpanel/payment">
             <button className="btn btn-primary">Pay</button>
           </Link>
         ) : (

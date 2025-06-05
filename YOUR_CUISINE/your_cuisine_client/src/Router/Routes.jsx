@@ -9,6 +9,7 @@ import AllUsers from "../Pages/MainPanel/Admin/AllUsers";
 import ManageItems from "../Pages/MainPanel/Admin/ManageItems";
 import UpdateItem from "../Pages/MainPanel/Admin/UpdateItem";
 import Cart from "../Pages/MainPanel/User/Cart";
+import Payment from "../Pages/MainPanel/User/Payment";
 import Menu from "../Pages/Menu/Menu";
 import Order from "../Pages/Order/Order";
 import AdminRoutes from "../Pages/Share/AdminRoutes";
@@ -53,6 +54,10 @@ const Routes = createBrowserRouter([
         element: <Cart></Cart>,
       },
       {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      {
         path: "users",
         element: (
           <AdminRoutes>
@@ -83,7 +88,8 @@ const Routes = createBrowserRouter([
             <UpdateItem></UpdateItem>
           </AdminRoutes>
         ),
-        loader:({params})=>fetch(`http://localhost:5000/menu/${params.id}`)
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menu/${params.id}`),
       },
     ],
   },
