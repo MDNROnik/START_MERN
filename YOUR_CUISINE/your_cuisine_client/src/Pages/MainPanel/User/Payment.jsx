@@ -39,8 +39,8 @@ const Payment = () => {
       .then((res) => {
         console.log("User added pay the payment", res);
         if (res.data.result.insertedId) {
-        //   console.log("User added pay the payment", res);
-          setTransactionId(res.data.insertedId);
+          //   console.log("User added pay the payment", res);
+          setTransactionId(res.data.result.insertedId);
           reset();
           setCarts([]);
           Swal.fire({
@@ -50,12 +50,12 @@ const Payment = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          // navigate("/");
+          navigate("/mainpanel/paymentHistory");
         }
       })
       .catch((err) => {
         console.log(err);
-        
+
         setError(err);
       });
   };

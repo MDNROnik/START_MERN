@@ -4,13 +4,12 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 const Navbar = () => {
-  const { user, signOutUser, loading, carts, setCarts } =
+  const { user, signOutUser, loading, carts, setCarts, setLoading } =
     useContext(AuthContext);
   // console.log(user);
 
   useEffect(() => {
     // console.log("hit ");
-
     if (user && user.uid) {
       // console.log("hit 2");
       axios

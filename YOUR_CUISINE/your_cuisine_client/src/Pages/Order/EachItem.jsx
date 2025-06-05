@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProvider";
 const EachItem = ({ item }) => {
-  const { user, setLoading, loading } = useContext(AuthContext);
+  const { user, setLoading, setCarts } = useContext(AuthContext);
   const { name, image, price, recipe, _id } = item;
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,9 +19,16 @@ const EachItem = ({ item }) => {
         image,
         price,
       };
+      setLoading(true);
       axios.post("http://localhost:5000/cart", cart).then((res) => {
         // console.log(res.data);
-        setLoading(!loading);
+        axios
+          .get("http://localhost:5000/cart", {
+            params: { userId: user.uid, status: "active" },
+          })
+          .then((res) => setCarts(res.data))
+          .catch((err) => console.error(err));
+
         if (res.data.insertedId) {
           Swal.fire({
             position: "top-end",
@@ -30,10 +37,9 @@ const EachItem = ({ item }) => {
             showConfirmButton: false,
             timer: 1500,
           });
-          // refetch cart to update the cart items count
-          // refetch();
         }
       });
+      setLoading(false);
     } else {
       Swal.fire({
         title: "You are not Logged In",

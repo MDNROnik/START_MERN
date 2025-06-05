@@ -3,13 +3,18 @@ import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 const PrivateRoutes = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
+  console.log(loading);
+
   const preLocation = useLocation();
   if (loading) {
     return <progress className="progress w-56"></progress>;
   }
   if (user) {
     return children;
-  } else {
+  } 
+  else {
+    console.log("privaterouters");
+    
     return (
       <Navigate to="/login" state={{ preLocation: preLocation }}></Navigate>
     );

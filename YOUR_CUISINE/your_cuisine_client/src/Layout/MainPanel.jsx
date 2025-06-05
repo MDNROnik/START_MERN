@@ -39,6 +39,8 @@ const MainPanel = () => {
       .catch((err) => {
         console.log(err.status);
         if (err) {
+          console.log(err);
+          console.log("main panel");
           signOutUser();
           navigate("/login");
         }

@@ -22,7 +22,7 @@ const AdminRoutes = ({ children }) => {
           //   setIsAdmin(true);
           // console.log("2222");
         } else {
-          // console.log("1111");
+          console.log("admin route");
           signOutUser();
           navigate("/login");
         }
@@ -30,12 +30,16 @@ const AdminRoutes = ({ children }) => {
       .catch((err) => {
         console.log(err.status);
         if (err) {
+          console.log("admin route");
+
           signOutUser();
           navigate("/login");
         }
       });
     return children;
   } else {
+    console.log("admin route");
+
     signOutUser();
     return <Navigate to="/login"></Navigate>;
   }

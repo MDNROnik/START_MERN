@@ -17,6 +17,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [carts, setCarts] = useState([]);
   const [loading, setLoading] = useState(true);
+  
 
   const createNewUser = (email, password) => {
     setLoading(true);
@@ -44,6 +45,7 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       // console.log("user inside auth state change", currentUser);
       setUser(currentUser);
@@ -58,12 +60,14 @@ const AuthProvider = ({ children }) => {
           // console.log(res);
           if (res.data.token) {
             localStorage.setItem("jwttoken", res.data.token);
+            setLoading(false);
           }
         });
+        // setLoading(false);
       } else {
         localStorage.removeItem("jwttoken");
+        setLoading(false);
       }
-      setLoading(false);
     });
     return () => {
       unsubscribe();

@@ -14,6 +14,7 @@ import Menu from "../Pages/Menu/Menu";
 import Order from "../Pages/Order/Order";
 import AdminRoutes from "../Pages/Share/AdminRoutes";
 import PrivateRoutes from "../Pages/Share/PrivateRoutes";
+import PaymentHistory from "../Pages/MainPanel/User/PaymentHistory";
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -56,6 +57,10 @@ const Routes = createBrowserRouter([
       {
         path: "payment",
         element: <Payment></Payment>,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory></PaymentHistory>,
       },
       {
         path: "users",

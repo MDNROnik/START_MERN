@@ -275,9 +275,15 @@ async function run() {
       res.send({result, deleteResult});
     })
 
+    // get payment by id
+    app.get('/payment/:id', async(req, res)=>{
+      const id = req.params.id;
+      const query = {uid: id};
+      const result = await paymentCollection.find(query).toArray();
+      res.send(result);
 
+    })
 
-  
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
