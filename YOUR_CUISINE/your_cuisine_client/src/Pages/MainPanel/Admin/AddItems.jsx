@@ -9,7 +9,7 @@ import SectionTitle from "../../Share/SectionTitle";
 // set it on env local file
 // import as like firebase apis
 // take the url for api work
-//set template string url
+// set template string url
 // send image data from client to hosting server
 // that will bring a url for image access
 
@@ -59,19 +59,6 @@ const AddItems = () => {
             // navigate("/");
           }
         });
-
-      // console.log(menuRes.data);
-      // if (menuRes.data.insertedId) {
-      //   // show success popup
-      //   reset();
-      //   Swal.fire({
-      //     position: "top-end",
-      //     icon: "success",
-      //     title: `${data.name} is added to the menu.`,
-      //     showConfirmButton: false,
-      //     timer: 1500,
-      //   });
-      // }
     }
     // console.log("with image url", res.data);
     reset();

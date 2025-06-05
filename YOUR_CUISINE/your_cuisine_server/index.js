@@ -38,6 +38,7 @@ async function run() {
     const reviewCollection = database.collection('review');
     const cartCollection = database.collection('cart');
     const userCollection = database.collection('user');
+    const paymentCollection = database.collection('payment');
 
     //verfity token
     const verifyToken=(req,res, next)=>{
@@ -256,6 +257,16 @@ async function run() {
       const result = await cartCollection.deleteOne(query);
       res.send(result);
     })
+
+
+    // post payment
+    app.post('/payment',verifyToken, async(req, res)=>{
+      const paymentInfo = req.body;
+      const result = await paymentCollection.insertOne(paymentInfo);
+      res.send(result);
+    })
+
+
 
   
   } finally {
