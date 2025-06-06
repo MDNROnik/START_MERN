@@ -19,27 +19,7 @@ const Order = () => {
   // console.log(cate);
 
   useEffect(() => {
-    // fetch("http://localhost:5000/menu")
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     // console.log(data);
-
-    //     // setMenu(data);
-    //     const tdesserts = data.filter((item) => item.category === "dessert");
-    //     const tsoup = data.filter((item) => item.category === "soup");
-    //     const tsalad = data.filter((item) => item.category === "salad");
-    //     const tpizza = data.filter((item) => item.category === "pizza");
-    //     const tdrinks = data.filter((item) => item.category === "drinks");
-
-    //     setSalad(tsalad);
-    //     setPizza(tpizza);
-    //     setDesserts(tdesserts);
-    //     setSoup(tsoup);
-    //     setDrinks(tdrinks);
-    //   });
-    // console.log('====================================');
-    // console.log(menu);
-    // console.log('====================================');
+    
     const tdesserts = menu.filter((item) => item.category === "dessert");
     const tsoup = menu.filter((item) => item.category === "soup");
     const tsalad = menu.filter((item) => item.category === "salad");

@@ -5,13 +5,12 @@ import { AuthContext } from "../../providers/AuthProvider";
 const AdminRoutes = ({ children }) => {
   const { user, loading, signOutUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  // console.log(user);
-  
+  console.log(" admin logout ",loading, user);
 
   if (loading) {
     return <progress className="progress w-56"></progress>;
   }
-  if (user.admin=="admin") {
+  else if (user.admin=="admin") {
     // axios
     //   .get(`http://localhost:5000/user/${user.uid}`, {
     //     headers: {
@@ -40,7 +39,7 @@ const AdminRoutes = ({ children }) => {
     //   });
     return children;
   } else {
-    console.log("admin route");
+   
     signOutUser();
     return <Navigate to="/login"></Navigate>;
   }

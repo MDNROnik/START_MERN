@@ -183,6 +183,25 @@ async function run() {
       res.send(result);
     })
 
+    //data for admins
+    app.get('/admin-data',verifyToken, verifyAdmin, async(req, res)=>{
+      const users = await userCollection.estimatedDocumentCount();
+      const menus = await menuCollection.estimatedDocumentCount();
+      const reviews = await reviewCollection.estimatedDocumentCount();
+      const payments = await paymentCollection.estimatedDocumentCount();
+
+      // find the payment amounts
+      const payment = await paymentCollection.find().toArray();
+      const revenue = payment.reduce((total, payment)=> total + payment.totalPrice, 0);
+      res.send({
+        users, menus, reviews, payments, revenue
+      })
+    })
+
+
+
+
+
     //get menu
     app.get('/menu', async(req, res)=>{
       const result = await menuCollection.find().toArray();

@@ -61,7 +61,7 @@ const AuthProvider = ({ children }) => {
           // console.log(res);
           if (res.data.token) {
             localStorage.setItem("jwttoken", res.data.token);
-            setLoading(false);
+            // setLoading(false);
             // for admin
             axiosPublic
               .get(`/user/${currentUser.uid}`, {
@@ -73,6 +73,8 @@ const AuthProvider = ({ children }) => {
                 console.log(res.data.role);
                 if (res.data?.role == "admin") {
                   currentUser.admin = "admin";
+                } else {
+                  currentUser.admin = "user";
                 }
               })
               .catch((err) => {
