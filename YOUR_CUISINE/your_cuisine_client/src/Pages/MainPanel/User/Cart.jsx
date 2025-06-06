@@ -3,9 +3,12 @@ import { useContext } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../providers/AuthProvider";
 
 const Cart = () => {
+  const axiosPublic = useAxiosPublic();
+
   const { carts, setCarts } = useContext(AuthContext);
   const totalPrice = carts.reduce((total, item) => total + item.price, 0);
   const handleDelete = (id) => {
@@ -21,8 +24,8 @@ const Cart = () => {
       if (result.isConfirmed) {
         // console.log(id);
         // setLoading(!loading);
-        axios
-          .delete(`http://localhost:5000/cart/${id}`)
+        axiosPublic
+          .delete(`/cart/${id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               console.log("parchi mama");

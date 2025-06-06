@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
 const EachItem = ({ item }) => {
   const { user, setLoading, setCarts } = useContext(AuthContext);
@@ -9,6 +10,7 @@ const EachItem = ({ item }) => {
   const navigate = useNavigate();
   const location = useLocation();
   // console.log(user);
+  const axiosPublic = useAxiosPublic();
   const handleAddToCart = () => {
     if (user && user.email) {
       //send cart item to the database
@@ -20,10 +22,10 @@ const EachItem = ({ item }) => {
         price,
       };
       setLoading(true);
-      axios.post("http://localhost:5000/cart", cart).then((res) => {
+      axiosPublic.post("/cart", cart).then((res) => {
         // console.log(res.data);
-        axios
-          .get("http://localhost:5000/cart", {
+        axiosPublic
+          .get("/cart", {
             params: { userId: user.uid, status: "active" },
           })
           .then((res) => setCarts(res.data))

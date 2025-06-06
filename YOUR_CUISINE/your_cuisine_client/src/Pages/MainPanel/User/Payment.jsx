@@ -1,13 +1,12 @@
-import axios from "axios";
 import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../providers/AuthProvider";
 import SectionTitle from "../../Share/SectionTitle";
-
 // TODO: add real payment getway service
 const Payment = () => {
   const navigate = useNavigate();
@@ -15,7 +14,7 @@ const Payment = () => {
   const [transactionId, setTransactionId] = useState("");
   const [error, setError] = useState("");
   const { carts, user, setCarts } = useContext(AuthContext);
-
+  const axiosPublic = useAxiosPublic();
   const totalPrice = carts.reduce((total, item) => total + item.price, 0);
 
   const onSubmit = async (value) => {
@@ -30,8 +29,8 @@ const Payment = () => {
       carts: carts,
     };
 
-    await axios
-      .post("http://localhost:5000/payment", paymentInfo, {
+    await axiosPublic
+      .post("/payment", paymentInfo, {
         headers: {
           jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
         },

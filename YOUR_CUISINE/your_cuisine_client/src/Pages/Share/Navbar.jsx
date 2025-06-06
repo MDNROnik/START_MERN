@@ -1,19 +1,21 @@
-import axios from "axios";
 import { useContext, useEffect } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
+
 const Navbar = () => {
   const { user, signOutUser, loading, carts, setCarts, setLoading } =
     useContext(AuthContext);
   // console.log(user);
+  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
     // console.log("hit ");
     if (user && user.uid) {
       // console.log("hit 2");
-      axios
-        .get("http://localhost:5000/cart", {
+      axiosPublic
+        .get("/cart", {
           params: { userId: user.uid, status: "active" },
         })
         .then((res) => setCarts(res.data))

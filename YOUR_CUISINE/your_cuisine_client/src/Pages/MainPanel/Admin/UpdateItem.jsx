@@ -2,6 +2,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import SectionTitle from "../../Share/SectionTitle";
 
 const apiKeyForImgbb = import.meta.env.VITE_apiKeyForImgbb;
@@ -9,7 +10,7 @@ const image_api_imgbb_url = `https://api.imgbb.com/1/upload?key=${apiKeyForImgbb
 const UpdateItem = () => {
   const { name, category, recipe, price, _id } = useLoaderData();
   const navigate = useNavigate();
-
+  const axiosPublic = useAxiosPublic();
   const { register, handleSubmit } = useForm();
   //   const axiosPublic = useAxiosPublic();
   //   const axiosSecure = useAxiosSecure();
@@ -32,8 +33,8 @@ const UpdateItem = () => {
         image: res.data.data.display_url,
       };
       //
-      await axios
-        .patch(`http://localhost:5000/menu/${_id}`, menuItem, {
+      await axiosPublic
+        .patch(`/menu/${_id}`, menuItem, {
           headers: {
             jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
           },

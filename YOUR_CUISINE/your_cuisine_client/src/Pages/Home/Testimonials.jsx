@@ -1,21 +1,24 @@
-import { Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import SectionTitle from "../Share/SectionTitle";
-
-// Import Swiper styles
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import SectionTitle from "../Share/SectionTitle";
 
 const Tesimonials = () => {
   const [reviews, setReviews] = useState([]);
-
+  const axiosPublic = useAxiosPublic();
   useEffect(() => {
-    fetch("http://localhost:5000/review")
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
+    // fetch("http://localhost:5000/review")
+    //   .then((res) => res.json())
+    //   .then((data) => setReviews(data));
+
+    axiosPublic.get("/review").then((res) => {
+      setReviews(res.data);
+    });
   }, []);
   return (
     <section className="my-20">

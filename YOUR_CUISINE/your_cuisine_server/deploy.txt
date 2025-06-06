@@ -1,0 +1,5 @@
+comment the mongodb connect and ping
+run vercel --prod
+go as the project style
+
+set env in the site project setting env variables

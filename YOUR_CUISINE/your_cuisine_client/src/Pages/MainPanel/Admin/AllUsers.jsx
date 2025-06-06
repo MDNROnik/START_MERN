@@ -26,7 +26,7 @@ const AllUsers = () => {
         if (err) {
           console.log(err);
           console.log("in all users");
-          
+
           signOutUser();
           navigate("/login");
         }

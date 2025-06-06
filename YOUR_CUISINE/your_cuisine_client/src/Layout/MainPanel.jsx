@@ -14,15 +14,16 @@ import {
 } from "react-icons/fa";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 const MainPanel = () => {
   const { carts, user, signOutUser } = useContext(AuthContext);
-  // let isAdmin = false;
+  const axiosPublic = useAxiosPublic();
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     // currentUser.uid
-    axios
-      .get(`http://localhost:5000/user/${user.uid}`, {
+    axiosPublic
+      .get(`/user/${user.uid}`, {
         headers: {
           jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
         },

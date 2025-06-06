@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { FaUtensils } from "react-icons/fa";
 import Swal from "sweetalert2";
 import SectionTitle from "../../Share/SectionTitle";
-
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 //how to image host on imgbb
 //take api from app button -> api route
 // set it on env local file
@@ -17,8 +17,7 @@ const apiKeyForImgbb = import.meta.env.VITE_apiKeyForImgbb;
 const image_api_imgbb_url = `https://api.imgbb.com/1/upload?key=${apiKeyForImgbb}`;
 const AddItems = () => {
   const { register, handleSubmit, reset } = useForm();
-  // const axiosPublic = useAxiosPublic();
-  // const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const onSubmit = async (data) => {
     // console.log(data);
     const imageFile = { image: data.image[0] };
@@ -39,8 +38,8 @@ const AddItems = () => {
         image: res.data.data.display_url,
       };
 
-      await axios
-        .post("http://localhost:5000/menu", menuItem, {
+      await axiosPublic
+        .post("/menu", menuItem, {
           headers: {
             jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
           },
