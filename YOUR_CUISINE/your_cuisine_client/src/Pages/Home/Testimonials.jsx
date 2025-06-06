@@ -12,10 +12,7 @@ const Tesimonials = () => {
   const [reviews, setReviews] = useState([]);
   const axiosPublic = useAxiosPublic();
   useEffect(() => {
-    // fetch("http://localhost:5000/review")
-    //   .then((res) => res.json())
-    //   .then((data) => setReviews(data));
-
+    
     axiosPublic.get("/review").then((res) => {
       setReviews(res.data);
     });

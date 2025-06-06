@@ -1,0 +1,7 @@
+setup with firebase documents and chatgpt
+
+firebase init, 
+go as wish, 
+set dist
+build every time before deploy
+then run deploy

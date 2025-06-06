@@ -108,7 +108,7 @@ const Routes = createBrowserRouter([
           </AdminRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/menu/${params.id}`),
+          fetch(`https://your-cuisine-server.vercel.app/menu/${params.id}`),
       },
     ],
   },
