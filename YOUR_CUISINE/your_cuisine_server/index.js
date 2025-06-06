@@ -276,8 +276,11 @@ async function run() {
     })
 
     // get payment by id
-    app.get('/payment/:id', async(req, res)=>{
+    app.get('/payment/:id',verifyToken, async(req, res)=>{
       const id = req.params.id;
+      if(id!==req.decode.uid){
+        return res.status(403).send({message:" why man ?"})
+      }
       const query = {uid: id};
       const result = await paymentCollection.find(query).toArray();
       res.send(result);

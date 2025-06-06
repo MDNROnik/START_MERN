@@ -15,6 +15,8 @@ import Order from "../Pages/Order/Order";
 import AdminRoutes from "../Pages/Share/AdminRoutes";
 import PrivateRoutes from "../Pages/Share/PrivateRoutes";
 import PaymentHistory from "../Pages/MainPanel/User/PaymentHistory";
+import Dashboard from "../Pages/MainPanel/Admin/Dashboard";
+import Profile from "../Pages/MainPanel/User/Profile";
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -63,6 +65,10 @@ const Routes = createBrowserRouter([
         element: <PaymentHistory></PaymentHistory>,
       },
       {
+        path: "profile",
+        element: <Profile></Profile>,
+      },
+      {
         path: "users",
         element: (
           <AdminRoutes>
@@ -83,6 +89,14 @@ const Routes = createBrowserRouter([
         element: (
           <AdminRoutes>
             <ManageItems></ManageItems>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "dashboard",
+        element: (
+          <AdminRoutes>
+            <Dashboard></Dashboard>
           </AdminRoutes>
         ),
       },
