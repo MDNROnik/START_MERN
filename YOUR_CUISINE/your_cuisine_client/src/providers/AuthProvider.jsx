@@ -17,7 +17,6 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [carts, setCarts] = useState([]);
   const [loading, setLoading] = useState(true);
-  
 
   const createNewUser = (email, password) => {
     setLoading(true);
@@ -51,6 +50,8 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
 
       if (currentUser) {
+        console.log(currentUser);
+
         const userInfo = {
           uid: currentUser.uid,
           email: currentUser.email,
@@ -60,6 +61,24 @@ const AuthProvider = ({ children }) => {
           // console.log(res);
           if (res.data.token) {
             localStorage.setItem("jwttoken", res.data.token);
+            setLoading(false);
+            // for admin
+            axiosPublic
+              .get(`/user/${currentUser.uid}`, {
+                headers: {
+                  jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
+                },
+              })
+              .then((res) => {
+                console.log(res.data.role);
+                if (res.data?.role == "admin") {
+                  currentUser.admin = "admin";
+                }
+              })
+              .catch((err) => {
+                console.log(err.status);
+              });
+
             setLoading(false);
           }
         });

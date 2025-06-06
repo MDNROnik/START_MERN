@@ -148,6 +148,9 @@ async function run() {
     app.get('/user/:id' ,verifyToken , async(req, res)=>{
       const id = req.params.id;
       // res.send({mes:"IN"})
+      // check requent uid and token uid are same or not
+      console.log("in route ", id);
+      
       if(id == req.decode.uid){
         const query = { uid: id };
         const result = await userCollection.findOne(query);
