@@ -25,72 +25,136 @@ const Banner = () => {
   // console.log("Current slide index:", current);
 
   return (
-    <div className="bg-black/30">
-      <div
-        className="relative w-full h-screen bg-center bg-cover flex items-center justify-center transition-all duration-700  "
-        style={{
-          backgroundImage: `url(${images[current]})`,
-        }}
-      >
-        {/* Overlay */}
-        <div className="absolute inset-0  bg-black/40 bg-opacity-50"></div>
+    // <div
+    //     className="relative w-full h-screen bg-center bg-cover flex items-center justify-center transition-all duration-1000 ease-in-out  "
+    //     style={{
+    //       backgroundImage: `url(${images[current]})`,
+    //     }}
+    //   >
+    //     {/* Overlay */}
+    //     <div className="absolute inset-0  bg-black/40 bg-opacity-50"></div>
 
-        {/* Content */}
-        <div className="relative z-10 text-white text-center">
-          <div className="flex items-center justify-center mb-4 text-sm tracking-widest uppercase">
-            <span className="mx-4">←</span>
-            <span>Being True</span>
-            <span className="mx-4">→</span>
-          </div>
+    //     {/* Content */}
+    //     <div className="relative z-10 text-white text-center">
+    //       <div className="flex items-center justify-center mb-4 text-sm tracking-widest uppercase">
+    //         <span className="mx-4">←</span>
+    //         <span>Being True</span>
+    //         <span className="mx-4">→</span>
+    //       </div>
 
-          <h1 className="text-7xl font-bold font-playfair mb-8">YOUR CUSINE</h1>
+    //       <h1 className="text-7xl font-bold font-playfair mb-8">YOUR CUSINE</h1>
 
-          <div className="flex items-center justify-center space-x-6">
-            {/* Left Text */}
-            <span className="text-white font-semibold tracking-widest">
-              <span>
-                <Link className="mx-4" to="/menu">
-                  VIEW
-                </Link>
-              </span>
-            </span>
+    //       <div className="flex items-center justify-center space-x-6">
+    //         {/* Left Text */}
+    //         <span className="text-white font-semibold tracking-widest">
+    //           <span>
+    //             <Link className="mx-4" to="/menu">
+    //               VIEW
+    //             </Link>
+    //           </span>
+    //         </span>
 
-            {/* Diamond Shape */}
-            <div className="relative w-20 h-20">
-              <div className="absolute inset-0 transform rotate-45 border-2 border-white"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="transform -rotate-45">
-                  <LiaChevronDownSolid className="text-white w-6 h-6 transform -rotate-316" />
-                </div>
-              </div>
-            </div>
+    //         {/* Diamond Shape */}
+    //         <div className="relative w-20 h-20">
+    //           <div className="absolute inset-0 transform rotate-45 border-2 border-white"></div>
+    //           <div className="absolute inset-0 flex items-center justify-center">
+    //             <div className="transform -rotate-45">
+    //               <LiaChevronDownSolid className="text-white w-6 h-6 transform -rotate-316" />
+    //             </div>
+    //           </div>
+    //         </div>
 
-            {/* Right Text */}
-            <span className="text-white font-semibold tracking-widest">
-              <span>
-                <Link className="mx-4" to={`/order/0`}>
-                  MORE
-                </Link>
-              </span>
-            </span>
-          </div>
+    //         {/* Right Text */}
+    //         <span className="text-white font-semibold tracking-widest">
+    //           <span>
+    //             <Link className="mx-4" to={`/order/0`}>
+    //               MORE
+    //             </Link>
+    //           </span>
+    //         </span>
+    //       </div>
+    //     </div>
+
+    //     {/* Navigation */}
+    //     <button
+    //       onClick={prevSlide}
+    //       className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl z-20"
+    //     >
+    //       &#8592;
+    //     </button>
+
+    //     <button
+    //       onClick={nextSlide}
+    //       className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl z-20"
+    //     >
+    //       &#8594;
+    //     </button>
+    //   </div>
+
+    <div className="relative w-full h-screen overflow-hidden">
+      {/* Background Images with Crossfade */}
+      {images.map((img, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 bg-center bg-cover transition-opacity duration-1000 ease-in-out ${
+            index === current ? "opacity-100 z-10" : "opacity-0 z-0"
+          }`}
+          style={{
+            backgroundImage: `url(${img})`,
+          }}
+        ></div>
+      ))}
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40"></div>
+
+      {/* Content */}
+      <div className="relative z-20 text-white text-center">
+        <div className="flex items-center justify-center mt-70 text-sm tracking-widest uppercase">
+          <span className="mx-4">←</span>
+          <span>Being True</span>
+          <span className="mx-4">→</span>
         </div>
 
-        {/* Navigation */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl z-20"
-        >
-          &#8592;
-        </button>
+        <h1 className="text-7xl font-bold font-playfair mb-8">YOUR CUISINE</h1>
 
-        <button
-          onClick={nextSlide}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl z-20"
-        >
-          &#8594;
-        </button>
+        <div className="flex items-center justify-center space-x-6">
+          <span className="text-white font-semibold tracking-widest">
+            <Link className="mx-4" to="/menu">
+              VIEW
+            </Link>
+          </span>
+
+          <div className="relative w-20 h-20">
+            <div className="absolute inset-0 transform rotate-45 border-2 border-white"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="">
+                <LiaChevronDownSolid className="text-white w-6 h-6" />
+              </div>
+            </div>
+          </div>
+
+          <span className="text-white font-semibold tracking-widest">
+            <Link className="mx-4" to={`/order/0`}>
+              MORE
+            </Link>
+          </span>
+        </div>
       </div>
+
+      {/* Navigation Buttons */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl z-30"
+      >
+        &#8592;
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl z-30"
+      >
+        &#8594;
+      </button>
     </div>
   );
 };

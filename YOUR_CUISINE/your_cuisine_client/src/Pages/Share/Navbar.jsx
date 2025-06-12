@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar fixed z-10  max-w-screen-xl bg-black/30 text-white">
+      <div className="navbar fixed top-0 w-full z-50  max-w-screen-xl bg-black/30 text-white">
         <div className="navbar-start ">
           {/* Mobile View */}
           <div className="dropdown">

@@ -40,7 +40,7 @@ const HomeCategory = () => {
             {/* Carousel */}
             <div className="relative overflow-hidden">
               <div
-                className=" flex transition-transform duration-500 ease-in-out"
+                className=" flex transition-transform duration-1000 ease-in-out"
                 style={{
                   width: `${(images.length * 100) / ITEMS_VISIBLE}%`,
                   transform: `translateX(-${
