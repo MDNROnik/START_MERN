@@ -21,6 +21,7 @@ const Banner = () => {
     // console.log("Previous slide clicked");
     setCurrent((current - 1 + images.length) % images.length);
   };
+
   // console.log("Current slide index:", current);
 
   return (
