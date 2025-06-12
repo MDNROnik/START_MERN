@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaBowlFood } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
-  const { user, signOutUser, loading, carts, setCarts, setLoading } =
+  const { user, signOutUser, loading, carts, setCarts } =
     useContext(AuthContext);
   // console.log(user);
   const axiosPublic = useAxiosPublic();
@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar fixed z-10  max-w-screen-xl bg-black/30 text-white">
+      <div className="navbar fixed z-10  max-w-screen-xl bg-black text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -66,47 +66,63 @@ const Navbar = () => {
               </li>
 
               <li>
-                <Link to="/mainpanel/cart">
-                  <button className="btn">
-                    <FaShoppingCart className="mr-2"></FaShoppingCart>
-                    <div className="badge badge-secondary">
-                      +{carts?.length || 0}
-                    </div>
-                  </button>
-                </Link>
+                {user ? (
+                  <>
+                    <Link to="/mainpanel/cart">
+                      <button className="btn">
+                        <FaBowlFood className="mr-2"></FaBowlFood>
+                        <div className="badge badge-secondary">
+                          +{carts?.length || 0}
+                        </div>
+                      </button>
+                    </Link>
+                  </>
+                ) : (
+                  <></>
+                )}
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">YOUR CUISINE</a>
+          <Link className="btn btn-ghost normal-case text-xl" to="/">
+            YOUR CUISINE
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/menu">Our Menu</Link>
-            </li>
-            <li>
-              <Link to={`/order/0`}>Order Food</Link>
-            </li>
+          <ul className="menu menu-horizontal ">
+            <div className="flex items-center gap-4">
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/menu">Our Menu</Link>
+              </li>
+              <li>
+                <Link to={`/order/0`}>Order Food</Link>
+              </li>
+            </div>
 
             <li>
-              <Link to="/mainpanel/cart">
-                <button className="btn">
-                  <FaShoppingCart className="mr-2"></FaShoppingCart>
-                  <div className="badge badge-secondary">
-                    +{carts?.length || 0}
-                  </div>
-                </button>
-              </Link>
+              {user ? (
+                <>
+                  <Link to="/mainpanel/cart">
+                    <button className="btn">
+                      <FaBowlFood className="mr-2"></FaBowlFood>
+                      <div className="badge badge-secondary">
+                        +{carts?.length || 0}
+                      </div>
+                    </button>
+                  </Link>
+                </>
+              ) : (
+                <></>
+              )}
             </li>
           </ul>
         </div>
         <div className="navbar-end">
           <ul className="menu menu-horizontal px-1">
             {user ? (
-              <>
+              <div className="flex items-center gap-4">
                 <li>{user?.displayName}</li>
                 <li>
                   <Link
@@ -117,7 +133,7 @@ const Navbar = () => {
                     Log Out
                   </Link>
                 </li>
-              </>
+              </div>
             ) : (
               <>
                 <li>
