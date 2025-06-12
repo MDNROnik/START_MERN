@@ -32,8 +32,9 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar fixed z-10  max-w-screen-xl bg-black text-white">
-        <div className="navbar-start">
+      <div className="navbar fixed z-10  max-w-screen-xl bg-black/30 text-white">
+        <div className="navbar-start ">
+          {/* Mobile View */}
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
               <svg
@@ -46,24 +47,51 @@ const Navbar = () => {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth="2"
+                  strokeWidth="4"
                   d="M4 6h16M4 12h8m-8 6h16"
                 />
               </svg>
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-black rounded-box w-52"
             >
-              <li>
-                <Link to="/">Home</Link>
-              </li>
               <li>
                 <Link to="/menu">Our Menu</Link>
               </li>
               <li>
                 <Link to={`/order/0`}>Order Food</Link>
               </li>
+              <li>
+                {user ? (
+                  <>
+                    <Link to="/mainpanel/cart">
+                      <button className="btn">
+                        <FaBowlFood className="mr-2"></FaBowlFood>
+                        <div className="badge badge-secondary">
+                          +{carts?.length || 0}
+                        </div>
+                      </button>
+                    </Link>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </li>
+            </ul>
+          </div>
+
+          {/* Desktop View */}
+          <div className="navbar-start hidden lg:flex ">
+            <ul className="menu menu-horizontal ">
+              <div className="flex items-center gap-4">
+                <li>
+                  <Link to="/menu">Our Menu</Link>
+                </li>
+                <li>
+                  <Link to={`/order/0`}>Order Food</Link>
+                </li>
+              </div>
 
               <li>
                 {user ? (
@@ -83,42 +111,13 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <Link className="btn btn-ghost normal-case text-xl" to="/">
-            YOUR CUISINE
-          </Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal ">
-            <div className="flex items-center gap-4">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/menu">Our Menu</Link>
-              </li>
-              <li>
-                <Link to={`/order/0`}>Order Food</Link>
-              </li>
-            </div>
 
-            <li>
-              {user ? (
-                <>
-                  <Link to="/mainpanel/cart">
-                    <button className="btn">
-                      <FaBowlFood className="mr-2"></FaBowlFood>
-                      <div className="badge badge-secondary">
-                        +{carts?.length || 0}
-                      </div>
-                    </button>
-                  </Link>
-                </>
-              ) : (
-                <></>
-              )}
-            </li>
-          </ul>
-        </div>
+        <Link className="btn btn-ghost normal-case text-xl" to="/">
+          YOUR CUISINE
+        </Link>
+
+        {/* User Profile and Logout */}
         <div className="navbar-end">
           <ul className="menu menu-horizontal px-1">
             {user ? (
