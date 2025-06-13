@@ -34,9 +34,9 @@ const Featured = () => {
           bg-center bg-cover  transition-all duration-2000 ease-in-out"
       style={{ backgroundImage: `url(${images[current]})` }}
     >
-      <div className="bg-black/70 bg-opacity-50">
-        <SectionTitle heading="OUR CHEFS"></SectionTitle>
-        <div className="md:flex justify-center items-center pb-20 pt-12 px-36 ">
+      <div className=" bg-black/70 bg-opacity-50 pt-5">
+        <SectionTitle heading="OUR CHEFS" ></SectionTitle>
+        <div className="md:flex justify-center items-center pb-20 pt-5 px-36 ">
           <div className="">
             <img
               src={images[current]}

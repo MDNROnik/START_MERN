@@ -31,7 +31,7 @@ const HomeCategory = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <SectionTitle heading={"Origins and Inspirations"}></SectionTitle>
       <section className=" text-white py-16 px-6 md:px-12">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-10">
@@ -75,8 +75,8 @@ const HomeCategory = () => {
           </div>
 
           {/* Right: Description */}
-          <div className="md:w-1/3 text-sm md:text-base leading-relaxed">
-            <p className="mb-6">
+          <div className=" top-1/2 md:w-1/3 md:h-1/3 text-sm md:text-base leading-relaxed">
+            <p className="mb-6 mt-8">
               We take pride in providing exceptional service, ensuring your
               every need is met with a smile. Our dedicated staff is here to
               guide you through our menu, recommend pairings, and make your

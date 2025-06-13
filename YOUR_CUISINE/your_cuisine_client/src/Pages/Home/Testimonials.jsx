@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import img from "../../assets/home/1.jpg"; // Adjust the path as necessary
+import img from "../../assets/home/testi.jpg"; // Adjust the path as necessary
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Tesimonials = () => {

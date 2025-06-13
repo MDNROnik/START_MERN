@@ -91,7 +91,7 @@ const Banner = () => {
     //     </button>
     //   </div>
 
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative bg-[#0f2b33] w-full h-screen overflow-hidden">
       {/* Background Images with Crossfade */}
       {images.map((img, index) => (
         <div
