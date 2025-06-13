@@ -3,7 +3,6 @@ import { FaBowlFood } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
-// import one from "../../assets/icon/logo-bg-white.png"
 import two from "../../assets/icon/logo-bg-black-removebg-preview.png"
 
 const Navbar = () => {
