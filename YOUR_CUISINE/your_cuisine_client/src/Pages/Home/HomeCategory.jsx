@@ -16,7 +16,7 @@ const images = [slide1, slide2, slide3, slide4, slide5, slide6];
 const HomeCategory = () => {
   const [startIndex, setStartIndex] = useState(0);
   const ITEMS_VISIBLE = 3;
-  console.log(images.length);
+  // console.log(images.length);
 
   const prev = () => {
     setStartIndex((prevIndex) =>

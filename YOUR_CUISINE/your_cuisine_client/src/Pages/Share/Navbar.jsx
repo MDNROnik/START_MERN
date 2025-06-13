@@ -9,7 +9,7 @@ import two from "../../assets/icon/logo-bg-black-removebg-preview.png"
 const Navbar = () => {
   const { user, signOutUser, loading, carts, setCarts } =
     useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
   const axiosPublic = useAxiosPublic();
 
   useEffect(() => {

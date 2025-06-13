@@ -29,66 +29,64 @@ const Featured = () => {
     setCurrent((current - 1 + images.length) % images.length);
   };
   return (
-    <div>
-      <div
-        className=" bg-fixed  text-white 
-         my-20 bg-center bg-cover  transition-all duration-2000 ease-in-out"
-        style={{ backgroundImage: `url(${images[current]})` }}
-      >
-        <div className="bg-black/70 bg-opacity-50">
-          <SectionTitle heading="OUR CHEFS"></SectionTitle>
-          <div className="md:flex justify-center items-center pb-20 pt-12 px-36 ">
-            <div className="">
-              <img
-                src={images[current]}
-                alt=""
-                className="w-400 h-100 object-cover rounded-md flex-shrink-0 pr-4 transition-all duration-2000 ease-in-out"
-              />
+    <div
+      className=" bg-fixed  text-white 
+          bg-center bg-cover  transition-all duration-2000 ease-in-out"
+      style={{ backgroundImage: `url(${images[current]})` }}
+    >
+      <div className="bg-black/70 bg-opacity-50">
+        <SectionTitle heading="OUR CHEFS"></SectionTitle>
+        <div className="md:flex justify-center items-center pb-20 pt-12 px-36 ">
+          <div className="">
+            <img
+              src={images[current]}
+              alt=""
+              className="w-400 h-100 object-cover rounded-md flex-shrink-0 pr-4 transition-all duration-2000 ease-in-out"
+            />
+          </div>
+          <div className="md:ml-10 ">
+            <div>
+              <p className="uppercase">{chefs[current]}</p>
+              <p className="h-50 w-50">{chefsIntro[current]}</p>
             </div>
-            <div className="md:ml-10 ">
-              <div>
-                <p className="uppercase">{chefs[current]}</p>
-                <p className="h-50 w-50">{chefsIntro[current]}</p>
-              </div>
 
-              <div className="flex items-center justify-center mt-8 space-x-4">
-                <button
-                  onClick={prevSlide}
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    backgroundColor: "rgba(255, 255, 255, 0.15)",
-                    borderRadius: "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "white",
-                    fontSize: "20px",
-                    transition: "0.3s",
-                    cursor: "pointer",
-                  }}
-                >
-                  <FaArrowLeft />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    backgroundColor: "rgba(255, 255, 255, 0.15)",
-                    borderRadius: "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "white",
-                    fontSize: "20px",
-                    transition: "0.3s",
-                    cursor: "pointer",
-                  }}
-                >
-                  <FaArrowRight />
-                </button>
-              </div>
+            <div className="flex items-center justify-center mt-8 space-x-4">
+              <button
+                onClick={prevSlide}
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  backgroundColor: "rgba(255, 255, 255, 0.15)",
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "white",
+                  fontSize: "20px",
+                  transition: "0.3s",
+                  cursor: "pointer",
+                }}
+              >
+                <FaArrowLeft />
+              </button>
+              <button
+                onClick={nextSlide}
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  backgroundColor: "rgba(255, 255, 255, 0.15)",
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "white",
+                  fontSize: "20px",
+                  transition: "0.3s",
+                  cursor: "pointer",
+                }}
+              >
+                <FaArrowRight />
+              </button>
             </div>
           </div>
         </div>
