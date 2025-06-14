@@ -3,7 +3,7 @@ import Footer from "../Pages/Share/Footer";
 import Navbar from "../Pages/Share/Navbar";
 const MainLayout = () => {
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className="bg-[#00222B]">
       <Navbar></Navbar>
       <Outlet></Outlet>
       <Footer></Footer>

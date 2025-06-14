@@ -41,7 +41,7 @@ const Featured = () => {
             <img
               src={images[current]}
               alt=""
-              className="w-400 h-100 object-cover rounded-md flex-shrink-0 pr-4 transition-all duration-2000 ease-in-out"
+              className="w-400 h-150 object-cover rounded-md flex-shrink-0 pr-4 transition-all duration-2000 ease-in-out"
             />
           </div>
           <div className="md:ml-10 ">

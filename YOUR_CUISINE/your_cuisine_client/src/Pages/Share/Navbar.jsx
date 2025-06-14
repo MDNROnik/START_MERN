@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
 import { FaBowlFood } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import two from "../../assets/icon/logo-bg-black-removebg-preview.png";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
-import two from "../../assets/icon/logo-bg-black-removebg-preview.png"
 
 const Navbar = () => {
   const { user, signOutUser, loading, carts, setCarts } =
@@ -31,7 +31,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar fixed top-0 w-full z-50  max-w-screen-xl bg-black/30 text-white">
+      <div className="navbar fixed top-0 w-full z-50   bg-black/30 text-white">
         <div className="navbar-start ">
           {/* Mobile View */}
           <div className="dropdown">
