@@ -30,7 +30,7 @@ const Featured = () => {
   };
   return (
     <div
-      className=" bg-fixed  text-white 
+      className=" text-white 
           bg-center bg-cover  transition-all duration-2000 ease-in-out"
       style={{ backgroundImage: `url(${images[current]})` }}
     >

@@ -7,7 +7,7 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import img from "../../assets/home/testi.jpg"; // Adjust the path as necessary
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-
+import SectionTitle from "../Share/SectionTitle";
 const Tesimonials = () => {
   const [reviews, setReviews] = useState([]);
   const axiosPublic = useAxiosPublic();
@@ -28,17 +28,11 @@ const Tesimonials = () => {
   console.log(reviews);
 
   return (
-    <section className="">
-      {/* <SectionTitle
-        subHeading="What Our Client Say"
-        heading={"Testimonials"}
-      ></SectionTitle> */}
-      <section className="bg-[#00222B] text-white py-10 px-6 md:px-20 flex flex-col ">
+    <section>
+      <section className="bg-[#00222B] text-white py-10 px-6 flex flex-col ">
         {/* Text Content */}
+        <SectionTitle heading={"Testimonials"}></SectionTitle>
         <div>
-          <h1 className="text-5xl font-serif font-semibold border-b border-[#d2cab3] pb-4 inline-block">
-            Testimonials
-          </h1>
           <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
             {reviews.map((review) => (
               <SwiperSlide key={review._id} className="max-w-max">
@@ -52,6 +46,7 @@ const Tesimonials = () => {
                   <p className="text-lg leading-relaxed font-light text-[#f1ede6]">
                     {review.details}
                   </p>
+                  <p className="text-4xl text-[#d2cab3] mt-3">“</p>
                   <h3 className="mt-8 font-medium text-[#d2cab3]">
                     {review.name}
                   </h3>
