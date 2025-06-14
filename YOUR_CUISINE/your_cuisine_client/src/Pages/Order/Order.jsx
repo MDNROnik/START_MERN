@@ -9,61 +9,90 @@ import OrderCard from "./OrderCard";
 
 const Order = () => {
   const [menu, loading] = useMenu();
-  const [salad, setSalad] = useState([]);
-  const [pizza, setPizza] = useState([]);
-  const [desserts, setDesserts] = useState([]);
-  const [soup, setSoup] = useState([]);
+  const [breakfast, setBreakfast] = useState([]);
+  const [lunch, setLunch] = useState([]);
+  const [dinner, setDinner] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const [desserts, setDesserts] = useState([]);
+
   const { cate } = useParams();
   const [tabIndex, setTabIndex] = useState(cate);
   // console.log(cate);
 
   useEffect(() => {
-    
-    const tdesserts = menu.filter((item) => item.category === "dessert");
-    const tsoup = menu.filter((item) => item.category === "soup");
-    const tsalad = menu.filter((item) => item.category === "salad");
-    const tpizza = menu.filter((item) => item.category === "pizza");
+    const tbreakfast = menu.filter((item) => item.category === "breakfast");
+    const tlunch = menu.filter((item) => item.category === "lunch");
+    const tdinner = menu.filter((item) => item.category === "dinner");
     const tdrinks = menu.filter((item) => item.category === "drinks");
+    const tdesserts = menu.filter((item) => item.category === "dessert");
 
-    setSalad(tsalad);
-    setPizza(tpizza);
-    setDesserts(tdesserts);
-    setSoup(tsoup);
+    setBreakfast(tbreakfast);
+    setLunch(tlunch);
+    setDinner(tdinner);
     setDrinks(tdrinks);
+    setDesserts(tdesserts);
   }, [menu]);
-
-  // console.log("salad, ", salad);
-  // console.log("pizza, ", pizza);
-  // console.log("desserts, ", desserts);
-  // console.log("soup, ", soup);
-  // console.log("drinks, ", drinks);
 
   return (
     <div>
       <Cover img={orderImg} title={"Place Your Order"}></Cover>
-      <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-        <TabList>
-          <Tab>Salad</Tab>
-          <Tab>Pizza</Tab>
-          <Tab>Soup</Tab>
-          <Tab>Dessert</Tab>
-          <Tab>Drinks</Tab>
+      <Tabs
+        defaultIndex={tabIndex}
+        onSelect={(index) => setTabIndex(index)}
+        className="m-10"
+      >
+        <TabList className="flex justify-between gap-2 bg-[#bfb086] p-2 rounded-full shadow-inner">
+          <Tab
+            className="cursor-pointer flex-1 text-center py-2 rounded-full transition-all duration-300 text-[#07252d] font-medium
+                         hover:bg-[#07252d] hover:text-[#bfb086] focus:outline-none"
+            selectedClassName="bg-[#07252d] text-[#bfb086] shadow-md"
+          >
+            Breakfast
+          </Tab>
+          <Tab
+            className="cursor-pointer flex-1 text-center py-2 rounded-full transition-all duration-300 text-[#07252d] font-medium
+                         hover:bg-[#07252d] hover:text-[#bfb086] focus:outline-none"
+            selectedClassName="bg-[#07252d] text-[#bfb086] shadow-md"
+          >
+            Lunch
+          </Tab>
+          <Tab
+            className="cursor-pointer flex-1 text-center py-2 rounded-full transition-all duration-300 text-[#07252d] font-medium
+                         hover:bg-[#07252d] hover:text-[#bfb086] focus:outline-none"
+            selectedClassName="bg-[#07252d] text-[#bfb086] shadow-md"
+          >
+            Dinner
+          </Tab>
+          <Tab
+            className="cursor-pointer flex-1 text-center py-2 rounded-full transition-all duration-300 text-[#07252d] font-medium
+                         hover:bg-[#07252d] hover:text-[#bfb086] focus:outline-none"
+            selectedClassName="bg-[#07252d] text-[#bfb086] shadow-md"
+          >
+            Drinks
+          </Tab>
+          <Tab
+            className="cursor-pointer flex-1 text-center py-2 rounded-full transition-all duration-300 text-[#07252d] font-medium
+                         hover:bg-[#07252d] hover:text-[#bfb086] focus:outline-none"
+            selectedClassName="bg-[#07252d] text-[#bfb086] shadow-md"
+          >
+            Dessert
+          </Tab>
         </TabList>
+
         <TabPanel>
-          <OrderCard items={salad}></OrderCard>
+          <OrderCard items={breakfast}></OrderCard>
         </TabPanel>
         <TabPanel>
-          <OrderCard items={pizza}></OrderCard>
+          <OrderCard items={lunch}></OrderCard>
         </TabPanel>
         <TabPanel>
-          <OrderCard items={soup}></OrderCard>
-        </TabPanel>
-        <TabPanel>
-          <OrderCard items={desserts}></OrderCard>
+          <OrderCard items={dinner}></OrderCard>
         </TabPanel>
         <TabPanel>
           <OrderCard items={drinks}></OrderCard>
+        </TabPanel>
+        <TabPanel>
+          <OrderCard items={desserts}></OrderCard>
         </TabPanel>
       </Tabs>
     </div>
@@ -71,3 +100,28 @@ const Order = () => {
 };
 
 export default Order;
+
+// for future code code practice
+{
+  /* <Tabs>
+        <TabList className="flex justify-between gap-2 bg-gray-100 p-2 rounded-full shadow-inner">
+          {categories.map((cat, idx) => (
+            <Tab
+              key={idx}
+              className="cursor-pointer flex-1 text-center py-2 rounded-full transition-all duration-300 text-gray-600 font-medium
+                         hover:bg-white hover:text-black focus:outline-none"
+              selectedClassName="bg-white text-black shadow-md"
+            >
+              {cat}
+            </Tab>
+          ))}
+        </TabList>
+
+        {categories.map((cat, idx) => (
+          <TabPanel key={idx} className="mt-6 p-6 bg-white rounded-xl shadow-lg animate-fade-in">
+            <h2 className="text-xl font-semibold">{cat} Menu</h2>
+            <p className="mt-2 text-gray-600">Delicious {cat.toLowerCase()} items will appear here.</p>
+          </TabPanel>
+        ))}
+      </Tabs> */
+}

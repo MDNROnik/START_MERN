@@ -11,23 +11,32 @@ const OrderCard = ({ items }) => {
     },
   };
   return (
-    <div>
-      <div>OrderCard {items.length}</div>
-      <div>
-        <Swiper
-          pagination={pagination}
-          modules={[Pagination]}
-          className="mySwiper"
-        >
-          <SwiperSlide>
-            <div className="grid md:grid-cols-3 gap-10">
-              {items.map((item) => (
-                <EachItem key={item._id} item={item}></EachItem>
-              ))}
-            </div>
-          </SwiperSlide>
-        </Swiper>
-      </div>
+    <div className="w-full my-5 px-4 md:px-10 lg:px-20">
+      <Swiper
+        pagination={pagination}
+        modules={[Pagination]}
+        className="mySwiper"
+        breakpoints={{
+          640: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 1,
+          },
+          1024: {
+            slidesPerView: 1,
+          },
+        }}
+      >
+        {/* Optional: Split items into multiple slides if needed */}
+        <SwiperSlide>
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+            {items.map((item) => (
+              <EachItem key={item._id} item={item} />
+            ))}
+          </div>
+        </SwiperSlide>
+      </Swiper>
     </div>
   );
 };
