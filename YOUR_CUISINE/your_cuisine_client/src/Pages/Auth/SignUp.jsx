@@ -55,26 +55,28 @@ const SignUp = () => {
         .catch((error) => console.log(error));
       navigate("/");
     });
-
     reset();
   };
 
   return (
     <>
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Sign up now!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
+      <div className="hero min-h-screen pt-15 px-4 sm:px-8">
+        <div className="flex flex-col">
+          {/* content */}
+          <div className="flex flex-col items-center justify-center p-4">
+            <div className="text-center">
+              <h1 className="text-4xl font-semibold text-[#bcaf87] mb-4">
+                “Join the experience.”
+              </h1>
+              <p className="text-[#bcaf87] text-base max-w-md">
+                “Join our family — delicious moments await.”
+              </p>
+            </div>
           </div>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <div className="card ring-2 ring-[#bcaf87]/50  w-full max-w-sm md:max-w-md lg:max-w-lg   p-6">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
-                <label className="label">
+                <label className="label text-[#bcaf87]">
                   <span className="label-text">Name</span>
                 </label>
                 <input
@@ -104,7 +106,7 @@ const SignUp = () => {
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text text-[#bcaf87]">Email</span>
                 </label>
                 <input
                   type="email"
@@ -119,7 +121,7 @@ const SignUp = () => {
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Password</span>
+                  <span className="label-text text-[#bcaf87]">Password</span>
                 </label>
                 <input
                   type="password"
@@ -130,7 +132,7 @@ const SignUp = () => {
                     // pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
                   })}
                   placeholder="password"
-                  className="input input-bordered"
+                  className="input input-bordered "
                 />
                 {errors.password?.type === "required" && (
                   <p className="text-red-600">Password is required</p>
@@ -150,7 +152,10 @@ const SignUp = () => {
                   </p>
                 )} */}
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
+                  <a
+                    href="#"
+                    className="label-text-alt link link-hover text-[#bcaf87]"
+                  >
                     Forgot password?
                   </a>
                 </label>
@@ -158,23 +163,27 @@ const SignUp = () => {
               <div className="flex">
                 <div className="form-control mt-6 pr-5">
                   <input
-                    className="btn btn-primary"
+                    className="btn bg-[#021a20] w-full hover:bg-[#bcaf87] hover:text-[#021a20] font-semibold border-0"
                     type="submit"
                     value="Sign Up"
                   />
                 </div>
                 <div className="form-control mt-6" onClick={() => reset()}>
                   <input
-                    className="btn btn-primary"
+                    className="btn bg-[#021a20] w-full hover:bg-[#bcaf87] hover:text-[#021a20] font-semibold border-0"
                     type="reset"
                     value="Reset"
                   />
                 </div>
               </div>
             </form>
+
             <p className="px-6">
               <small>
-                Already have an account <Link to="/login">Login</Link>
+                Already have an account{" "}
+                <Link to="/login" className="link text-[#bcaf87]">
+                  Login
+                </Link>
               </small>
             </p>
             <Social></Social>

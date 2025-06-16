@@ -41,39 +41,39 @@ const Order = () => {
         onSelect={(index) => setTabIndex(index)}
         className="m-10"
       >
-        <TabList className="flex justify-between gap-2 bg-[#bfb086] p-2 rounded-full shadow-inner">
+        <TabList className="flex justify-between gap-2 bg-[#bcaf87] p-2 rounded-full shadow-inner">
           <Tab
             className="cursor-pointer flex-1 text-center py-2 rounded-full transition-all duration-300 text-[#07252d] font-medium
-                         hover:bg-[#07252d] hover:text-[#bfb086] focus:outline-none"
+                         hover:bg-[#07252d] hover:text-[#bcaf87] focus:outline-none"
             selectedClassName="bg-[#07252d] text-[#bfb086] shadow-md"
           >
             Breakfast
           </Tab>
           <Tab
             className="cursor-pointer flex-1 text-center py-2 rounded-full transition-all duration-300 text-[#07252d] font-medium
-                         hover:bg-[#07252d] hover:text-[#bfb086] focus:outline-none"
-            selectedClassName="bg-[#07252d] text-[#bfb086] shadow-md"
+                         hover:bg-[#07252d] hover:text-[#bcaf87] focus:outline-none"
+            selectedClassName="bg-[#07252d] text-[#bcaf87] shadow-md"
           >
             Lunch
           </Tab>
           <Tab
             className="cursor-pointer flex-1 text-center py-2 rounded-full transition-all duration-300 text-[#07252d] font-medium
-                         hover:bg-[#07252d] hover:text-[#bfb086] focus:outline-none"
-            selectedClassName="bg-[#07252d] text-[#bfb086] shadow-md"
+                         hover:bg-[#07252d] hover:text-[#bcaf87] focus:outline-none"
+            selectedClassName="bg-[#07252d] text-[#bcaf87] shadow-md"
           >
             Dinner
           </Tab>
           <Tab
             className="cursor-pointer flex-1 text-center py-2 rounded-full transition-all duration-300 text-[#07252d] font-medium
-                         hover:bg-[#07252d] hover:text-[#bfb086] focus:outline-none"
-            selectedClassName="bg-[#07252d] text-[#bfb086] shadow-md"
+                         hover:bg-[#07252d] hover:text-[#bcaf87] focus:outline-none"
+            selectedClassName="bg-[#07252d] text-[#bcaf87] shadow-md"
           >
             Drinks
           </Tab>
           <Tab
             className="cursor-pointer flex-1 text-center py-2 rounded-full transition-all duration-300 text-[#07252d] font-medium
-                         hover:bg-[#07252d] hover:text-[#bfb086] focus:outline-none"
-            selectedClassName="bg-[#07252d] text-[#bfb086] shadow-md"
+                         hover:bg-[#07252d] hover:text-[#bcaf87] focus:outline-none"
+            selectedClassName="bg-[#07252d] text-[#bcaf87] shadow-md"
           >
             Dessert
           </Tab>

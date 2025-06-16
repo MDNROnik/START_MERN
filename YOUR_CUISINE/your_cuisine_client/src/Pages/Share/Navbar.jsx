@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import two from "../../assets/icon/logo-bg-black-removebg-preview.png";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
-
+import MainLogo from "./MainLogo";
 const Navbar = () => {
   const { user, signOutUser, loading, carts, setCarts } =
     useContext(AuthContext);
@@ -35,7 +35,10 @@ const Navbar = () => {
         <div className="navbar-start ">
           {/* Mobile View */}
           <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <label
+              tabIndex={0}
+              className="btn btn-ghost lg:hidden bg-[#bcaf87]"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -53,7 +56,7 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-black rounded-box w-52"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-[#07252d] text-[#bcaf87] rounded-box w-52"
             >
               <li>
                 <Link to="/menu">Our Menu</Link>
@@ -81,9 +84,18 @@ const Navbar = () => {
 
         <div className="navbar-center ">
           <Link className="flex items-center text-xl" to="/">
-            <div className="w-16 rounded-3xl">
-              <img alt={user?.displayName} src={two} />
-            </div>
+            {/* <div className="w-16 rounded-3xl ">
+              <img
+                className="animate-spin"
+                alt="LOGO"
+                src={two}
+                style={{
+                  animationDuration: "4s",
+                  animationTimingFunction: "linear",
+                }}
+              />
+            </div> */}
+            <MainLogo></MainLogo>
             <div> YOUR CUISINE </div>
           </Link>
         </div>

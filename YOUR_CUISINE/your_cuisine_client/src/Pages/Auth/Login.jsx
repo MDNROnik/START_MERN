@@ -1,16 +1,16 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  LoadCanvasTemplate,
-  loadCaptchaEnginge,
-  validateCaptcha,
-} from "react-simple-captcha";
+// import {
+//   LoadCanvasTemplate,
+//   loadCaptchaEnginge,
+//   validateCaptcha,
+// } from "react-simple-captcha";
 import Swal from "sweetalert2";
-import Social from "./Social"
 import { AuthContext } from "../../providers/AuthProvider";
+import Social from "./Social";
 
 const Login = () => {
-  const [disabled, setDisabled] = useState(true);
+  // const [disabled, setDisabled] = useState(true);
   const catRef = useRef();
   const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -19,9 +19,9 @@ const Login = () => {
   const preLocation = location.state?.preLocation?.pathname || "/";
   //   console.log("state in the location login page", location.state);
 
-  useEffect(() => {
-    loadCaptchaEnginge(6);
-  }, []);
+  // useEffect(() => {
+  //   loadCaptchaEnginge(6);
+  // }, []);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -45,34 +45,57 @@ const Login = () => {
     });
   };
 
-  const handleValidateCaptcha = () => {
-    const user_captcha_value = catRef.current.value;
+  // const handleValidateCaptcha = () => {
+  //   const user_captcha_value = catRef.current.value;
 
-    if (validateCaptcha(user_captcha_value)) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  };
+  //   if (validateCaptcha(user_captcha_value)) {
+  //     setDisabled(false);
+  //   } else {
+  //     setDisabled(true);
+  //   }
+  // };
+  // {/* <div className="form-control">
+  //               <label className="label "><LoadCanvasTemplate /></label>
+  //               <input
+  //                   onBlur={handleValidateCaptcha}
+  //                 type="text"
+  //                 name="captcha"
+  //                 ref={catRef}
+  //                 placeholder="type the captcha above"
+  //                 className="input input-bordered "
+  //               />
+  //               <div
+  //                 className="btn btn-neutral btn-dash text-white"
+  //                 onClick={handleValidateCaptcha}
+  //               >
+  //                 Check Captcha
+  //               </div>
+  //             </div> */}
 
   return (
     <>
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col md:flex-row-reverse">
-          <div className="text-center md:w-1/2 lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
+      <div className="hero min-h-screen pt-20 px-4 sm:px-8">
+        <div className="flex flex-col">
+          {/* content */}
+          <div className="flex flex-col items-center justify-center p-4">
+            <div className="text-center">
+              <h1 className="text-4xl font-semibold text-[#bcaf87] mb-4">
+                Welcome Back :)
+              </h1>
+              <p className="text-[#bcaf87] text-base max-w-md">
+                To keep connected with us please login with your personal
+                information by email address and password or user your google
+                account for login
+              </p>
+            </div>
           </div>
-          <div className="card md:w-1/2 max-w-sm shadow-2xl bg-base-100">
-            <form onSubmit={handleLogin} className="card-body">
-              <div className="form-control">
+          <div className="card ring-2 ring-[#bcaf87]/50  w-full max-w-sm md:max-w-md lg:max-w-lg   p-6">
+            <form onSubmit={handleLogin}>
+              <div className="form-control mb-4 ">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text text-[#bcaf87]">Email</span>
                 </label>
+                <br />
                 <input
                   type="email"
                   name="email"
@@ -80,10 +103,12 @@ const Login = () => {
                   className="input input-bordered"
                 />
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Password</span>
+
+              <div className="form-control mb-4">
+                <label className="label w-full">
+                  <span className="label-text text-[#bcaf87]">Password</span>
                 </label>
+                <br />
                 <input
                   type="password"
                   name="password"
@@ -91,46 +116,37 @@ const Login = () => {
                   className="input input-bordered"
                 />
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
+                  <a
+                    href="#"
+                    className="label-text-alt link link-hover text-[#bcaf87]"
+                  >
                     Forgot password?
                   </a>
                 </label>
               </div>
-              <div className="form-control">
-                <label className="label ">
-                  <LoadCanvasTemplate />
-                </label>
-                <input
-                  //   onBlur={handleValidateCaptcha}
-                  type="text"
-                  name="captcha"
-                  ref={catRef}
-                  placeholder="type the captcha above"
-                  className="input input-bordered "
-                />
-                <div
-                  className="btn btn-neutral btn-dash text-white"
-                  onClick={handleValidateCaptcha}
-                >
-                  Check Captcha
-                </div>
-              </div>
+
               <div className="form-control mt-6">
-                {/* TODO: apply disabled for re captcha */}
                 <input
-                  disabled={disabled}
-                  className="btn btn-primary"
+                  disabled={false}
+                  className="btn bg-[#021a20] w-full hover:bg-[#bcaf87] hover:text-[#021a20] font-semibold border-0"
                   type="submit"
                   value="Login"
                 />
               </div>
             </form>
-            <p className="px-6">
+
+            <p className="text-center mt-4">
               <small>
-                New Here? <Link to="/signup">Create an account</Link>{" "}
+                Don't Have An Account ?{" "}
+                <Link to="/signup" className="link text-[#bcaf87]">
+                  Create an account
+                </Link>
               </small>
             </p>
-            <Social></Social>
+
+            <div>
+              <Social />
+            </div>
           </div>
         </div>
       </div>

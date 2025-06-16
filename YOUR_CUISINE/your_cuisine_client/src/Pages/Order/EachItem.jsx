@@ -59,8 +59,8 @@ const EachItem = ({ item }) => {
     }
   };
   return (
-    <div className="relative bg-[#bfb086] rounded-2xl shadow-lg overflow-hidden w-full max-w-xs mx-auto transition hover:shadow-2xl  p-6 pt-16 flex flex-col items-center text-center space-y-4">
-      <p className="absolute top-4 right-4 bg-[#07252d] text-[#bfb086] text-sm font-semibold px-3 py-1 rounded-full shadow-md">
+    <div className="relative bg-[#bcaf87] rounded-2xl shadow-lg overflow-hidden w-full max-w-xs mx-auto transition hover:shadow-2xl  p-6 pt-16 flex flex-col items-center text-center space-y-4">
+      <p className="absolute top-4 right-4 bg-[#07252d] text-[#bcaf87] text-sm font-semibold px-3 py-1 rounded-full shadow-md">
         ${price.toFixed(2)}
       </p>
       <div className="w-40 h-20">
@@ -75,7 +75,7 @@ const EachItem = ({ item }) => {
 
       <button
         onClick={handleAddToCart}
-        className="mt-12 px-5 py-2 border-b-4 border-[#07252d] text-[#07252d] font-semibold uppercase hover:bg-[#07252d] hover:text-[#bfb086] transition duration-300 rounded-md"
+        className="mt-12 px-5 py-2 border-b-4 border-[#07252d] text-[#07252d] font-semibold uppercase hover:bg-[#07252d] hover:text-[#bcaf87] transition duration-300 rounded-md"
       >
         Add to Cart
       </button>

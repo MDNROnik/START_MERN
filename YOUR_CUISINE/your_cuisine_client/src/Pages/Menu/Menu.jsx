@@ -12,6 +12,7 @@ const Menu = () => {
     <div className="pt-15">
       <SectionTitle heading={"OUR MENU"}></SectionTitle>
       <Cover img={MenuIMG} title={"OUR MENU"}></Cover>
+      {/* todo popular or chef's choice */}
       <ShortMenu
         heading={"From Our Menu"}
         subHeading={"Popular Items"}

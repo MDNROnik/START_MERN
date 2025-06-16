@@ -16,7 +16,7 @@ const ShortMenu = ({ heading, subHeading, category, cate }) => {
   // console.log(cate);
 
   return (
-    <div className="bg-[#0a2a2f] text-white py-10 px-6 md:px-20">
+    <div className="bg-[#0a2a2f] text-[#bcaf87] py-10 px-6 md:px-20">
       <h2 className="text-3xl font-serif text-center mb-10 relative">
         <span className="border-t border-white w-12 inline-block mr-4 align-middle" />
         {category}

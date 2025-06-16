@@ -1,9 +1,8 @@
 import { useContext } from "react";
-import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Google from "../../assets/icon/google.png";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
-
 const SocialLogin = () => {
   const { signInWithGoogle } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
@@ -20,19 +19,18 @@ const SocialLogin = () => {
       };
 
       axiosPublic.post("/user", userInfo).then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         navigate("/");
       });
     });
   };
 
   return (
-    <div className="p-8">
+    <div className="">
       <div className="divider"></div>
       <div>
-        <button onClick={handleGoogleSignIn} className="btn">
-          <FaGoogle className="mr-2"></FaGoogle>
-          Google
+        <button onClick={handleGoogleSignIn} className="hover:cursor-pointer ">
+          <img src={Google} alt="" />
         </button>
       </div>
     </div>

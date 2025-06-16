@@ -1,5 +1,5 @@
-import two from "../../assets/icon/logo-bg-black-removebg-preview.png";
-
+// import two from "../../assets/icon/logo-bg-black-removebg-preview.png";
+import MainLogo from "./MainLogo";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -49,9 +49,13 @@ const Footer = () => {
           {/* Left: Social Icons */}
           <div className="flex flex-col items-center justify-center space-y-2">
             <div className="flex flex-col items-center text-xl" to="/">
-              <div className=" w-16">
-                <img alt={"logo"} src={two} />
-              </div>
+              {/* <div className=" w-16">
+                <img
+                  alt={"logo"}
+                  src={two}
+                />
+              </div> */}
+              <MainLogo />
               <div> YOUR CUISINE </div>
             </div>
             <div className="flex space-x-4 text-xl">
