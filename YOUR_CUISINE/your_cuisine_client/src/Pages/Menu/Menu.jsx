@@ -9,16 +9,16 @@ import SectionTitle from "../Share/SectionTitle";
 import ShortMenu from "../Share/ShortMenu";
 const Menu = () => {
   return (
-    <div className="pt-15">
-      <SectionTitle heading={"OUR MENU"}></SectionTitle>
+    <div className="pt-20">
       <Cover img={MenuIMG} title={"OUR MENU"}></Cover>
+      <SectionTitle heading={"OUR MENU"}></SectionTitle>
       {/* todo popular or chef's choice */}
-      <ShortMenu
+      {/* <ShortMenu
         heading={"From Our Menu"}
         subHeading={"Popular Items"}
         category={"breakfast"}
         cate={0}
-      ></ShortMenu>
+      ></ShortMenu> */}
 
       <Cover img={Breakfast} title={"Breakfast"}></Cover>
       <ShortMenu category={"breakfast"} cate={0}></ShortMenu>

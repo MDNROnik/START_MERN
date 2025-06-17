@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import orderImg from "../../assets/order/banner2.jpg";
+import OrderCover from "../../assets/order/OrderCover1.jpg";
 import useMenu from "../../Hooks/useMenu";
 import Cover from "../Share/Cover";
 import OrderCard from "./OrderCard";
@@ -35,7 +35,7 @@ const Order = () => {
 
   return (
     <div>
-      <Cover img={orderImg} title={"Place Your Order"}></Cover>
+      <Cover img={OrderCover} title={"Place Your Order"}></Cover>
       <Tabs
         defaultIndex={tabIndex}
         onSelect={(index) => setTabIndex(index)}

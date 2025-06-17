@@ -6,17 +6,17 @@ import SignUp from "../Pages/Auth/SignUp";
 import Home from "../Pages/Home/Home";
 import AddItems from "../Pages/MainPanel/Admin/AddItems";
 import AllUsers from "../Pages/MainPanel/Admin/AllUsers";
+import Dashboard from "../Pages/MainPanel/Admin/Dashboard";
 import ManageItems from "../Pages/MainPanel/Admin/ManageItems";
 import UpdateItem from "../Pages/MainPanel/Admin/UpdateItem";
 import Cart from "../Pages/MainPanel/User/Cart";
 import Payment from "../Pages/MainPanel/User/Payment";
+import PaymentHistory from "../Pages/MainPanel/User/PaymentHistory";
+import Profile from "../Pages/MainPanel/User/Profile";
 import Menu from "../Pages/Menu/Menu";
 import Order from "../Pages/Order/Order";
 import AdminRoutes from "../Pages/Share/AdminRoutes";
 import PrivateRoutes from "../Pages/Share/PrivateRoutes";
-import PaymentHistory from "../Pages/MainPanel/User/PaymentHistory";
-import Dashboard from "../Pages/MainPanel/Admin/Dashboard";
-import Profile from "../Pages/MainPanel/User/Profile";
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -110,7 +110,7 @@ const Routes = createBrowserRouter([
         loader: ({ params }) =>
           // http://localhost:5000
           // fetch(`https://your-cuisine-server.vercel.app/menu/${params.id}`),
-          fetch(`http://localhost:5000/menu/${params.id}`),
+        fetch(`http://localhost:5000/menu/${params.id}`),
       },
     ],
   },

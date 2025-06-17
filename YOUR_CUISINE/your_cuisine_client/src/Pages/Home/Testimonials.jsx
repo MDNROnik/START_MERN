@@ -13,18 +13,18 @@ const Tesimonials = () => {
   const [reviews, setReviews] = useState([]);
   const axiosPublic = useAxiosPublic();
   useEffect(() => {
-    // axiosPublic.get("/review").then((res) => {
-    //   setReviews(res.data);
-    // });
-    fetch("/reviews.json")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch");
-        }
-        return response.json();
-      })
-      .then((data) => setReviews(data))
-      .catch((error) => console.error("Error loading JSON:", error));
+    axiosPublic.get("/review").then((res) => {
+      setReviews(res.data);
+    });
+    // fetch("/reviews.json")
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error("Failed to fetch");
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((data) => setReviews(data))
+    //   .catch((error) => console.error("Error loading JSON:", error));
   }, []);
   console.log(reviews);
 

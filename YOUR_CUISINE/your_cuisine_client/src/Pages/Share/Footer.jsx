@@ -37,7 +37,7 @@ const Footer = () => {
             className="w-full border border-[#07252d] p-2 h-28 focus:outline-none text-black"
           />
 
-          <button class="bg-transparent text-[#07252d] w-full items-center hover:bg-[#07252d] text-black font-semibold hover:text-[#bcaf87] py-2 px-4 border border-black hover:border-transparent rounded">
+          <button className="bg-transparent text-[#07252d] w-full items-center hover:bg-[#07252d] text-black font-semibold hover:text-[#bcaf87] py-2 px-4 border border-black hover:border-transparent rounded">
             SEND MESSAGE
           </button>
         </form>

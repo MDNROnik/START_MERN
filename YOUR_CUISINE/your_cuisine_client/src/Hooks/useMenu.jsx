@@ -6,7 +6,7 @@ const useMenu = () => {
   const axiosPublic = useAxiosPublic();
   useEffect(() => {
     axiosPublic.get("/menu").then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setMenu(res.data);
     });
     setLoading(false);
