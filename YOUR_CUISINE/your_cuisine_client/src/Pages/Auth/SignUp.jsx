@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import axios from "axios";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,6 +8,8 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
 import Social from "./Social";
 
+const apiKeyForImgbb = import.meta.env.VITE_apiKeyForImgbb;
+const image_api_imgbb_url = `https://api.imgbb.com/1/upload?key=${apiKeyForImgbb}`;
 const SignUp = () => {
   const axiosUser = useAxiosPublic();
   const {
@@ -18,15 +21,21 @@ const SignUp = () => {
   const { createNewUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // console.log(data);
-
+    const imageFile = { image: data.image[0] };
+    const res = await axios.post(image_api_imgbb_url, imageFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    // res.data.data.display_url
     createNewUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
       console.log(loggedUser);
       const profile = {
         displayName: data.name,
-        photoURL: data.photoURL,
+        photoURL: res.data.data.display_url,
       };
       updateUserProfile(profile)
         .then((result) => {
@@ -34,7 +43,7 @@ const SignUp = () => {
           const userInfo = {
             name: data.name,
             email: data.email,
-            photoURL: data.photoURL,
+            photoURL: res.data.data.display_url,
             uid: loggedUser.uid,
           };
           axiosUser.post("/user", userInfo).then((res) => {
@@ -90,7 +99,8 @@ const SignUp = () => {
                   <span className="text-red-600">Name is required</span>
                 )}
               </div>
-              <div className="form-control">
+              {/* //photoURL */}
+              {/* <div className="form-control">
                 <label className="label">
                   <span className="label-text">Photo URL</span>
                 </label>
@@ -103,7 +113,19 @@ const SignUp = () => {
                 {errors.photoURL && (
                   <span className="text-red-600">Photo URL is required</span>
                 )}
+              </div> */}
+
+              <div className="form-control w-full ">
+                <label className="label  text-[#bcaf87]">
+                  <span className="label-text">User Photo</span>
+                </label>
+                <input
+                  {...register("image", { required: true })}
+                  type="file"
+                  className="file-input w-full max-w-xs"
+                />
               </div>
+
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-[#bcaf87]">Email</span>

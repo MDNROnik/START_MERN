@@ -75,14 +75,14 @@ const HomeCategory = () => {
           </div>
 
           {/* Right: Description */}
-          <div className=" top-1/2 md:w-1/3 md:h-1/3 text-sm md:text-base leading-relaxed">
+          <div className="text-[#bcaf87] top-1/2 md:w-1/3 md:h-1/3 text-sm md:text-base leading-relaxed">
             <p className="mb-6 mt-8">
               We take pride in providing exceptional service, ensuring your
               every need is met with a smile. Our dedicated staff is here to
               guide you through our menu, recommend pairings, and make your
               dining experience truly exceptional.
             </p>
-            <button className="border border-white px-6 py-2 hover:bg-white hover:text-[#0f2b33] transition">
+            <button className="border border-[#bcaf87] px-6 py-2 hover:bg-[#bcaf87]  hover:text-[#07252d] transition">
               <Link to="/menu">Our Menu</Link>
             </button>
           </div>

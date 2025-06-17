@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { FaBowlFood } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import two from "../../assets/icon/logo-bg-black-removebg-preview.png";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
 import MainLogo from "./MainLogo";
@@ -84,19 +83,11 @@ const Navbar = () => {
 
         <div className="navbar-center ">
           <Link className="flex items-center text-xl" to="/">
-            {/* <div className="w-16 rounded-3xl ">
-              <img
-                className="animate-spin"
-                alt="LOGO"
-                src={two}
-                style={{
-                  animationDuration: "4s",
-                  animationTimingFunction: "linear",
-                }}
-              />
-            </div> */}
             <MainLogo></MainLogo>
-            <div> YOUR CUISINE </div>
+            <div className="hover:bg-[#07252d] p-2 rounded transition duration-300">
+              {" "}
+              YOUR CUISINE{" "}
+            </div>
           </Link>
         </div>
 
@@ -107,11 +98,11 @@ const Navbar = () => {
             <div className="flex items-center gap-2">
               <Link
                 to="/mainpanel/cart"
-                className="bg-black/30 p-2 rounded-2xl"
+                className="bg-[#07252d] p-2 rounded-2xl"
               >
-                <button className="flex items-center gap-2">
-                  <FaBowlFood className="mr-2"></FaBowlFood>
-                  <div className="badge badge-secondary">
+                <button className="flex items-center  gap-2 cursor-pointer">
+                  <FaBowlFood className="mr-2 text-[#bcaf87]"></FaBowlFood>
+                  <div className="badge bg-[#bcaf87] text-[#07252d]">
                     +{carts?.length || 0}
                   </div>
                 </button>

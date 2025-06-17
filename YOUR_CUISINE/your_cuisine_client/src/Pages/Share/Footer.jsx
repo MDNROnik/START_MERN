@@ -18,36 +18,36 @@ const Footer = () => {
         ></iframe>
       </div>
       <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 bg-white shadow-lg p-10 w-[90%] md:w-1/2 z-20 rounded-lg">
-        <h2 className="text-center text-3xl font-serif text-orange-500 mb-6">
-          Contact <span className="text-gray-800">Us</span>
+        <h2 className="text-center text-3xl font-serif text-[#07252d] mb-6">
+          Contact Us
         </h2>
         <form className="space-y-4">
           <input
             type="text"
             placeholder="Name*"
-            className="w-full border-b p-2 focus:outline-none text-black"
+            className="w-full border-b border-[#07252d] p-2 focus:outline-none text-black"
           />
           <input
             type="email"
             placeholder="E-mail*"
-            className="w-full border-b p-2 focus:outline-none text-black"
+            className="w-full border-b border-[#07252d] p-2 focus:outline-none text-black"
           />
           <textarea
             placeholder="Message*"
-            className="w-full border p-2 h-28 focus:outline-none text-black"
+            className="w-full border border-[#07252d] p-2 h-28 focus:outline-none text-black"
           />
 
-          <button class="bg-transparent w-full items-center hover:bg-black text-black font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded">
+          <button class="bg-transparent text-[#07252d] w-full items-center hover:bg-[#07252d] text-black font-semibold hover:text-[#bcaf87] py-2 px-4 border border-black hover:border-transparent rounded">
             SEND MESSAGE
           </button>
         </form>
       </div>
 
       {/* Footer */}
-      <footer className="w-full  pt-70 md:pt-10 lg:pt-10 text-white p-2 mt-10">
+      <footer className=" bg-[#07252d] w-full  pt-70 md:pt-10 lg:pt-10 text-[#bcaf87] p-2 mt-10">
         <div className="flex flex-col md:flex-row  justify-between items-center md:items-center gap-8">
           {/* Left: Social Icons */}
-          <div className="flex flex-col items-center justify-center space-y-2">
+          <div className=" flex flex-col items-center justify-center space-y-2">
             <div className="flex flex-col items-center text-xl" to="/">
               {/* <div className=" w-16">
                 <img
@@ -83,7 +83,7 @@ const Footer = () => {
             <p> support@yourname.com</p>
           </div>
         </div>
-        <div className="pt-5 lg:pt-25 md:pt-25 left-0 w-full text-center text-gray-500 text-sm">
+        <div className="pt-5 lg:pt-25 md:pt-25 left-0 w-full text-center text-[#bcaf87] text-sm">
           © {currentYear} YOUR CUISINE BY ONIK. ALL RIGHTS RESERVED
         </div>
       </footer>
