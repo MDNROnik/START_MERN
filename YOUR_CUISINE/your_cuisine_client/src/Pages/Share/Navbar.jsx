@@ -93,7 +93,7 @@ const Navbar = () => {
 
         {/* User Profile and Logout */}
 
-        <div className="navbar-end text-lg">
+        <div className="navbar-end text-lg ">
           {user ? (
             <div className="flex items-center gap-2">
               <Link
@@ -119,14 +119,17 @@ const Navbar = () => {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                  className="menu menu-sm bg-[#07252d] text-[#bcaf87] dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow"
                 >
                   {user ? (
                     <div className="flex flex-col items-center gap-2">
-                      <li>{user?.displayName}</li>
+                      <li>
+                        <Link to="/mainpanel/profile">{user?.displayName}</Link>
+                      </li>
+
+                      {/* to="/mainpanel/profile" */}
                       <li>
                         <Link
-                          className="text-base"
                           onClick={() => {
                             handleSignOut();
                           }}

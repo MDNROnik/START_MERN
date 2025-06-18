@@ -1,9 +1,7 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import {
   FaAd,
   FaBook,
-  FaCalendar,
   FaEnvelope,
   FaHome,
   FaList,
@@ -13,8 +11,8 @@ import {
   FaUtensils,
 } from "react-icons/fa";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { AuthContext } from "../providers/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { AuthContext } from "../providers/AuthProvider";
 const MainPanel = () => {
   const { carts, user, signOutUser } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
@@ -48,7 +46,7 @@ const MainPanel = () => {
       });
   }, [isAdmin]);
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className=" mx-auto">
       {/* <Navbar></Navbar> */}
       <div className="flex">
         {/* mainpanel side bar */}
@@ -95,12 +93,7 @@ const MainPanel = () => {
                     User Home
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink to="/mainpanel/history">
-                    <FaCalendar></FaCalendar>
-                    Not History
-                  </NavLink>
-                </li>
+
                 <li>
                   <NavLink to="/mainpanel/cart">
                     <FaShoppingCart></FaShoppingCart>
@@ -111,12 +104,6 @@ const MainPanel = () => {
                   <NavLink to="/mainpanel/review">
                     <FaAd></FaAd>
                     Add a Review
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/mainpanel/paymentHistory">
-                    <FaList></FaList>
-                    Real Payment History
                   </NavLink>
                 </li>
               </>

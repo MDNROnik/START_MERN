@@ -9,6 +9,7 @@ import AllUsers from "../Pages/MainPanel/Admin/AllUsers";
 import Dashboard from "../Pages/MainPanel/Admin/Dashboard";
 import ManageItems from "../Pages/MainPanel/Admin/ManageItems";
 import UpdateItem from "../Pages/MainPanel/Admin/UpdateItem";
+import AddAReview from "../Pages/MainPanel/User/AddAReview";
 import Cart from "../Pages/MainPanel/User/Cart";
 import Payment from "../Pages/MainPanel/User/Payment";
 import PaymentHistory from "../Pages/MainPanel/User/PaymentHistory";
@@ -69,6 +70,10 @@ const Routes = createBrowserRouter([
         element: <Profile></Profile>,
       },
       {
+        path: "review",
+        element: <AddAReview></AddAReview>,
+      },
+      {
         path: "users",
         element: (
           <AdminRoutes>
@@ -110,7 +115,7 @@ const Routes = createBrowserRouter([
         loader: ({ params }) =>
           // http://localhost:5000
           // fetch(`https://your-cuisine-server.vercel.app/menu/${params.id}`),
-        fetch(`http://localhost:5000/menu/${params.id}`),
+          fetch(`http://localhost:5000/menu/${params.id}`),
       },
     ],
   },

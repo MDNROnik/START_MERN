@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../providers/AuthProvider";
-import { format } from 'date-fns';
 
 const PaymentHistory = () => {
   const [payments, setPayments] = useState([]);
@@ -19,7 +18,7 @@ const PaymentHistory = () => {
       })
       .then((res) => {
         console.log(res.data);
-        
+
         setPayments(res.data);
       })
       .catch((err) => {
@@ -42,14 +41,13 @@ const PaymentHistory = () => {
             </tr>
           </thead>
           <tbody>
-
             {payments.map((payment, index) => (
               <tr key={payment._id}>
                 <th>{index + 1}</th>
                 <td>${payment.totalPrice}</td>
                 <td>{payment._id}</td>
                 <td>{payment.carts.length}</td>
-                <td>{new Date(payment.date).toLocaleDateString('en-GB')}</td>
+                <td>{new Date(payment.date).toLocaleDateString("en-GB")}</td>
               </tr>
             ))}
           </tbody>

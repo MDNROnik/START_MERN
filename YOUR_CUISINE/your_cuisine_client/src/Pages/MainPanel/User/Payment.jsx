@@ -27,6 +27,7 @@ const Payment = () => {
       uid: user.uid,
       totalPrice: totalPrice,
       carts: carts,
+      status: "On The Queue",
     };
 
     await axiosPublic
