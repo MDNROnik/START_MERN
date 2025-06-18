@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
 
       if (currentUser) {
-        console.log(currentUser);
+        // console.log(currentUser);
 
         const userInfo = {
           uid: currentUser.uid,
@@ -70,7 +70,7 @@ const AuthProvider = ({ children }) => {
                 },
               })
               .then((res) => {
-                console.log(res.data.role);
+                // console.log(res.data.role);
                 if (res.data?.role == "admin") {
                   currentUser.admin = "admin";
                 } else {

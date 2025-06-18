@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useContext } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
