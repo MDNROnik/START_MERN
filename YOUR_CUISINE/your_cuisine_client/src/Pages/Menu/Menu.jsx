@@ -20,19 +20,30 @@ const Menu = () => {
         cate={0}
       ></ShortMenu> */}
 
-      <Cover img={Breakfast} title={"Breakfast"}></Cover>
+      <div className="px-20">
+        <Cover img={Breakfast} title={"Breakfast"}></Cover>
+      </div>
       <ShortMenu category={"breakfast"} cate={0}></ShortMenu>
 
-      <Cover img={Lunch} title={"Lunch"}></Cover>
+      <div className="px-20">
+        <Cover img={Lunch} title={"Lunch"}></Cover>
+      </div>
       <ShortMenu category={"lunch"} cate={1}></ShortMenu>
 
-      <Cover img={Dinner} title={"Dinner"}></Cover>
+      <div className="px-20">
+        {" "}
+        <Cover img={Dinner} title={"Dinner"}></Cover>
+      </div>
       <ShortMenu category={"dinner"} cate={2}></ShortMenu>
 
-      <Cover img={Drinks} title={"Drinks"}></Cover>
+      <div className="px-20">
+        <Cover img={Drinks} title={"Drinks"}></Cover>
+      </div>
       <ShortMenu category={"drinks"} cate={3}></ShortMenu>
 
-      <Cover img={Desert} title={"Desert"}></Cover>
+      <div className="px-20">
+        <Cover img={Desert} title={"Desert"}></Cover>
+      </div>
       <ShortMenu category={"dessert"} cate={4}></ShortMenu>
     </div>
   );
