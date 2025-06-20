@@ -16,7 +16,7 @@ import { AuthContext } from "../providers/AuthProvider";
 const MainPanel = () => {
   const { carts, user, signOutUser } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [role, setRole] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     // currentUser.uid
@@ -27,12 +27,9 @@ const MainPanel = () => {
         },
       })
       .then((res) => {
-        console.log(res.data.role);
-        if (res.data?.role == "admin") {
-          setIsAdmin(true);
-          // console.log("2222");
-        } else {
-          // console.log("1111");
+        // console.log(res.data.role);
+        if (res?.data?.role) {
+          setRole(res?.data?.role);
         }
       })
       .catch((err) => {
@@ -44,7 +41,7 @@ const MainPanel = () => {
           navigate("/login");
         }
       });
-  }, [isAdmin]);
+  }, [role]);
   return (
     <div className=" mx-auto">
       {/* <Navbar></Navbar> */}
@@ -52,7 +49,7 @@ const MainPanel = () => {
         {/* mainpanel side bar */}
         <div className="w-64 min-h-screen bg-white text-black">
           <ul className="menu p-4">
-            {isAdmin ? (
+            {role === "admin" ? (
               <>
                 <li>
                   <NavLink to="/mainpanel/dashboard">
@@ -82,6 +79,24 @@ const MainPanel = () => {
                   <NavLink to="/mainpanel/users">
                     <FaUsers></FaUsers>
                     All Users
+                  </NavLink>
+                </li>
+              </>
+            ) : role === "cafe" ? (
+              <>
+                <li>
+                  <NavLink to="/mainpanel/cafe-dashboard">
+                    <FaHome /> Cafe Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/mainpanel/cafe-orders">
+                    <FaList /> Cafe Orders
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/mainpanel/cafe-menu">
+                    <FaUtensils /> Manage Cafe Menu
                   </NavLink>
                 </li>
               </>

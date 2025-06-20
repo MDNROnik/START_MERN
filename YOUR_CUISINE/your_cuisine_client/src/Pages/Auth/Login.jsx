@@ -11,12 +11,10 @@ import Social from "./Social";
 
 const Login = () => {
   // const [disabled, setDisabled] = useState(true);
-  const catRef = useRef();
   const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const preLocation = location.state?.preLocation?.pathname || "/";
   //   console.log("state in the location login page", location.state);
 
   // useEffect(() => {

@@ -6,26 +6,7 @@ const Profile = () => {
   const [payments, setPayments] = useState([]);
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
-  const userT = {
-    name: "Rahim Uddin",
-    email: "rahim@example.com",
-    address: "123 Main Street, Dhaka",
-    profileImage: "https://i.pravatar.cc/150?img=3",
-    recentOrders: [
-      {
-        id: 1,
-        item: "Chicken Biryani",
-        date: "June 16, 2025",
-        status: "Delivered",
-      },
-      {
-        id: 2,
-        item: "Beef Burger",
-        date: "June 14, 2025",
-        status: "On the way",
-      },
-    ],
-  };
+
   useEffect(() => {
     if (!user?.uid) return; // wait until user is loaded
 
@@ -36,7 +17,7 @@ const Profile = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
 
         setPayments(res.data);
       })

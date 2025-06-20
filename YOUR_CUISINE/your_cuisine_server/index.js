@@ -44,14 +44,14 @@ async function run() {
     const verifyToken=(req,res, next)=>{
       console.log("inside verifyToken ",  req.headers);
       if(!req.headers.jwttoken){
-        console.log('NOT FOUND TOKEN');
+        // console.log('NOT FOUND TOKEN');
         
         return res.status(401).send({
           message : 'forbidden-access'
         })
       }
       else{
-        console.log('FOUND TOKEN');
+        // console.log('FOUND TOKEN');
         const token = req.headers.jwttoken.split(' ')[1];
         // console.log(token);
         
@@ -62,16 +62,16 @@ async function run() {
           })
         }
         else{
-          console.log('TOKEN HAVE VALUE');
+          // console.log('TOKEN HAVE VALUE');
           jwt.verify(token, process.env.JWT_SECRET, (error, decode)=>{
             if(error){
-              console.log('TOKEN ERROR');
+              // console.log('TOKEN ERROR');
               return res.status(401).send({
                 message : 'forbidden-access'
               })
             }
             else{
-              console.log('TOKEN VALID');
+              // console.log('TOKEN VALID');
               req.decode = decode;
               next();
             }
@@ -144,12 +144,12 @@ async function run() {
       res.send(result);
     })
 
-    //get a user
+    //get a user by id
     app.get('/user/:id' ,verifyToken , async(req, res)=>{
       const id = req.params.id;
       // res.send({mes:"IN"})
       // check requent uid and token uid are same or not
-      console.log("in route ", id);
+      // console.log("in route ", id);
       
       if(id == req.decode.uid){
         const query = { uid: id };
@@ -250,6 +250,8 @@ async function run() {
 
     // get review
     app.get('/review', async(req, res)=>{
+      // console.log('review');
+      
       const result = await reviewCollection.find().toArray();
       res.send(result);
     })
@@ -285,14 +287,14 @@ async function run() {
     app.post('/payment',verifyToken, async(req, res)=>{
       const paymentInfo = req.body;
       const result = await paymentCollection.insertOne(paymentInfo);
-      console.log(paymentInfo);
+      // console.log(paymentInfo);
       
       const query = {_id:{
         $in:paymentInfo.carts.map(cart=>  new mongodb.ObjectId(cart._id) )
       }};
-      console.log(query);
+      // console.log(query);
       const deleteResult = await cartCollection.deleteMany(query);
-      console.log(deleteResult);
+      // console.log(deleteResult);
       
       res.send({result, deleteResult});
     })

@@ -26,7 +26,7 @@ const Tesimonials = () => {
     //   .then((data) => setReviews(data))
     //   .catch((error) => console.error("Error loading JSON:", error));
   }, []);
-  console.log(reviews);
+  // console.log(reviews);
 
   return (
     // <section>

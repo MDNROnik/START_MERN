@@ -33,7 +33,8 @@ const Navbar = () => {
     signOutUser();
     setCarts([]);
   };
-  // console.log(show);
+  // console.log(user);
+  
   const displayedItems = carts?.slice(0, 3) || [];
   return (
     <>

@@ -45,6 +45,7 @@ const SignUp = () => {
             email: data.email,
             photoURL: res.data.data.display_url,
             uid: loggedUser.uid,
+            role: "user",
           };
           axiosUser.post("/user", userInfo).then((res) => {
             if (res.data.insertedId) {
@@ -99,21 +100,6 @@ const SignUp = () => {
                   <span className="text-red-600">Name is required</span>
                 )}
               </div>
-              {/* //photoURL */}
-              {/* <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Photo URL</span>
-                </label>
-                <input
-                  type="text"
-                  {...register("photoURL", { required: true })}
-                  placeholder="Photo URL"
-                  className="input input-bordered"
-                />
-                {errors.photoURL && (
-                  <span className="text-red-600">Photo URL is required</span>
-                )}
-              </div> */}
 
               <div className="form-control w-full ">
                 <label className="label  text-[#bcaf87]">
