@@ -1,15 +1,17 @@
 import { useContext, useEffect, useState } from "react";
-import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../providers/AuthProvider";
 
 const AllUsers = () => {
-  const { signOutUser } = useContext(AuthContext);
+  const { user, signOutUser } = useContext(AuthContext);
   const [users, setUser] = useState([]);
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
+  // console.log(user);
+
   useEffect(() => {
     axiosPublic
       .get("/user", {
@@ -18,7 +20,7 @@ const AllUsers = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setUser(res.data);
       })
       .catch((err) => {
@@ -33,26 +35,60 @@ const AllUsers = () => {
       });
   }, []);
 
-  const handleMakeAdmin = (user) => {
-    console.log(user);
+  // const handleMakeAdmin = (user) => {
+  //   console.log(user);
 
-    axiosPublic.patch(`/user/admin/${user._id}`).then((res) => {
-      console.log(res.data);
-      if (res.data.modifiedCount > 0) {
-        setUser((prevUsers) =>
-          prevUsers.map((u) =>
-            u._id === user._id ? { ...u, role: "admin" } : u
-          )
-        );
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: `${user.name} is an Admin Now!`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    });
+  // axiosPublic.patch(`/user/admin/${user._id}`).then((res) => {
+  //   console.log(res.data);
+  //   if (res.data.modifiedCount > 0) {
+  //     setUser((prevUsers) =>
+  //       prevUsers.map((u) =>
+  //         u._id === user._id ? { ...u, role: "admin" } : u
+  //       )
+  //     );
+  //     Swal.fire({
+  //       position: "top-end",
+  //       icon: "success",
+  //       title: `${user.name} is an Admin Now!`,
+  //       showConfirmButton: false,
+  //       timer: 1500,
+  //     });
+  //   }
+  // });
+  // };
+
+  const handleRoleChange = (userId, newRole) => {
+    // Optional: confirm before changing
+    console.log(userId, newRole);
+    console.log(users);
+    
+
+    const confirmChange = window.confirm(
+      `Are you sure you want to change role to "${newRole}"?`
+    );
+    if (!confirmChange) return;
+
+    axiosPublic
+      .patch(`/user/admin/${userId._id}`, {
+        role: newRole, // newRole is the value from <select>
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.modifiedCount > 0) {
+          setUser((prevUsers) =>
+            prevUsers.map((u) =>
+              u._id === userId._id ? { ...u, role: newRole } : u
+            )
+          );
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${userId.name}'s role changed to ${newRole}`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
   };
 
   const handleDeleteUser = (id) => {
@@ -125,7 +161,7 @@ const AllUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>
-                  {user.role === "admin" ? (
+                  {/* {user.role === "admin" ? (
                     "Admin"
                   ) : (
                     <button
@@ -137,7 +173,21 @@ const AllUsers = () => {
                                         text-2xl"
                       ></FaUsers>
                     </button>
-                  )}
+                  )} */}
+
+                  <select
+                    value={user.role}
+                    onChange={(e) => handleRoleChange(user, e.target.value)}
+                    className="select select-bordered w-full max-w-xs"
+                  >
+                    <option value="supreme">Supreme</option>
+                    <option value="admin">Admin</option>
+                    <option value="chef">Chef</option>
+                    <option value="staff">Staff</option>
+                    <option value="delivery man">Delivery Man</option>
+                    <option value="waiter">Waiter</option>
+                    <option value="user">User</option>
+                  </select>
                 </td>
                 <td>
                   <button

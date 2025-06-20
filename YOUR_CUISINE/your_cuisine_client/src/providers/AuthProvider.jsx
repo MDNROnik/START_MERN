@@ -35,6 +35,8 @@ const AuthProvider = ({ children }) => {
   };
 
   const signOutUser = () => {
+    // console.log("HELLO");
+
     setLoading(true);
     return signOut(auth);
   };
@@ -45,48 +47,75 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     setLoading(true);
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      // console.log("user inside auth state change", currentUser);
-      setUser(currentUser);
-
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      console.log("user inside auth state change", currentUser);
       if (currentUser) {
-        // console.log(currentUser);
-
         const userInfo = {
           uid: currentUser.uid,
           email: currentUser.email,
           displayName: currentUser.displayName,
         };
-        axiosPublic.post("/jwt", userInfo).then((res) => {
-          // console.log(res);
+        console.log("in for current account");
+        // setLoading(true);
+        // axiosPublic.post("/jwt", userInfo).then((res) => {
+        //   console.log(res);
+        //   if (res.data.token) {
+        //     localStorage.setItem("jwttoken", res.data.token);
+        //     // setLoading(false);
+        //     // for admin
+        //     axiosPublic
+        //       .get(`/user/${currentUser.uid}`, {
+        //         headers: {
+        //           jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
+        //         },
+        //       })
+        //       .then((res) => {
+        //         currentUser.nowData = res.data;
+        //         setUser(currentUser);
+        //         // console.log(loading);
+        //         // setLoading(false);
+        //       })
+        //       .catch((err) => {
+        //         console.log(err.status);
+        //       });
+
+        //     setLoading(false);
+        //   }
+        // });
+        // setLoading(false);
+        try {
+          const res = await axiosPublic.post("/jwt", userInfo);
+          console.log(res);
           if (res.data.token) {
             localStorage.setItem("jwttoken", res.data.token);
             // setLoading(false);
             // for admin
-            axiosPublic
-              .get(`/user/${currentUser.uid}`, {
-                headers: {
-                  jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
-                },
-              })
-              .then((res) => {
-                // console.log(res.data.role);
-                if (res.data?.role == "admin") {
-                  currentUser.admin = "admin";
-                } else {
-                  currentUser.admin = "user";
+            try {
+              const userRes = await axiosPublic.get(
+                `/user/${currentUser.uid}`,
+                {
+                  headers: {
+                    jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
+                  },
                 }
-              })
-              .catch((err) => {
-                console.log(err.status);
-              });
-
+              );
+              currentUser.nowData = userRes.data;
+              setUser(currentUser);
+              // console.log(loading);
+              // setLoading(false);
+            } catch (err) {
+              console.log(err.status);
+            }
             setLoading(false);
           }
-        });
-        // setLoading(false);
+        } catch (err) {
+          console.log(err);
+          setLoading(false);
+        }
       } else {
         localStorage.removeItem("jwttoken");
+        // console.log("problem is here");
+        // setUser(null);
         setLoading(false);
       }
     });

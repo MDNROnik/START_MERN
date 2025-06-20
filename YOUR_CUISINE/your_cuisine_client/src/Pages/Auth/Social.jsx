@@ -20,7 +20,7 @@ const SocialLogin = () => {
       };
 
       axiosPublic.post("/user", userInfo).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         navigate("/");
       });
     });

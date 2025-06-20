@@ -1,16 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { FaBowlFood } from "react-icons/fa6";
 import { RiLogoutCircleLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
 import MainLogo from "./MainLogo";
 
 const Navbar = () => {
-  const { user, signOutUser, loading, carts, setCarts } =
+  const { user, signOutUser, loading, carts, setCarts, setUser } =
     useContext(AuthContext);
   // console.log(user);
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
 
@@ -34,7 +35,7 @@ const Navbar = () => {
     setCarts([]);
   };
   // console.log(user);
-  
+
   const displayedItems = carts?.slice(0, 3) || [];
   return (
     <>
@@ -201,6 +202,7 @@ const Navbar = () => {
                         <Link
                           onClick={() => {
                             handleSignOut();
+                            setUser(null);
                           }}
                         >
                           <RiLogoutCircleLine className="w-10 h-10" />

@@ -172,11 +172,13 @@ async function run() {
 
     //update user as admin or remove as admin
     app.patch('/user/admin/:id', async(req, res)=>{
-      const id = req.params.id;
+      const id = req.params.id;      
+      const { role } = req.body; // get new role from request
+      // console.log(role, id);
       const filter = { _id: new mongodb.ObjectId(id) };
       const updatedDoc ={
         $set:{
-          role:'admin'
+          role:role
         }
       }
       const result = await userCollection.updateOne(filter, updatedDoc);
