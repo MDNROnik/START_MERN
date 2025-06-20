@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import {
   FaAd,
-  FaBook,
-  FaEnvelope,
   FaHome,
   FaList,
   FaSearch,
@@ -69,12 +67,7 @@ const MainPanel = () => {
                     Manage Items
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink to="/mainpanel/bookings">
-                    <FaBook></FaBook>
-                    Manage Bookings
-                  </NavLink>
-                </li>
+
                 <li>
                   <NavLink to="/mainpanel/users">
                     <FaUsers></FaUsers>
@@ -132,15 +125,9 @@ const MainPanel = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/order/salad">
+              <NavLink to="/menu">
                 <FaSearch></FaSearch>
                 Menu
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/order/contact">
-                <FaEnvelope></FaEnvelope>
-                Contact
               </NavLink>
             </li>
           </ul>

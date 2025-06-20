@@ -1,11 +1,15 @@
 import { format } from "date-fns";
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../providers/AuthProvider";
+
 const Profile = () => {
+  const navigate = useNavigate();
+
   const [payments, setPayments] = useState([]);
   const axiosPublic = useAxiosPublic();
-  const { user } = useContext(AuthContext);
+  const { user, signOutUser, setCarts, setUser } = useContext(AuthContext);
 
   useEffect(() => {
     if (!user?.uid) return; // wait until user is loaded
@@ -25,7 +29,12 @@ const Profile = () => {
         console.log("Error fetching payments:", err);
       });
   }, [user?.uid, axiosPublic]);
-
+  const handleSignOut = () => {
+    signOutUser();
+    setCarts([]);
+    setUser(null);
+    navigate("/");
+  };
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-2xl shadow-lg mt-10">
       <div className="flex flex-col md:flex-row items-center gap-6">
@@ -60,6 +69,7 @@ const Profile = () => {
                   {/* {order.date} */}
                   {format(order.date, "MMMM dd, yyyy")}
                 </p>
+                <p className="text-sm text-gray-500">Payment ID: {order._id}</p>
               </div>
               <span
                 className={`px-3 py-1 text-sm rounded-full
@@ -86,7 +96,12 @@ const Profile = () => {
       </div>
 
       <div className="mt-8 flex justify-end">
-        <button className="bg-red-500 text-white px-5 py-2 rounded-xl hover:bg-red-600 transition">
+        <button
+          onClick={() => {
+            handleSignOut();
+          }}
+          className="bg-red-500 cursor-pointer text-white px-5 py-2 rounded-xl hover:bg-red-600 transition"
+        >
           Logout
         </button>
       </div>

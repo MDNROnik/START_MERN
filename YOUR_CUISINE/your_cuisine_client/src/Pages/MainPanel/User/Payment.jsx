@@ -50,7 +50,7 @@ const Payment = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate("/mainpanel/paymentHistory");
+          navigate("/mainpanel/profile");
         }
       })
       .catch((err) => {
