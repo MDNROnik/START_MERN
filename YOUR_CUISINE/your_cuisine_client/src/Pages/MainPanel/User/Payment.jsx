@@ -28,6 +28,7 @@ const Payment = () => {
       totalPrice: totalPrice,
       carts: carts,
       status: "On The Queue",
+      address: value.address,
     };
 
     await axiosPublic
@@ -123,6 +124,18 @@ const Payment = () => {
               type="number"
               placeholder="Enter Your CVC Number"
               {...register("cvc", { required: true })}
+              required
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div className="form-control w-full my-6">
+            <label className="label">
+              <span className="label-text">Address</span>
+            </label>
+            <input
+              type="test"
+              placeholder="Enter Your Full Address"
+              {...register("address", { required: true })}
               required
               className="input input-bordered w-full"
             />

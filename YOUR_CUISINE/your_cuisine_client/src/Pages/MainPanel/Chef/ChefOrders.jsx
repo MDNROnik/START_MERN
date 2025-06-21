@@ -33,8 +33,13 @@ const ChefOrders = () => {
     navigate("/");
   };
   console.log(payments);
-  
-  return <div>{payments.length}</div>;
+
+  return (
+    <div>
+      <h1>TOTAL ORDER IN THE QUEUES</h1>
+      <div>{payments.length}</div>
+    </div>
+  );
 };
 
 export default ChefOrders;
