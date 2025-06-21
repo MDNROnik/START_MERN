@@ -34,7 +34,7 @@ const Navbar = () => {
     signOutUser();
     setCarts([]);
   };
-  // console.log(user);
+  console.log(user);
 
   const displayedItems = carts?.slice(0, 3) || [];
   return (
@@ -193,9 +193,28 @@ const Navbar = () => {
                 >
                   {user ? (
                     <div className="flex flex-col items-center gap-2">
-                      <li>
+                      {/* <li>
                         <Link to="/mainpanel/profile">{user?.displayName}</Link>
-                      </li>
+                      </li> */}
+                      {user?.nowData?.role === "admin" ? (
+                        <li>
+                          <Link to="/mainpanel/dashboard">
+                            {user?.displayName}
+                          </Link>
+                        </li>
+                      ) : user?.nowData?.role === "chef" ? (
+                        <li>
+                          <Link to="/mainpanel/chef-home">
+                            {user?.displayName}
+                          </Link>
+                        </li>
+                      ) : (
+                        <li>
+                          <Link to="/mainpanel/profile">
+                            {user?.displayName}
+                          </Link>
+                        </li>
+                      )}
 
                       {/* to="/mainpanel/profile" */}
                       <li>

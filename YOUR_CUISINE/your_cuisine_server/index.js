@@ -285,6 +285,14 @@ async function run() {
     })
 
 
+    // get payment data
+    app.get('/payment',verifyToken, async(req, res)=>{
+      console.log("in");
+      
+      const result = await paymentCollection.find().toArray();
+      res.json(result);
+    })
+
     // post payment
     app.post('/payment',verifyToken, async(req, res)=>{
       const paymentInfo = req.body;
