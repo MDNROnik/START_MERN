@@ -9,6 +9,8 @@ import AllUsers from "../Pages/MainPanel/Admin/AllUsers";
 import Dashboard from "../Pages/MainPanel/Admin/Dashboard";
 import ManageItems from "../Pages/MainPanel/Admin/ManageItems";
 import UpdateItem from "../Pages/MainPanel/Admin/UpdateItem";
+import ChefHome from "../Pages/MainPanel/Chef/ChefHome";
+import ChefOrders from "../Pages/MainPanel/Chef/ChefOrders";
 import AddAReview from "../Pages/MainPanel/User/AddAReview";
 import Cart from "../Pages/MainPanel/User/Cart";
 import Payment from "../Pages/MainPanel/User/Payment";
@@ -114,8 +116,16 @@ const Routes = createBrowserRouter([
         ),
         loader: ({ params }) =>
           // http://localhost:5000
-          // fetch(`https://your-cuisine-server.vercel.app/menu/${params.id}`),
-          fetch(`http://localhost:5000/menu/${params.id}`),
+          fetch(`https://your-cuisine-server.vercel.app/menu/${params.id}`),
+        // fetch(`http://localhost:5000/menu/${params.id}`),
+      },
+      {
+        path: "chef-home",
+        element: <ChefHome></ChefHome>,
+      },
+      {
+        path: "chef-orders",
+        element: <ChefOrders></ChefOrders>,
       },
     ],
   },

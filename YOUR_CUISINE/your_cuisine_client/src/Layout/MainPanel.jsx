@@ -25,7 +25,7 @@ const MainPanel = () => {
         },
       })
       .then((res) => {
-        // console.log(res.data.role);
+        console.log(res.data.role);
         if (res?.data?.role) {
           setRole(res?.data?.role);
         }
@@ -75,21 +75,16 @@ const MainPanel = () => {
                   </NavLink>
                 </li>
               </>
-            ) : role === "cafe" ? (
+            ) : role === "chef" ? (
               <>
                 <li>
-                  <NavLink to="/mainpanel/cafe-dashboard">
-                    <FaHome /> Cafe Home
+                  <NavLink to="/mainpanel/chef-home">
+                    <FaHome /> Chef Home
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/mainpanel/cafe-orders">
-                    <FaList /> Cafe Orders
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/mainpanel/cafe-menu">
-                    <FaUtensils /> Manage Cafe Menu
+                  <NavLink to="/mainpanel/chef-orders">
+                    <FaList /> Chef Orders
                   </NavLink>
                 </li>
               </>
