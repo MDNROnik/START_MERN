@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import {
   FaAd,
+  FaBars,
   FaHome,
   FaList,
-  FaSearch,
   FaShoppingCart,
   FaUsers,
   FaUtensils,
@@ -16,6 +16,8 @@ const MainPanel = () => {
   const axiosPublic = useAxiosPublic();
   const [role, setRole] = useState("");
   const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   useEffect(() => {
     // currentUser.uid
     axiosPublic
@@ -40,99 +42,122 @@ const MainPanel = () => {
         }
       });
   }, [role]);
+
+  const renderNavLinks = () => {
+    if (role === "admin") {
+      return (
+        <>
+          <NavItem
+            to="/mainpanel/dashboard"
+            icon={<FaHome />}
+            label="Admin Home"
+          />
+          <NavItem
+            to="/mainpanel/addItems"
+            icon={<FaUtensils />}
+            label="Add Items"
+          />
+          <NavItem
+            to="/mainpanel/manageItems"
+            icon={<FaList />}
+            label="Manage Items"
+          />
+          <NavItem to="/mainpanel/users" icon={<FaUsers />} label="All Users" />
+        </>
+      );
+    } else if (role === "chef") {
+      return (
+        <>
+          <NavItem
+            to="/mainpanel/chef-home"
+            icon={<FaHome />}
+            label="Chef Home"
+          />
+          <NavItem
+            to="/mainpanel/chef-orders"
+            icon={<FaList />}
+            label="Chef Orders"
+          />
+        </>
+      );
+    } else {
+      return (
+        <>
+          <NavItem
+            to="/mainpanel/profile"
+            icon={<FaHome />}
+            label="User Home"
+          />
+          <NavItem
+            to="/mainpanel/cart"
+            icon={<FaShoppingCart />}
+            label={`My Cart (${carts.length})`}
+          />
+          <NavItem
+            to="/mainpanel/review"
+            icon={<FaAd />}
+            label="Add a Review"
+          />
+        </>
+      );
+    }
+  };
+
+  // Reusable nav item component
+  const NavItem = ({ to, icon, label }) => (
+    <div>
+      <NavLink
+        to={to}
+        className={({ isActive }) =>
+          `flex items-center gap-3 px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
+            isActive
+              ? "bg-[#07252d]  text-[#bcaf87]"
+              : "hover:bg-[#807144] text-[#07252d] hover:text-white"
+          }`
+        }
+      >
+        <span className="text-lg">{icon}</span>
+        <span>{label}</span>
+      </NavLink>
+    </div>
+  );
   return (
-    <div className=" mx-auto">
-      {/* <Navbar></Navbar> */}
-      <div className="flex">
-        {/* mainpanel side bar */}
-        <div className="w-64 min-h-screen bg-white text-black">
-          <ul className="menu p-4">
-            {role === "admin" ? (
-              <>
-                <li>
-                  <NavLink to="/mainpanel/dashboard">
-                    <FaHome></FaHome>
-                    Admin Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/mainpanel/addItems">
-                    <FaUtensils></FaUtensils>
-                    Add Items
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/mainpanel/manageItems">
-                    <FaList></FaList>
-                    Manage Items
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink to="/mainpanel/users">
-                    <FaUsers></FaUsers>
-                    All Users
-                  </NavLink>
-                </li>
-              </>
-            ) : role === "chef" ? (
-              <>
-                <li>
-                  <NavLink to="/mainpanel/chef-home">
-                    <FaHome /> Chef Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/mainpanel/chef-orders">
-                    <FaList /> Chef Orders
-                  </NavLink>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <NavLink to="/mainpanel/profile">
-                    <FaHome></FaHome>
-                    User Home
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink to="/mainpanel/cart">
-                    <FaShoppingCart></FaShoppingCart>
-                    My Cart ({carts.length})
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/mainpanel/review">
-                    <FaAd></FaAd>
-                    Add a Review
-                  </NavLink>
-                </li>
-              </>
-            )}
-            {/* shared nav links */}
-            <div className="divider"></div>
-            <li>
-              <NavLink to="/">
-                <FaHome></FaHome>
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/menu">
-                <FaSearch></FaSearch>
-                Menu
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-        {/* mainpanel content */}
-        <div className="flex-1 p-8">
-          <Outlet></Outlet>
-        </div>
+    <div className="flex min-h-screen bg-[#07252d] text-[#bcaf87]">
+      {/* Top bar for mobile */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-30 bg-[#bcaf87] shadow-md flex items-center justify-between px-4 py-3">
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="text-gray-700"
+        >
+          <FaBars size={20} />
+        </button>
+        <h1 className="font-semibold text-lg">Main Panel</h1>
       </div>
-      {/* <Footer></Footer> */}
+
+      {/* Sidebar */}
+
+      <aside
+        className={`fixed z-20 top-0 left-0 h-full w-64 min-w-64 max-w-64 flex-shrink-0 transform bg-[#bcaf87] text-[#07252d] shadow-lg transition-transform duration-300 ease-in-out
+    ${sidebarOpen ? "translate-x-0 mt-14" : "-translate-x-full"}
+    md:translate-x-0 md:relative md:flex md:flex-col`}
+      >
+        <div className="hidden md:block text-xl font-bold px-6 py-4 border-b">
+          Main Panel
+        </div>
+        <div className="border-b">
+          <nav className="flex-1 p-4 space-y-1">{renderNavLinks()}</nav>
+        </div>
+        <div className="p-4">
+          <NavItem to="/" icon={<FaHome />} label="Home" />
+        </div>
+      </aside>
+
+      {/* Main content */}
+      <main className=" h-full w-full p-5">
+        <div className=" p-6 min-h-[calc(100vh-5rem)]">
+          <Outlet />
+        </div>
+      </main>
     </div>
   );
 };
