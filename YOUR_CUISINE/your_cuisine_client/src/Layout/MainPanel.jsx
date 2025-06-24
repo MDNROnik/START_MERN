@@ -124,14 +124,14 @@ const MainPanel = () => {
   return (
     <div className="flex min-h-screen bg-[#07252d] text-[#bcaf87]">
       {/* Top bar for mobile */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-30 bg-[#bcaf87] shadow-md flex items-center justify-between px-4 py-3">
+      <div className="md:hidden fixed top-0 left-0 right-0 z-30 bg-[#bcaf87]  flex items-center justify-between px-4 py-4">
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
           className="text-gray-700"
         >
           <FaBars size={20} />
         </button>
-        <h1 className="font-semibold text-lg">Main Panel</h1>
+        <h1 className="font-semibold text-lg text-[#07252d]">Main Panel</h1>
       </div>
 
       {/* Sidebar */}

@@ -1,5 +1,5 @@
 import { FaBook, FaDollarSign, FaUsers } from "react-icons/fa";
-// import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, PieChart, Pie, Legend } from 'recharts';
+import { MdOutlinePayment } from "react-icons/md";
 import { useContext, useEffect, useState } from "react";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../providers/AuthProvider";
@@ -19,60 +19,52 @@ const Dashboard = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setStats(res.data);
       });
   }, []);
 
   return (
-    <div>
-      <h2 className="text-3xl">
-        <span>Hello </span>
-        {user?.displayName ? user.displayName : "Back"}
+    <div className="px-4 sm:px-6 lg:px-8">
+      <h2 className="text-2xl sm:text-3xl font-semibold pt-6 pb-6 text-center ">
+        Welcome {user?.displayName || "Back"}
       </h2>
-      <div className="stats shadow">
-        <div className="stat">
-          <div className="stat-figure text-secondary">
-            <FaDollarSign className="text-3xl"></FaDollarSign>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-[#07252d]">
+        {/* Revenue */}
+        <div className="bg-[#bcaf87] backdrop-blur-lg border  rounded-xl p-5 shadow-sm text-center hover:shadow-md transition">
+          <div className="flex justify-center mb-2">
+            <FaDollarSign className="text-[#07252d] text-3xl" />
           </div>
-          <div className="stat-title">Revenue</div>
-          <div className="stat-value">${stats.revenue}</div>
+          <h3 className="text-sm  font-medium mb-1">Revenue</h3>
+          <p className="text-2xl font-bold ">${stats.revenue}</p>
         </div>
 
-        <div className="stat">
-          <div className="stat-figure text-secondary">
-            <FaUsers className="text-3xl"></FaUsers>
+        {/* Users */}
+        <div className="bg-[#bcaf87] backdrop-blur-lg border  rounded-xl p-5 shadow-sm text-center hover:shadow-md transition">
+          <div className="flex justify-center mb-2">
+            <FaUsers className=" text-3xl" />
           </div>
-          <div className="stat-title">Users</div>
-          <div className="stat-value">{stats.users}</div>
+          <h3 className="text-sm  font-medium mb-1">Users</h3>
+          <p className="text-2xl font-bold ">{stats.users}</p>
         </div>
 
-        <div className="stat">
-          <div className="stat-figure text-secondary">
-            <FaBook className="text-3xl"></FaBook>
+        {/* Menu Items */}
+        <div className="bg-[#bcaf87] backdrop-blur-lg border  rounded-xl p-5 shadow-sm text-center hover:shadow-md transition">
+          <div className="flex justify-center mb-2">
+            <FaBook className=" text-3xl" />
           </div>
-          <div className="stat-title">Menu Items</div>
-          <div className="stat-value">{stats.menus}</div>
+          <h3 className="text-sm  font-medium mb-1">Menu Items</h3>
+          <p className="text-2xl font-bold ">{stats.menus}</p>
         </div>
 
-        <div className="stat">
-          <div className="stat-figure text-secondary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block w-8 h-8 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-              ></path>
-            </svg>
+        {/* Payments */}
+        <div className="bg-[#bcaf87] backdrop-blur-lg border  rounded-xl p-5 shadow-sm text-center hover:shadow-md transition">
+          <div className="flex justify-center mb-2">
+            <MdOutlinePayment className=" text-3xl" />
           </div>
-          <div className="stat-title">Payments</div>
-          <div className="stat-value">{stats.payments}</div>
+          <h3 className="text-sm  font-medium mb-1">Payments</h3>
+          <p className="text-2xl font-bold ">{stats.payments}</p>
         </div>
       </div>
     </div>
