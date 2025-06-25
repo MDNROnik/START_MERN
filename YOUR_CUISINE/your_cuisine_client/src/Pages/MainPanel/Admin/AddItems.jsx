@@ -206,7 +206,7 @@ const AddItems = () => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 rounded-3xl shadow-lg p-8 border border-[#bcaf87] text-[#bcaf87]"
+        className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 rounded-xl shadow-lg p-8 border border-[#bcaf87] text-[#bcaf87]"
       >
         {/* Left side - text fields */}
         <div className="space-y-6">

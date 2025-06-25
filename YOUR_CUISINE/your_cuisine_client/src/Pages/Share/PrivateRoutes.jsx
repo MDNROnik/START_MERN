@@ -5,7 +5,7 @@ const PrivateRoutes = ({ children }) => {
   const { user, loading, signOutUser } = useContext(AuthContext);
   // console.log(" private logout ",loading, user);
 
-  console.log("in private router", user, loading);
+  // console.log("in private router", user, loading);
 
   if (loading) {
     return <progress className="progress w-56"></progress>;
