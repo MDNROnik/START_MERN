@@ -162,17 +162,37 @@ const MainPanel = () => {
     // </div>
     <div className="min-h-screen bg-[#07252d] text-">
       {/* Top Navigation Bar */}
-      <nav className="w-full bg-[#bcaf87] text-[#07252d] shadow-md px-2 py-3 flex flex-col sm:flex-row  items-start sm:items-center justify-between gap-4 border-b sm:border-b-0 sm:border-r border-[#07252d]">
-        <div className="flex items-center ">
+      <nav className="w-full bg-[#bcaf87] text-[#07252d] shadow-md px-4 py-3 flex items-center justify-between border-b sm:border-b-0 sm:border-r border-[#07252d]">
+        {/* Left: Logo + Heading */}
+        <div className="flex items-center gap-2">
           <img className="w-10 h-10" alt="LOGO" src={two} />
-          <h1 className="text-xl font-bold ">Main Panel</h1>
+          <h1 className="text-xl font-bold">Main Panel</h1>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-2 md:gap-4 sm:items-center">
-          <div className="border-b md:border-b-0 md:border-r border-[#07252d]">
-            {renderNavLinks()}
+        {/* Right: Dropdown on small, nav on medium+ */}
+        <div className="flex items-center gap-2">
+          {/* Small screens: dropdown */}
+          <div className="sm:hidden">
+            <details className="relative">
+              <summary className="cursor-pointer bg-[#07252d] text-[#bcaf87] px-4 py-2 rounded-md">
+                Menu
+              </summary>
+              <div className="absolute right-0 mt-2 w-100 rounded-md shadow-md border border-[#07252d] bg-[#bcaf87] text-[#07252d] z-50 p-2 space-y-1 ">
+                {renderNavLinks()}
+                <div className="border-[#07252d] border-t">
+                  <NavItem to="/" icon={<FaHome />} label="Home" />
+                </div>
+              </div>
+            </details>
           </div>
-          <NavItem to="/" icon={<FaHome />} label="Home" />
+
+          {/* Medium and up: inline nav */}
+          <div className="hidden sm:flex sm:flex-row sm:items-center ">
+            {renderNavLinks()}
+            <div className="border-[#07252d] border-l">
+              <NavItem to="/" icon={<FaHome />} label="Home" />
+            </div>
+          </div>
         </div>
       </nav>
 
