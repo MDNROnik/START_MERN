@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../providers/AuthProvider";
-
 const categories = [
   "supreme",
   "admin",
@@ -48,7 +47,7 @@ const AllUsers = () => {
   const handleRoleChange = (userId, newRole) => {
     // Optional: confirm before changing
     console.log(userId, newRole);
-    console.log(users);
+    // console.log(users);
     console.log(user);
 
     if (user.nowData.role !== "admin" && user.nowData.role !== "supreme") {
@@ -64,7 +63,7 @@ const AllUsers = () => {
 
     if (
       user.nowData.role === "admin" &&
-      (newRole === "admin" || newRole === "supreme")
+      (userId.uid === user.uid || newRole === "admin" || newRole === "supreme")
     ) {
       Swal.fire({
         position: "top-end",
@@ -270,7 +269,7 @@ const AllUsers = () => {
         </div>
 
         {/* User list */}
-        <div className="p-4 rounded-lg shadow w-full">
+        {/* <div className="p-4 rounded-lg shadow w-full">
           <h2 className="text-2xl font-semibold mb-4">
             Users in role: {selectedCategory}
           </h2>
@@ -324,6 +323,77 @@ const AllUsers = () => {
             </div>
           ) : (
             <p className="text-gray-500">No users found for this role.</p>
+          )}
+        </div> */}
+        {/* User list */}
+        <div className="p-4 rounded-lg shadow w-full bg-[#bcaf87] text-[#07252d]">
+          <h2 className="text-2xl font-semibold mb-4">
+            Users in role:{" "}
+            <span className="text-[#07252d]">{selectedCategory}</span>
+          </h2>
+
+          {filteredUsers.length > 0 ? (
+            <div className="overflow-x-auto">
+              <table className="table w-full text-sm text-left ">
+                <thead className="text-xs text-[#bcaf87] uppercase bg-[#07252d]">
+                  <tr>
+                    <th className="px-4 py-3">#</th>
+                    <th className="px-4 py-3">Name</th>
+                    <th className="px-4 py-3">Email</th>
+                    <th className="px-4 py-3">Role</th>
+                    <th className="px-4 py-3">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredUsers.map((current, index) => (
+                    <tr
+                      key={current._id}
+                      className="border-b hover:bg-[#07252d] hover:text-[#bcaf87] transition duration-150"
+                    >
+                      <th className="px-4 py-2 font-medium text-gray-800">
+                        {index + 1}
+                      </th>
+                      <td className="px-4 py-2">{current.name}</td>
+                      <td className="px-4 py-2">{current.email}</td>
+                      <td className="px-4 py-2">
+                        <select
+                          value={current.role}
+                          onChange={(e) =>
+                            handleRoleChange(current, e.target.value)
+                          }
+                          className="w-full max-w-xs px-3 py-2 rounded-md border border-[#bcaf87] bg-[#07252d] text-[#bcaf87] 
+             focus:outline-none focus:ring-2 focus:ring-[#bcaf87] focus:border-[#bcaf87] transition"
+                        >
+                          {categories.map((roleOption) => (
+                            <option
+                              key={roleOption}
+                              value={roleOption}
+                              style={{
+                                ":hover": { backgroundColor: "#bcaf87" },
+                              }}
+                            >
+                              {roleOption.charAt(0).toUpperCase() +
+                                roleOption.slice(1)}
+                            </option>
+                          ))}
+                        </select>
+                      </td>
+
+                      <td className="px-4 py-2">
+                        <button
+                          onClick={() => handleDeleteUser(current._id)}
+                          className="btn btn-ghost btn-sm"
+                        >
+                          <FaTrashAlt className="text-red-600" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p className="text-bg-[#07252d]">No users found for this role.</p>
           )}
         </div>
       </div>
