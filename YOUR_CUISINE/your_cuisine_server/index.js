@@ -101,7 +101,7 @@ async function run() {
     app.post('/jwt', async(req, res)=>{
       const user  = req.body;
       // console.log(user);
-      const token = jwt.sign(user, process.env.JWT_SECRET, {expiresIn: '6h'});
+      const token = jwt.sign(user, process.env.JWT_SECRET, {expiresIn: '1h'});
       // res.cookie('token', token, {
       //   httpOnly: true, 
       //   secure: false, // set true for production https

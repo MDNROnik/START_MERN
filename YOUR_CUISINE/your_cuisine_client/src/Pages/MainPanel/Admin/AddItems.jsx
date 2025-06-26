@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaUtensils } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import SectionTitle from "../../Share/SectionTitle";
@@ -24,7 +25,7 @@ const AddItems = () => {
   const [selected, setSelected] = useState(categories[0]);
 
   const { register, handleSubmit, reset, watch } = useForm();
-
+  const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   // const onSubmit = async (data) => {
   //   // console.log(data);
@@ -103,6 +104,7 @@ const AddItems = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          navigate("/mainpanel/manageItems");
         }
       }
     } catch (error) {

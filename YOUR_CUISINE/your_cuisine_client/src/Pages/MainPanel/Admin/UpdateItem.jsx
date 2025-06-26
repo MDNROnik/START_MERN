@@ -1,8 +1,10 @@
 import { Listbox } from "@headlessui/react";
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaUtensils } from "react-icons/fa";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import SectionTitle from "../../Share/SectionTitle";
 
@@ -17,11 +19,6 @@ const UpdateItem = () => {
   const [selected, setSelected] = useState(categories[index]);
   const [updateImage, setUpdateImage] = useState(false);
 
-  // useEffect(() => {
-
-  //   console.log(selected);
-  // }, [selected]);
-
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const { register, handleSubmit, watch } = useForm();
@@ -29,45 +26,58 @@ const UpdateItem = () => {
   const onSubmit = async (data) => {
     console.log(data);
     // image upload to imgbb and then get an url
-
-    const imageFile = { image: data.image[0] };
-    const res = await axios.post(image_api_imgbb_url, imageFile, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
-    if (res.data.success) {
-      // now send the menu item data to the server with the image url
-      const menuItem = {
-        name: data.name,
-        category: data.category,
-        price: parseFloat(data.price),
-        recipe: data.recipe,
-        image: res.data.data.display_url,
-      };
-      //
-      await axiosPublic
-        .patch(`/menu/${_id}`, menuItem, {
-          headers: {
-            jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-
-          if (res.data.modifiedCount) {
-            console.log("admin modify a menu to the database");
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: `${data.name} is modify to the menu.`,
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            navigate("/mainpanel/manageItems");
-          }
+    let res,
+      tempImg = image;
+    if (data.image.length === 1) {
+      const imageFile = { image: data.image[0] };
+      res = await axios.post(image_api_imgbb_url, imageFile, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+      tempImg = res.data.data.display_url;
+      if (!res.data.success) {
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Image is not uploaded",
+          showConfirmButton: false,
+          timer: 1500,
         });
+        navigate("/mainpanel/manageItems");
+      }
     }
+
+    // now send the menu item data to the server with the image url
+    const menuItem = {
+      name: data.name,
+      category: data.category,
+      price: parseFloat(data.price),
+      recipe: data.recipe,
+      image: tempImg,
+    };
+    //
+    await axiosPublic
+      .patch(`/menu/${_id}`, menuItem, {
+        headers: {
+          jwttoken: `Bearer ${localStorage.getItem("jwttoken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+
+        if (res.data.modifiedCount) {
+          console.log("admin modify a menu to the database");
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${data.name} is modify to the menu.`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/mainpanel/manageItems");
+        }
+      });
     // console.log("with image url", res.data);
   };
   const capitalizeFirst = (str) => {
