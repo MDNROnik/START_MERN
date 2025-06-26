@@ -177,7 +177,7 @@ const UpdateItem = () => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 rounded-xl shadow-lg p-8 border border-[#bcaf87] text-[#bcaf87]"
+        className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 rounded-xl shadow-lg p-8 border bg-[#bcaf87] text-[#07252d]"
       >
         {/* Left side - text fields */}
         <div className="space-y-6">
@@ -190,12 +190,12 @@ const UpdateItem = () => {
               defaultValue={name}
               {...register("name", { required: true })}
               placeholder="e.g. Chicken Alfredo"
-              className="w-full border border-[#bcaf87] rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#bcaf87]"
+              className="w-full border bg-[#07252d] text-[#bcaf87] rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#bcaf87]"
             />
           </div>
 
           <div className="w-full">
-            <label className="block text-sm font-semibold mb-1 text-[#bcaf87]">
+            <label className="block text-sm font-semibold mb-1 text-[#07252d]">
               Category*
             </label>
             <Listbox value={selected} onChange={setSelected}>
@@ -231,7 +231,7 @@ const UpdateItem = () => {
               type="number"
               {...register("price", { required: true })}
               placeholder="e.g. 12.99"
-              className="w-full border border-[#bcaf87] rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#bcaf87]"
+              className="w-full border bg-[#07252d] text-[#bcaf87] rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#bcaf87]"
             />
           </div>
 
@@ -244,7 +244,7 @@ const UpdateItem = () => {
               {...register("recipe")}
               rows={4}
               placeholder="Enter detailed description of the recipe..."
-              className="w-full border border-[#bcaf87] rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#bcaf87] resize-none"
+              className="w-full border bg-[#07252d] text-[#bcaf87] rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#bcaf87] resize-none"
             ></textarea>
           </div>
         </div>
@@ -259,7 +259,7 @@ const UpdateItem = () => {
               type="file"
               {...register("image")}
               accept="image/*"
-              className="file-input w-full max-w-xs border border-[#bcaf87] text-sm bg-[#07252d] text-[#bcaf87] placeholder-gray-400 file:bg-[#bcaf87] file:text-[#07252d] file:border-0 file:px-4 file:py-2 file:rounded-md"
+              className="file-input w-full max-w-xs border  text-sm bg-[#07252d] text-[#bcaf87] placeholder-gray-400 file:bg-[#bcaf87] file:text-[#07252d] file:border-0 file:px-4 file:py-2 file:rounded-md"
             />
           </div>
 
@@ -280,7 +280,7 @@ const UpdateItem = () => {
           <div className="flex items-center justify-start pt-6">
             <button
               type="submit"
-              className="inline-flex items-center gap-2 bg-[#bcaf87] hover:bg-[#07252d] text-[#07252d] hover:text-[#bcaf87] hover:border font-semibold px-6 py-3 rounded-lg shadow transition duration-200"
+              className="inline-flex items-center gap-2 bg-[#07252d] text-[#bcaf87] hover:bg-[#bcaf87] hover:text-[#07252d] border border-[#07252d] hover:border-black font-semibold px-6 py-3 rounded-lg shadow transition duration-200"
             >
               <FaUtensils className="text-lg" />
               Update Item

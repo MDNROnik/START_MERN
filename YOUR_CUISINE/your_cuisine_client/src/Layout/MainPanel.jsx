@@ -160,7 +160,7 @@ const MainPanel = () => {
     //     </div>
     //   </main>
     // </div>
-    <div className="min-h-screen bg-[#07252d] text-[#bcaf87]">
+    <div className="min-h-screen bg-[#07252d] text-">
       {/* Top Navigation Bar */}
       <nav className="w-full bg-[#bcaf87] text-[#07252d] shadow-md px-2 py-3 flex flex-col sm:flex-row  items-start sm:items-center justify-between gap-4 border-b sm:border-b-0 sm:border-r border-[#07252d]">
         <div className="flex items-center ">
