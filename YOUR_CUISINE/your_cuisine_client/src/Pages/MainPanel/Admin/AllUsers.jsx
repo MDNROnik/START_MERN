@@ -156,91 +156,44 @@ const AllUsers = () => {
   );
 
   return (
-    // <div>
-    //   <div className="flex justify-evenly my-4">
-    //     <h2 className="text-3xl">All Users and Members</h2>
-    //     {/* <h2 className="text-3xl">Total Users: {users.length}</h2> */}
+    // <div className="px-4 py-6">
+    //   <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+    //     <h2 className="text-3xl font-semibold">All Users and Members</h2>
     //   </div>
-    //   {/* <div className="overflow-x-auto">
-    //     <table className="table table-zebra w-full">
-    //       <thead>
-    //         <tr>
-    //           <th></th>
-    //           <th>Name</th>
-    //           <th>Email</th>
-    //           <th>Role</th>
-    //           <th>Action</th>
-    //         </tr>
-    //       </thead>
-    //       <tbody>
-    //         {users.map((current, index) => (
-    //           <tr key={current._id}>
-    //             <th>{index + 1}</th>
-    //             <td>{current.name}</td>
-    //             <td>{current.email}</td>
-    //             <td>
-    //               <select
-    //                 value={current.role}
-    //                 onChange={(e) => handleRoleChange(current, e.target.value)}
-    //                 className="select select-bordered w-full max-w-xs"
-    //               >
-    //                 <option value="supreme">Supreme</option>
-    //                 <option value="admin">Admin</option>
-    //                 <option value="chef">Chef</option>
-    //                 <option value="staff">Staff</option>
-    //                 <option value="delivery man">Delivery Man</option>
-    //                 <option value="waiter">Waiter</option>
-    //                 <option value="user">User</option>
-    //               </select>
-    //             </td>
-    //             <td>
-    //               <button
-    //                 onClick={() => handleDeleteUser(user._id)}
-    //                 className="btn btn-ghost btn-lg"
-    //               >
-    //                 <FaTrashAlt className="text-red-600"></FaTrashAlt>
-    //               </button>
-    //             </td>
-    //           </tr>
+
+    //   <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+    //     {/* Sidebar */}
+    //     <div className=" p-4 rounded-lg">
+    //       <h2 className="text-xl font-bold mb-4">Roles</h2>
+    //       <ul className="space-y-2">
+    //         {categories.map((category) => (
+    //           <li
+    //             key={category}
+    //             className={`cursor-pointer p-2 rounded-lg text-center md:text-left ${
+    //               selectedCategory === category
+    //                 ? "bg-blue-500 text-white"
+    //                 : "hover:bg-blue-100"
+    //             }`}
+    //             onClick={() => setSelectedCategory(category)}
+    //           >
+    //             {category.charAt(0).toUpperCase() + category.slice(1)}
+    //           </li>
     //         ))}
-    //       </tbody>
-    //     </table>
-    //   </div> */}
+    //       </ul>
+    //     </div>
 
-    //   {/* test */}
-    //   <div>
-    //     <div className="grid grid-cols-4 h-screen">
-    //       {/* Sidebar */}
-    //       <div className="col-span-1 bg-black p-4">
-    //         <h2 className="text-xl font-bold mb-4">Roles</h2>
-    //         <ul className="space-y-2">
-    //           {categories.map((category) => (
-    //             <li
-    //               key={category}
-    //               className={`cursor-pointer p-2 rounded-lg ${
-    //                 selectedCategory === category
-    //                   ? "bg-blue-500 text-white"
-    //                   : "hover:bg-blue-100"
-    //               }`}
-    //               onClick={() => setSelectedCategory(category)}
-    //             >
-    //               {category.charAt(0).toUpperCase() + category.slice(1)}
-    //             </li>
-    //           ))}
-    //         </ul>
-    //       </div>
+    //     {/* User list */}
+    //     <div className="md:col-span-3 p-4  rounded-lg shadow">
+    //       <h2 className="text-2xl font-semibold mb-4">
+    //         Users in role: {selectedCategory}
+    //       </h2>
 
-    //       {/* User list */}
-    //       <div className="col-span-3 p-6">
-    //         <h2 className="text-2xl font-semibold mb-4">
-    //           Users in role: {selectedCategory}
-    //         </h2>
-    //         {/* head */}
+    //       {filteredUsers.length > 0 ? (
     //         <div className="overflow-x-auto">
-    //           <table className="table table-zebra w-full">
+    //           <table className="table w-full">
     //             <thead>
     //               <tr>
-    //                 <th></th>
+    //                 <th>#</th>
     //                 <th>Name</th>
     //                 <th>Email</th>
     //                 <th>Role</th>
@@ -248,71 +201,65 @@ const AllUsers = () => {
     //               </tr>
     //             </thead>
     //             <tbody>
-    //               {filteredUsers.length > 0 ? (
-    //                 <ul className="space-y-3">
-    //                   {filteredUsers.map((current, index) => (
-    //                     <tr key={current._id}>
-    //                       <th>{index + 1}</th>
-    //                       <td>{current.name}</td>
-    //                       <td>{current.email}</td>
-    //                       <td>
-    //                         <select
-    //                           value={current.role}
-    //                           onChange={(e) =>
-    //                             handleRoleChange(current, e.target.value)
-    //                           }
-    //                           className="select select-bordered w-full max-w-xs"
-    //                         >
-    //                           <option value="supreme">Supreme</option>
-    //                           <option value="admin">Admin</option>
-    //                           <option value="chef">Chef</option>
-    //                           <option value="staff">Staff</option>
-    //                           <option value="delivery man">Delivery Man</option>
-    //                           <option value="waiter">Waiter</option>
-    //                           <option value="user">User</option>
-    //                         </select>
-    //                       </td>
-    //                       <td>
-    //                         <button
-    //                           onClick={() => handleDeleteUser(user._id)}
-    //                           className="btn btn-ghost btn-lg"
-    //                         >
-    //                           <FaTrashAlt className="text-red-600"></FaTrashAlt>
-    //                         </button>
-    //                       </td>
-    //                     </tr>
-    //                   ))}
-    //                 </ul>
-    //               ) : (
-    //                 <p className="text-gray-500">
-    //                   No users found for this role.
-    //                 </p>
-    //               )}
+    //               {filteredUsers.map((current, index) => (
+    //                 <tr key={current._id} className="">
+    //                   <th>{index + 1}</th>
+    //                   <td>{current.name}</td>
+    //                   <td>{current.email}</td>
+    //                   <td>
+    //                     <select
+    //                       value={current.role}
+    //                       onChange={(e) =>
+    //                         handleRoleChange(current, e.target.value)
+    //                       }
+    //                       className="select select-bordered w-full max-w-xs"
+    //                     >
+    //                       {categories.map((roleOption) => (
+    //                         <option key={roleOption} value={roleOption}>
+    //                           {roleOption.charAt(0).toUpperCase() +
+    //                             roleOption.slice(1)}
+    //                         </option>
+    //                       ))}
+    //                     </select>
+    //                   </td>
+    //                   <td>
+    //                     <button
+    //                       onClick={() => handleDeleteUser(current._id)}
+    //                       className="btn btn-ghost btn-lg"
+    //                     >
+    //                       <FaTrashAlt className="text-red-600" />
+    //                     </button>
+    //                   </td>
+    //                 </tr>
+    //               ))}
     //             </tbody>
     //           </table>
     //         </div>
-    //       </div>
+    //       ) : (
+    //         <p className="text-gray-500">No users found for this role.</p>
+    //       )}
     //     </div>
     //   </div>
     // </div>
 
-    <div className="px-4 py-6">
-      <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+    <div>
+      <div className="flex flex-col justify-between items-center mb-6">
         <h2 className="text-3xl font-semibold">All Users and Members</h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      {/* Always column layout */}
+      <div className="flex flex-col gap-4">
         {/* Sidebar */}
-        <div className=" p-4 rounded-lg">
-          <h2 className="text-xl font-bold mb-4">Roles</h2>
-          <ul className="space-y-2">
+        <div className="rounded-lg w-full shadow mx-auto">
+          <h2 className="text-xl font-bold mb-4 text-center">Roles</h2>
+          <ul className="flex flex-wrap gap-2 justify-center">
             {categories.map((category) => (
               <li
                 key={category}
-                className={`cursor-pointer p-2 rounded-lg text-center md:text-left ${
+                className={`cursor-pointer px-4 py-2 rounded-lg text-sm font-medium ${
                   selectedCategory === category
-                    ? "bg-blue-500 text-white"
-                    : "hover:bg-blue-100"
+                    ? "bg-[#bcaf87] text-[#07252d]"
+                    : "bg-[#07252d] border hover:bg-[#bcaf87] hover:text-[#07252d] transition duration-300"
                 }`}
                 onClick={() => setSelectedCategory(category)}
               >
@@ -323,7 +270,7 @@ const AllUsers = () => {
         </div>
 
         {/* User list */}
-        <div className="md:col-span-3 p-4  rounded-lg shadow">
+        <div className="p-4 rounded-lg shadow w-full">
           <h2 className="text-2xl font-semibold mb-4">
             Users in role: {selectedCategory}
           </h2>
@@ -342,7 +289,7 @@ const AllUsers = () => {
                 </thead>
                 <tbody>
                   {filteredUsers.map((current, index) => (
-                    <tr key={current._id} className="">
+                    <tr key={current._id}>
                       <th>{index + 1}</th>
                       <td>{current.name}</td>
                       <td>{current.email}</td>
