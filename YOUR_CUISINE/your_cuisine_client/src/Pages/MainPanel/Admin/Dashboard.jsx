@@ -1,6 +1,6 @@
+import { useContext, useEffect, useState } from "react";
 import { FaBook, FaDollarSign, FaUsers } from "react-icons/fa";
 import { MdOutlinePayment } from "react-icons/md";
-import { useContext, useEffect, useState } from "react";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../providers/AuthProvider";
 
@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-      <h2 className="text-2xl sm:text-3xl font-semibold pt-6 pb-6 text-center ">
+      <h2 className="text-2xl sm:text-3xl text-[#bcaf87] font-semibold pt-6 pb-6 text-center ">
         Welcome {user?.displayName || "Back"}
       </h2>
 

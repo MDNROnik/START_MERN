@@ -100,6 +100,11 @@ const AllUsers = () => {
             timer: 1500,
           });
         }
+      })
+      .catch((err) => {
+        console.error(err?.response?.status || err.message);
+        signOutUser();
+        navigate("/login");
       });
   };
 
@@ -242,7 +247,7 @@ const AllUsers = () => {
     // </div>
 
     <div>
-      <div className="flex flex-col justify-between items-center mb-6">
+      <div className="flex flex-col justify-between text-[#bcaf87] items-center mb-6">
         <h2 className="text-3xl font-semibold">All Users and Members</h2>
       </div>
 
@@ -250,7 +255,7 @@ const AllUsers = () => {
       <div className="flex flex-col gap-4">
         {/* Sidebar */}
         <div className="rounded-lg w-full shadow mx-auto">
-          <h2 className="text-xl font-bold mb-4 text-center">Roles</h2>
+          <h2 className="text-xl font-bold mb-4 text-[#bcaf87] text-center">Roles</h2>
           <ul className="flex flex-wrap gap-2 justify-center">
             {categories.map((category) => (
               <li
@@ -258,7 +263,7 @@ const AllUsers = () => {
                 className={`cursor-pointer px-4 py-2 rounded-lg text-sm font-medium ${
                   selectedCategory === category
                     ? "bg-[#bcaf87] text-[#07252d]"
-                    : "bg-[#07252d] border hover:bg-[#bcaf87] hover:text-[#07252d] transition duration-300"
+                    : "bg-[#07252d] text-[#bcaf87] border border-[#bcaf87] hover:bg-[#bcaf87] hover:text-[#07252d] transition duration-300"
                 }`}
                 onClick={() => setSelectedCategory(category)}
               >

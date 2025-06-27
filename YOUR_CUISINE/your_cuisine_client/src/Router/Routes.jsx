@@ -116,8 +116,8 @@ const Routes = createBrowserRouter([
         ),
         loader: ({ params }) =>
           // http://localhost:5000
-          // fetch(`https://your-cuisine-server.vercel.app/menu/${params.id}`),
-        fetch(`http://localhost:5000/menu/${params.id}`),
+          fetch(`https://your-cuisine-server.vercel.app/menu/${params.id}`),
+        // fetch(`http://localhost:5000/menu/${params.id}`),
       },
       {
         path: "chef-home",
