@@ -165,17 +165,6 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
-              {/* <Link
-                to="/mainpanel/cart"
-                className="bg-[#07252d] p-2 rounded-2xl "
-              >
-                <button className="flex items-center  gap-2 cursor-pointer">
-                  <FaBowlFood className="mr-2 text-[#bcaf87]"></FaBowlFood>
-                  <div className="badge bg-[#bcaf87] text-[#07252d]">
-                    +{carts?.length || 0}
-                  </div>
-                </button>
-              </Link> */}
 
               <div className="dropdown dropdown-end">
                 <div
@@ -183,7 +172,7 @@ const Navbar = () => {
                   role="button"
                   className="btn btn-ghost btn-circle avatar"
                 >
-                  <div className="w-10 rounded-full">
+                  <div className=" rounded-full border-1 border-[#07252d]">
                     <img alt={user?.displayName} src={user?.photoURL} />
                   </div>
                 </div>
