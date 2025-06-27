@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FiEdit } from "react-icons/fi";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useMenu from "../../../Hooks/useMenu";
 import SectionTitle from "../../Share/SectionTitle";
+
 const categories = ["breakfast", "lunch", "dinner", "dessert", "drinks"];
 
 const ManageItems = () => {
@@ -220,14 +222,17 @@ const ManageItems = () => {
                 </thead>
                 <tbody>
                   {filteredItems.map((item, index) => (
-                    <tr key={item._id}>
-                      <td>{index + 1}</td>
-                      <td>
+                    <tr
+                      key={item._id}
+                      className="hover:bg-[#07252d] hover:text-[#bcaf87] transition duration-500"
+                    >
+                      <td className="border-b border-[#07252d]">{index + 1}</td>
+                      <td className="border-b border-[#07252d]">
                         <img src={item.image} className="w-10 h-10" />
                       </td>
-                      <td>{item.name}</td>
-                      <td>${item.price}</td>
-                      <td>
+                      <td className="border-b border-[#07252d]">{item.name}</td>
+                      <td className="border-b border-[#07252d]">${item.price}</td>
+                      {/* <td>
                         <Link
                           to={`/mainpanel/manageItems/updateItem/${item._id}`}
                         >
@@ -235,13 +240,22 @@ const ManageItems = () => {
                             <FaEdit />
                           </button>
                         </Link>
+                      </td> */}
+                      <td className="px-4 py-2 border-b border-[#07252d]">
+                        <Link
+                          to={`/mainpanel/manageItems/updateItem/${item._id}`}
+                        >
+                          <button className="p-2 rounded-full border-2 text-[#bcaf87] bg-[#07252d] hover:bg-[#bcaf87] hover:text-[#07252d] border-2 border-[#07252d] transition duration-200">
+                            <FiEdit className="text-xl" />
+                          </button>
+                        </Link>
                       </td>
-                      <td>
+                      <td className="border-b border-[#07252d]">
                         <button
                           onClick={() => handleDeleteItem(item._id)}
-                          className="btn btn-xs"
+                          className="p-2 rounded-full border-2 text-[#bcaf87] bg-[#07252d] hover:bg-[#bcaf87] hover:text-[#07252d] border-2 border-[#07252d] transition duration-200"
                         >
-                          <FaTrashAlt className="text-red-600" />
+                          <RiDeleteBin6Line className="text-xl" />
                         </button>
                       </td>
                     </tr>
@@ -255,7 +269,7 @@ const ManageItems = () => {
               {filteredItems.map((item, index) => (
                 <div
                   key={item._id}
-                  className="bg-[#bcaf87] text-[#07252d] p-4 rounded shadow"
+                  className="bg-[#07252d]  text-[#bcaf87] p-4 rounded shadow"
                 >
                   <div className="flex justify-between mb-2">
                     <span className="font-bold">#{index + 1}</span>
@@ -272,15 +286,15 @@ const ManageItems = () => {
                   </p>
                   <div className="flex justify-between mt-3">
                     <Link to={`/mainpanel/manageItems/updateItem/${item._id}`}>
-                      <button className="btn btn-xs bg-orange-500 text-white">
-                        <FaEdit />
+                      <button className="p-2 rounded-full border-2 text-[#bcaf87] bg-[#07252d] hover:bg-[#bcaf87] hover:text-[#07252d] border-[#bcaf87] transition duration-200">
+                        <FiEdit className="text-xl" />
                       </button>
                     </Link>
                     <button
                       onClick={() => handleDeleteItem(item._id)}
-                      className="btn btn-xs"
+                      className="p-2 rounded-full border-2 text-[#bcaf87] bg-[#07252d] hover:bg-[#bcaf87] hover:text-[#07252d] border-2 border-[#bcaf87] transition duration-200"
                     >
-                      <FaTrashAlt className="text-red-600" />
+                      <RiDeleteBin6Line className="text-xl" />
                     </button>
                   </div>
                 </div>
